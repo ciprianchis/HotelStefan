@@ -30,7 +30,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JPasswordField;
 
-public class LogIn extends JFrame {
+public class Registro extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel lblFondo;
@@ -40,11 +40,10 @@ public class LogIn extends JFrame {
 	private JLabel lblMinimizar;
 	private JLabel lblMaximizar;
 	private JTextField textFieldUser;
-	private JPasswordField passwordField;
-	private JLabel lblLogin;
-	private JButton btnEntrar;
-	private JButton btnSalir;
-	private JButton btnSignup;
+	private JLabel lblRegistro;
+	private JButton btnAñadirUser;
+	private JButton btnSignIn;
+	private JTextField txtContrasea;
 	/**
 	 * Launch the application.
 	 */
@@ -52,7 +51,7 @@ public class LogIn extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LogIn frame = new LogIn();
+					Registro frame = new Registro();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -64,7 +63,7 @@ public class LogIn extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LogIn() {
+	public Registro() {
 		setResizable(false);
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -125,35 +124,30 @@ public class LogIn extends JFrame {
 		contentPane.add(textFieldUser);
 		textFieldUser.setColumns(10);
 		
-		passwordField = new JPasswordField();
-		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
-		passwordField.setEchoChar('•');
-		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		passwordField.setBounds(460, 240, 368, 40);
-		contentPane.add(passwordField);
-		passwordField.setText("CONTRASEÑA");
+		lblRegistro = new JLabel("REGISTRO");
+		lblRegistro.setForeground(new Color(184, 134, 11));
+		lblRegistro.setFont(new Font("Tahoma", Font.BOLD, 50));
+		lblRegistro.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRegistro.setBounds(460, 76, 368, 70);
+		contentPane.add(lblRegistro);
 		
-		lblLogin = new JLabel("SIGN IN");
-		lblLogin.setForeground(new Color(184, 134, 11));
-		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 50));
-		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogin.setBounds(460, 76, 368, 70);
-		contentPane.add(lblLogin);
+		btnAñadirUser = new JButton("A\u00D1ADIR");
+		btnAñadirUser.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnAñadirUser.setBounds(460, 344, 368, 50);
+		contentPane.add(btnAñadirUser);
 		
-		btnEntrar = new JButton("ENTRAR");
-		btnEntrar.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnEntrar.setBounds(460, 344, 368, 50);
-		contentPane.add(btnEntrar);
+		btnSignIn = new JButton("VOLVER");
+		btnSignIn.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnSignIn.setBounds(650, 511, 368, 50);
+		contentPane.add(btnSignIn);
 		
-		btnSalir = new JButton("SALIR");
-		btnSalir.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnSalir.setBounds(272, 511, 368, 50);
-		contentPane.add(btnSalir);
-		
-		btnSignup = new JButton("REGISTRO");
-		btnSignup.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnSignup.setBounds(650, 511, 368, 50);
-		contentPane.add(btnSignup);
+		txtContrasea = new JTextField();
+		txtContrasea.setFont(new Font("Tahoma", Font.BOLD, 20));
+		txtContrasea.setText("CONTRASE\u00D1A");
+		txtContrasea.setHorizontalAlignment(SwingConstants.CENTER);
+		txtContrasea.setBounds(460, 258, 368, 40);
+		contentPane.add(txtContrasea);
+		txtContrasea.setColumns(10);
 		
 		lblFondo = new JLabel("");
 		lblFondo.setIcon(new ImageIcon(".\\recursos\\fondo.jpg"));
