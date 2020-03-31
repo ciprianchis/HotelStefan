@@ -52,7 +52,7 @@ public class Hotel extends JFrame {
 
 	/**
 	 * Create the frame.
-	 */
+	 */////
 	public Hotel() {
 		setResizable(false);
 		setUndecorated(true);
