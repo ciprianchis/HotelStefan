@@ -25,6 +25,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class ReservasCliente extends JFrame {
+	
 
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
@@ -35,7 +36,7 @@ public class ReservasCliente extends JFrame {
 	private JLabel lblMaximizar;
 
 	/**
-	 * Launch the application.
+	 * Bruh.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
