@@ -23,16 +23,20 @@ import java.awt.SystemColor;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
 
 public class Pago extends JFrame {
 
+	private JLabel lblReservar;
 	private JPanel contentPane;
-	private JLabel lblNewLabel;
 	private JPanel panel;
 	private JLabel lblNombreApp;
 	private JLabel lblCerrar;
 	private JLabel lblMinimizar;
 	private JLabel lblMaximizar;
+        private boolean maximizado = false;
+        private JTextArea txtrReservas;
 
 	/**
 	 * Launch the application.
@@ -63,10 +67,19 @@ public class Pago extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(".\\recursos\\fondo.jpg"));
-		lblNewLabel.setBounds(0, 30, 1280, 720);
-		contentPane.add(lblNewLabel);
+		txtrReservas = new JTextArea();
+		txtrReservas.setForeground(Color.WHITE);
+		txtrReservas.setOpaque(false);
+		txtrReservas.setEditable(false);
+		txtrReservas.setFont(new Font("Monospaced", Font.BOLD, 25));
+		txtrReservas.setText("Reservas:");
+		txtrReservas.setBounds(50, 100, 200, 38);
+		contentPane.add(txtrReservas);
+		
+		lblReservar = new JLabel("New label");
+		lblReservar.setIcon(new ImageIcon(".\\recursos\\fondo.jpg"));
+		lblReservar.setBounds(0, 30, 1280, 720);
+		contentPane.add(lblReservar);
 		
 		panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -109,6 +122,8 @@ public class Pago extends JFrame {
 		lblMaximizar.setIcon(new ImageIcon(".\\recursos\\maximize.png"));
 		lblMaximizar.setBounds(70, 9, 14, 14);
 		panel.add(lblMaximizar);
+                
+                initApp();
 	}
 	private class LblCerrarMouseListener extends MouseAdapter {
 		@Override
@@ -133,6 +148,10 @@ public class Pago extends JFrame {
 		public void mouseExited(MouseEvent e) {
 			lblMinimizar.setIcon(new ImageIcon(".\\recursos\\minimize.png"));
 		}
+                @Override
+		public void mouseClicked(MouseEvent e) {
+			setState(JFrame.ICONIFIED);
+		}
 	}
 	private class LblMaximizarMouseListener extends MouseAdapter {
 		@Override
@@ -143,5 +162,20 @@ public class Pago extends JFrame {
 		public void mouseExited(MouseEvent e) {
 			lblMaximizar.setIcon(new ImageIcon(".\\recursos\\maximize.png"));
 		}
+                 @Override
+		public void mouseClicked(MouseEvent e) {
+                    if (!maximizado) {
+                        setExtendedState(JFrame.MAXIMIZED_BOTH);
+                        maximizado=true;
+                    } else {
+                        setExtendedState(JFrame.NORMAL);
+                        maximizado=false;
+                    }
+		}
 	}
+        private void initApp() {
+            OperacionHabitacion operaciones = new OperacionHabitacion();
+            operaciones.cargarHabitaciones();
+            
+        }
 }

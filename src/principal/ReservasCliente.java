@@ -25,7 +25,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class ReservasCliente extends JFrame {
-	
 
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
@@ -34,9 +33,10 @@ public class ReservasCliente extends JFrame {
 	private JLabel lblCerrar;
 	private JLabel lblMinimizar;
 	private JLabel lblMaximizar;
+        private boolean maximizado = false;
 
 	/**
-	 * Bruh.
+	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -110,8 +110,11 @@ public class ReservasCliente extends JFrame {
 		lblMaximizar.setIcon(new ImageIcon(".\\recursos\\maximize.png"));
 		lblMaximizar.setBounds(70, 9, 14, 14);
 		panel.add(lblMaximizar);
+                
+                initApp();
 	}
 	private class LblCerrarMouseListener extends MouseAdapter {
+                
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			lblCerrar.setIcon(new ImageIcon(".\\recursos\\closeSelected.png"));
@@ -134,6 +137,10 @@ public class ReservasCliente extends JFrame {
 		public void mouseExited(MouseEvent e) {
 			lblMinimizar.setIcon(new ImageIcon(".\\recursos\\minimize.png"));
 		}
+                @Override
+		public void mouseClicked(MouseEvent e) {
+			setState(JFrame.ICONIFIED);
+		}
 	}
 	private class LblMaximizarMouseListener extends MouseAdapter {
 		@Override
@@ -144,5 +151,22 @@ public class ReservasCliente extends JFrame {
 		public void mouseExited(MouseEvent e) {
 			lblMaximizar.setIcon(new ImageIcon(".\\recursos\\maximize.png"));
 		}
+                @Override
+		public void mouseClicked(MouseEvent e) {
+                    if (!maximizado) {
+                        setExtendedState(JFrame.MAXIMIZED_BOTH);
+                        maximizado=true;
+                    } else {
+                        setExtendedState(JFrame.NORMAL);
+                        maximizado=false;
+                    }
+			
+                        
+		}
 	}
+        private void initApp() {
+            OperacionHabitacion operaciones = new OperacionHabitacion();
+            operaciones.cargarHabitaciones();
+            
+        }
 }
