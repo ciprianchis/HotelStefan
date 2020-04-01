@@ -23,6 +23,8 @@ import java.awt.SystemColor;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextField;
+import javax.swing.JList;
 
 public class Hotel extends JFrame {
 
@@ -33,6 +35,19 @@ public class Hotel extends JFrame {
 	private JLabel lblMinimizar;
 	private JLabel lblMaximizar;
 	private JLabel lblReserva;
+	private JLabel lblNombre;
+	private JLabel lblApellidos;
+	private JLabel lblInicio;
+	private JLabel lblFinal;
+	private JTextField txtCodigo;
+	private JTextField txtNombre;
+	private JTextField txtApellidos;
+	private JTextField txtInicio;
+	private JTextField txtFinal;
+	private JButton btnBuscar;
+	private JButton btnBorrarBusqueda;
+	private JList list;
+	private JButton btnAsignar;
 
 	/**
 	 * Launch the application.
@@ -106,8 +121,70 @@ public class Hotel extends JFrame {
 		panel.add(lblMaximizar);
 		
 		lblReserva = new JLabel("Reserva:");
-		lblReserva.setBounds(234, 164, 81, 22);
+		lblReserva.setBounds(358, 163, 81, 22);
 		contentPane.add(lblReserva);
+		
+		lblNombre = new JLabel("Nombre: ");
+		lblNombre.setBounds(358, 219, 46, 14);
+		contentPane.add(lblNombre);
+		
+		lblApellidos = new JLabel("Apellidos:");
+		lblApellidos.setBounds(358, 282, 46, 14);
+		contentPane.add(lblApellidos);
+		
+		lblInicio = new JLabel("Fecha inicio:");
+		lblInicio.setBounds(835, 167, 81, 14);
+		contentPane.add(lblInicio);
+		
+		lblFinal = new JLabel("Fecha final:");
+		lblFinal.setBounds(835, 219, 67, 14);
+		contentPane.add(lblFinal);
+		
+		txtCodigo = new JTextField();
+		txtCodigo.setText("CODIGO");
+		txtCodigo.setBounds(430, 164, 86, 20);
+		contentPane.add(txtCodigo);
+		txtCodigo.setColumns(10);
+		
+		txtNombre = new JTextField();
+		txtNombre.setText("NOMBRE");
+		txtNombre.setColumns(10);
+		txtNombre.setBounds(430, 216, 86, 20);
+		contentPane.add(txtNombre);
+		
+		txtApellidos = new JTextField();
+		txtApellidos.setText("APELLIDOS");
+		txtApellidos.setColumns(10);
+		txtApellidos.setBounds(430, 279, 86, 20);
+		contentPane.add(txtApellidos);
+		
+		txtInicio = new JTextField();
+		txtInicio.setText("INICIO");
+		txtInicio.setColumns(10);
+		txtInicio.setBounds(918, 164, 86, 20);
+		contentPane.add(txtInicio);
+		
+		txtFinal = new JTextField();
+		txtFinal.setText("FINAL");
+		txtFinal.setColumns(10);
+		txtFinal.setBounds(918, 216, 86, 20);
+		contentPane.add(txtFinal);
+		
+		btnBuscar = new JButton("BUSCAR");
+		btnBuscar.setBounds(513, 356, 89, 23);
+		contentPane.add(btnBuscar);
+		
+		btnBorrarBusqueda = new JButton("BORRAR BUSQUEDA");
+		btnBorrarBusqueda.setBounds(696, 356, 205, 23);
+		contentPane.add(btnBorrarBusqueda);
+		
+		list = new JList();
+		list.setBounds(358, 407, 646, 255);
+		contentPane.add(list);
+		
+		btnAsignar = new JButton("ASIGNAR HABITACI\u00D3N");
+		btnAsignar.setBounds(597, 690, 152, 23);
+		contentPane.add(btnAsignar);
 	}
 	private class LblCerrarMouseListener extends MouseAdapter {
 		@Override
