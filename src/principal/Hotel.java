@@ -5,8 +5,10 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Rectangle;
@@ -23,12 +25,11 @@ import java.awt.SystemColor;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JTextField;
-import javax.swing.JList;
 
 public class Hotel extends JFrame {
 
 	private JPanel contentPane;
+	private JLabel lblNewLabel;
 	private JPanel panel;
 	private JLabel lblNombreApp;
 	private JLabel lblCerrar;
@@ -67,7 +68,7 @@ public class Hotel extends JFrame {
 
 	/**
 	 * Create the frame.
-	 */////
+	 */
 	public Hotel() {
 		setResizable(false);
 		setUndecorated(true);
@@ -77,6 +78,77 @@ public class Hotel extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		btnAsignar = new JButton("ASIGNAR HABITACI\u00D3N");
+		btnAsignar.setBounds(597, 690, 152, 23);
+		contentPane.add(btnAsignar);
+		
+		lblFinal = new JLabel("Fecha final:");
+		lblFinal.setBounds(835, 219, 67, 14);
+		contentPane.add(lblFinal);
+		
+		list = new JList();
+		list.setBounds(358, 407, 646, 255);
+		contentPane.add(list);
+		
+		lblInicio = new JLabel("Fecha inicio:");
+		lblInicio.setBounds(835, 167, 81, 14);
+		contentPane.add(lblInicio);
+		
+		lblReserva = new JLabel("Reserva:");
+		lblReserva.setBounds(358, 163, 81, 22);
+		contentPane.add(lblReserva);
+		
+		lblNombre = new JLabel("Nombre: ");
+		lblNombre.setBounds(358, 219, 46, 14);
+		contentPane.add(lblNombre);
+		
+		btnBorrarBusqueda = new JButton("BORRAR BUSQUEDA");
+		btnBorrarBusqueda.setBounds(696, 356, 205, 23);
+		contentPane.add(btnBorrarBusqueda);
+		
+		txtNombre = new JTextField();
+		txtNombre.setText("NOMBRE");
+		txtNombre.setColumns(10);
+		txtNombre.setBounds(430, 216, 86, 20);
+		contentPane.add(txtNombre);
+		
+		txtApellidos = new JTextField();
+		txtApellidos.setText("APELLIDOS");
+		txtApellidos.setColumns(10);
+		txtApellidos.setBounds(430, 279, 86, 20);
+		contentPane.add(txtApellidos);
+		
+		txtCodigo = new JTextField();
+		txtCodigo.setText("CODIGO");
+		txtCodigo.setBounds(430, 164, 86, 20);
+		contentPane.add(txtCodigo);
+		txtCodigo.setColumns(10);
+		
+		btnBuscar = new JButton("BUSCAR");
+		btnBuscar.setBounds(513, 356, 89, 23);
+		contentPane.add(btnBuscar);
+		
+		txtInicio = new JTextField();
+		txtInicio.setText("INICIO");
+		txtInicio.setColumns(10);
+		txtInicio.setBounds(918, 164, 86, 20);
+		contentPane.add(txtInicio);
+		
+		lblApellidos = new JLabel("Apellidos:");
+		lblApellidos.setBounds(358, 282, 46, 14);
+		contentPane.add(lblApellidos);
+		
+		txtFinal = new JTextField();
+		txtFinal.setText("FINAL");
+		txtFinal.setColumns(10);
+		txtFinal.setBounds(918, 216, 86, 20);
+		contentPane.add(txtFinal);
+		
+		lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Alex Noe\\Desktop\\GRADO SUPERIOR\\PROGRAMACION\\HotelStefan\\recursos\\fondo.jpg"));
+        lblNewLabel.setBounds(0, 30, 1280, 720);
+        contentPane.add(lblNewLabel);
 		
 		panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -98,7 +170,7 @@ public class Hotel extends JFrame {
 		lblCerrar.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCerrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblCerrar.setToolTipText("Cerrar");
-		lblCerrar.setIcon(new ImageIcon(".\\recursos\\close.png"));
+		lblCerrar.setIcon(new ImageIcon("C:\\Users\\Alex Noe\\Desktop\\GRADO SUPERIOR\\PROGRAMACION\\HotelStefan\\recursos\\close.png"));
 		lblCerrar.setBounds(22, 9, 14, 14);
 		panel.add(lblCerrar);
 		
@@ -107,7 +179,7 @@ public class Hotel extends JFrame {
 		lblMinimizar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblMinimizar.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMinimizar.setToolTipText("Minimizar");
-		lblMinimizar.setIcon(new ImageIcon(".\\recursos\\minimize.png"));
+		lblMinimizar.setIcon(new ImageIcon("C:\\Users\\Alex Noe\\Desktop\\GRADO SUPERIOR\\PROGRAMACION\\HotelStefan\\recursos\\minimize.png"));
 		lblMinimizar.setBounds(46, 9, 14, 14);
 		panel.add(lblMinimizar);
 		
@@ -116,108 +188,42 @@ public class Hotel extends JFrame {
 		lblMaximizar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblMaximizar.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMaximizar.setToolTipText("Maximizar");
-		lblMaximizar.setIcon(new ImageIcon(".\\recursos\\maximize.png"));
+		lblMaximizar.setIcon(new ImageIcon("C:\\Users\\Alex Noe\\Desktop\\GRADO SUPERIOR\\PROGRAMACION\\HotelStefan\\recursos\\maximize.png"));
 		lblMaximizar.setBounds(70, 9, 14, 14);
 		panel.add(lblMaximizar);
-		
-		lblReserva = new JLabel("Reserva:");
-		lblReserva.setBounds(358, 163, 81, 22);
-		contentPane.add(lblReserva);
-		
-		lblNombre = new JLabel("Nombre: ");
-		lblNombre.setBounds(358, 219, 46, 14);
-		contentPane.add(lblNombre);
-		
-		lblApellidos = new JLabel("Apellidos:");
-		lblApellidos.setBounds(358, 282, 46, 14);
-		contentPane.add(lblApellidos);
-		
-		lblInicio = new JLabel("Fecha inicio:");
-		lblInicio.setBounds(835, 167, 81, 14);
-		contentPane.add(lblInicio);
-		
-		lblFinal = new JLabel("Fecha final:");
-		lblFinal.setBounds(835, 219, 67, 14);
-		contentPane.add(lblFinal);
-		
-		txtCodigo = new JTextField();
-		txtCodigo.setText("CODIGO");
-		txtCodigo.setBounds(430, 164, 86, 20);
-		contentPane.add(txtCodigo);
-		txtCodigo.setColumns(10);
-		
-		txtNombre = new JTextField();
-		txtNombre.setText("NOMBRE");
-		txtNombre.setColumns(10);
-		txtNombre.setBounds(430, 216, 86, 20);
-		contentPane.add(txtNombre);
-		
-		txtApellidos = new JTextField();
-		txtApellidos.setText("APELLIDOS");
-		txtApellidos.setColumns(10);
-		txtApellidos.setBounds(430, 279, 86, 20);
-		contentPane.add(txtApellidos);
-		
-		txtInicio = new JTextField();
-		txtInicio.setText("INICIO");
-		txtInicio.setColumns(10);
-		txtInicio.setBounds(918, 164, 86, 20);
-		contentPane.add(txtInicio);
-		
-		txtFinal = new JTextField();
-		txtFinal.setText("FINAL");
-		txtFinal.setColumns(10);
-		txtFinal.setBounds(918, 216, 86, 20);
-		contentPane.add(txtFinal);
-		
-		btnBuscar = new JButton("BUSCAR");
-		btnBuscar.setBounds(513, 356, 89, 23);
-		contentPane.add(btnBuscar);
-		
-		btnBorrarBusqueda = new JButton("BORRAR BUSQUEDA");
-		btnBorrarBusqueda.setBounds(696, 356, 205, 23);
-		contentPane.add(btnBorrarBusqueda);
-		
-		list = new JList();
-		list.setBounds(358, 407, 646, 255);
-		contentPane.add(list);
-		
-		btnAsignar = new JButton("ASIGNAR HABITACI\u00D3N");
-		btnAsignar.setBounds(597, 690, 152, 23);
-		contentPane.add(btnAsignar);
 	}
 	private class LblCerrarMouseListener extends MouseAdapter {
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			lblCerrar.setIcon(new ImageIcon(".\\recursos\\closeSelected.png"));
+			lblCerrar.setIcon(new ImageIcon("C:\\Users\\Alex Noe\\Desktop\\GRADO SUPERIOR\\PROGRAMACION\\HotelStefan\\recursos\\closeSelected.png"));
 		}
 		@Override
 		public void mouseExited(MouseEvent e) {
-			lblCerrar.setIcon(new ImageIcon(".\\recursos\\close.png"));
+			lblCerrar.setIcon(new ImageIcon("C:\\Users\\Alex Noe\\Desktop\\GRADO SUPERIOR\\PROGRAMACION\\HotelStefan\\recursos\\close.png"));
 		}
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			System.exit(0);
 		}
-	}
+	} //
 	private class LblMinimizarMouseListener extends MouseAdapter {
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			lblMinimizar.setIcon(new ImageIcon(".\\recursos\\minimizeSelected.png"));
+			lblMinimizar.setIcon(new ImageIcon("C:\\Users\\Alex Noe\\Desktop\\GRADO SUPERIOR\\PROGRAMACION\\HotelStefan\\recursos\\minimizeSelected.png"));
 		}
 		@Override
 		public void mouseExited(MouseEvent e) {
-			lblMinimizar.setIcon(new ImageIcon(".\\recursos\\minimize.png"));
+			lblMinimizar.setIcon(new ImageIcon("C:\\Users\\Alex Noe\\Desktop\\GRADO SUPERIOR\\PROGRAMACION\\HotelStefan\\recursos\\minimize.png"));
 		}
 	}
 	private class LblMaximizarMouseListener extends MouseAdapter {
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			lblMaximizar.setIcon(new ImageIcon(".\\recursos\\maximizeSelected.png"));
+			lblMaximizar.setIcon(new ImageIcon("C:\\Users\\Alex Noe\\Desktop\\GRADO SUPERIOR\\PROGRAMACION\\HotelStefan\\recursos\\maximizeSelected.png"));
 		}
 		@Override
 		public void mouseExited(MouseEvent e) {
-			lblMaximizar.setIcon(new ImageIcon(".\\recursos\\maximize.png"));
+			lblMaximizar.setIcon(new ImageIcon("C:\\Users\\Alex Noe\\Desktop\\GRADO SUPERIOR\\PROGRAMACION\\HotelStefan\\recursos\\maximize.png"));
 		}
 	}
 }
