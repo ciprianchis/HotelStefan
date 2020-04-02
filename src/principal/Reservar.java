@@ -23,6 +23,13 @@ import java.awt.SystemColor;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextArea;
+import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JTextField;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class Reservar extends JFrame {
 
@@ -33,8 +40,53 @@ public class Reservar extends JFrame {
 	private JLabel lblCerrar;
 	private JLabel lblMinimizar;
 	private JLabel lblMaximizar;
-        private boolean maximizado = false;
-
+    private boolean maximizado = false;
+    private JTextArea txtrNombre;
+    private JTextArea txtrApellido;
+    private JTextArea txtrTipoHabitacion;
+    private JRadioButton rdbtnDui;
+    private JRadioButton rdbtnDb;
+    private JRadioButton rdbtnTri;
+    private JRadioButton rdbtnSuite;
+    private final ButtonGroup buttonGroupHabitaciones = new ButtonGroup();
+    private JTextField textNombre;
+    private JTextField textApellido;
+    private JTextArea txtrTipoRegimen;
+    private JRadioButton rdbtnHa;
+    private JRadioButton rdbtnAd;
+    private JRadioButton rdbtnMp;
+    private JRadioButton rdbtnPc;
+    private final ButtonGroup buttonGroupRegimen = new ButtonGroup();
+    private JTextArea txtrSexo;
+    private JRadioButton rdbtnHombre;
+    private JRadioButton rdbtnMujer;
+    private final ButtonGroup buttonGroupSexo = new ButtonGroup();
+    private JTextField textFieldDiaEntrada;
+    private JTextField textFieldAnoEntrada;
+    private JTextField textFieldMesSalida;
+    private JTextField textFieldDiaSalida;
+    private JTextField textFieldMesEntrada;
+    private JTextField textFieldAnoSalida;
+    private JTextArea textAreaDiaMesEntrada;
+    private JTextArea textAreaMesAnoEntrada;
+    private JTextArea textAreaDiaMesSalida;
+    private JTextArea textAreaMesAnoSalida;
+    private JTextArea txtrFechaEntrada;
+    private JTextArea txtrFechaSalida;
+    private JTextArea txtrNumeroNoches;
+    private JTextField textFieldNumeroNoches;
+    private JTextArea txtrImporteTotal;
+    private JTextField textFieldImporte;
+    private JButton btnPagar;
+    private JButton btnSalir;
+    private JLabel lblComprobacionHabitacion;
+    private OperacionHabitacion operaciones = new OperacionHabitacion();
+    private ImageIcon imagentick = new ImageIcon(".\\recursos\\tick.png");
+	private ImageIcon imagenx = new ImageIcon(".\\recursos\\nodisponible.png");
+	private JLabel lblComprobacionFecha;
+	private int pos;
+	private Reserva reserva;
+	private String usuarioReservas="";
 	/**
 	 * Launch the application.
 	 */
@@ -55,63 +107,295 @@ public class Reservar extends JFrame {
 	 * Create the frame.
 	 */
 	public Reservar() {
-		setResizable(false);
-		setUndecorated(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1280, 750);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		initApp();  
+	}
+	public Reservar(String usuario) {
+		usuarioReservas="";
+		initApp();  
+	}
+	private void cambiarTextoNombreDefault() {
+		textNombre.setFont(new Font("Tahoma", Font.ITALIC,12));
+		textNombre.setForeground(Color.gray);
+		textNombre.setText("Nombre");
+	}
+	private void cambiarTextoNombre() {
+		textNombre.setFont(new Font("Tahoma", Font.BOLD,12));
+		textNombre.setForeground(Color.black);
+	}
+	private void cambiarTextoApellidoDefault() {
+		textApellido.setFont(new Font("Tahoma", Font.ITALIC,12));
+		textApellido.setForeground(Color.gray);
+		textApellido.setText("Apellido");
+	}
+	private void cambiarTextoApellido() {
+		textApellido.setFont(new Font("Tahoma", Font.BOLD,12));
+		textApellido.setForeground(Color.black);
+	}
+	
+	private void comprobarBotonEnviar() {
+		if (!textNombre.getText().equals("Nombre") && !textApellido.getText().equals("Apellido") && !textFieldImporte.getText().contentEquals("") && pos!=100) {
+			btnPagar.setEnabled(true);
+		} else {
+			btnPagar.setEnabled(false);
+		}
+	}
+	
+	private void comprobarDisponibilidad() {
+
+		String seleccion = "";
+		if (rdbtnDui.isSelected()) {
+			seleccion = "dui";
+		}
+		if (rdbtnDb.isSelected()) {
+			seleccion = "db";
+		}
+		if (rdbtnTri.isSelected()) {
+			seleccion = "tri";
+		}
+		if (rdbtnSuite.isSelected()) {
+			seleccion = "suite";
+		}
 		
-		lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(".\\recursos\\fondo.jpg"));
-		lblNewLabel.setBounds(0, 30, 1280, 720);
-		contentPane.add(lblNewLabel);
+		switch (seleccion) {
+			case "dui":
+				do {
+					if (operaciones.comprobarHabitacion(pos)) {
+						break;
+					}
+					if (pos==44) {
+						pos=100;
+					}
+					pos++;
+					if (pos==5) {
+						pos = pos + 20 - 5;
+					}
+				} while (pos!=44);
+				break;
+			case "db":
+				do {
+					if (operaciones.comprobarHabitacion(pos)) {
+						break;
+					}
+					if (pos==49) {
+						pos=100;
+					}
+					pos++;
+					if (pos==5) {
+						pos = pos + 20 - 5;
+					}
+				} while (pos!=49);
+				break;
+			case "tri":
+				do {
+					if (operaciones.comprobarHabitacion(pos)) {
+						break;
+					}
+					if (pos==54) {
+						pos=100;
+					}
+					pos++;
+					if (pos==5) {
+						pos = pos + 20 - 5;
+					}
+				} while (pos!=54);
+				break;
+			case "suite":
+				do {
+					if (operaciones.comprobarHabitacion(pos)) {
+						break;
+					}
+					if (pos==59) {
+						pos=100;
+					}
+					pos++;
+					if (pos==5) {
+						pos = pos + 20 - 5;
+					}
+				} while (pos!=59);
+				break;
+		}
+		if (pos!=100) {
+			lblComprobacionHabitacion.setIcon(imagentick);
+		} else {
+			lblComprobacionHabitacion.setIcon(imagenx);
+		}
+	}
+	
+	private void comprobarImporte() {
+		if (!textFieldNumeroNoches.getText().equals("")) {
+			String seleccionHabitacion = "";
+			if (rdbtnDui.isSelected()) {
+				seleccionHabitacion = "dui";
+			}
+			if (rdbtnDb.isSelected()) {
+				seleccionHabitacion = "db";
+			}
+			if (rdbtnTri.isSelected()) {
+				seleccionHabitacion = "tri";
+			}
+			if (rdbtnSuite.isSelected()) {
+				seleccionHabitacion = "suite";
+			}
+			
+			String seleccionRegimen = "";
+			if (rdbtnHa.isSelected()) {
+				seleccionRegimen = "ha";
+			}
+			if (rdbtnAd.isSelected()) {
+				seleccionRegimen = "ad";
+			}
+			if (rdbtnMp.isSelected()) {
+				seleccionRegimen = "mp";
+			}
+			if (rdbtnPc.isSelected()) {
+				seleccionRegimen = "pc";
+			}
+			int precio;
+			int precioHab = Integer.parseInt(textFieldNumeroNoches.getText());
+			int precioReg = precioHab;
+			
+			switch (seleccionHabitacion) {
+				case "dui":
+					precioHab = precioHab * 30;
+					break;
+				case "db":
+					precioHab = precioHab * 50;
+					break;
+				case "tri":
+					precioHab = precioHab * 70;
+					break;
+				case "suite":
+					precioHab = precioHab * 140;
+					break;
+			}
+			switch (seleccionRegimen) {
+				case "ha":
+					break;
+				case "ad":
+					precioReg = precioReg * 10;
+					break;
+				case "mp":
+					precioReg = precioReg * 15;
+					break;
+				case "pc":
+					precioReg = precioReg * 25;
+					break;
+			}
+			
+			precio = precioHab + precioReg;
+			textFieldImporte.setText(Integer.toString(precio));
+			
+		}
+	}
+	private void comprobarNumNoches() {
+		textFieldNumeroNoches.setText("");
+		int diaSalida=0, mesSalida=0, anoSalida=0, diaEntrada=0, mesEntrada=0, anoEntrada=0;
+		try {
+			diaSalida = Integer.parseInt(textFieldDiaSalida.getText());
+			diaEntrada = Integer.parseInt(textFieldDiaEntrada.getText());
+			mesSalida = Integer.parseInt(textFieldMesSalida.getText());
+			mesEntrada = Integer.parseInt(textFieldMesEntrada.getText());
+			anoSalida = Integer.parseInt(textFieldAnoSalida.getText());
+			anoEntrada = Integer.parseInt(textFieldAnoEntrada.getText());
+		} catch (Exception e) {
+		}
+		if (comprobarMes(anoSalida,mesSalida,diaSalida) && comprobarMes(anoEntrada,mesEntrada,diaEntrada)) {
+			int mesDiferencia = mesSalida - mesEntrada;
+			switch (mesDiferencia) {
+				case -11:
+					if (anoEntrada==(anoSalida-1) ) {
+						int diasDiferencia = 31 - diaEntrada + diaSalida;
+						if (diasDiferencia <32) {
+							lblComprobacionFecha.setIcon(imagentick);
+							textFieldNumeroNoches.setText(Integer.toString(diasDiferencia));
+							comprobarImporte();
+						} else {
+							lblComprobacionFecha.setIcon(imagenx);
+						}
+					} else {
+						lblComprobacionFecha.setIcon(imagenx);
+					}
+				case 0:
+					if (diaSalida > diaEntrada && anoEntrada == anoSalida) {
+						lblComprobacionFecha.setIcon(imagentick);
+						int diasDiferencia = diaSalida - diaEntrada;
+						textFieldNumeroNoches.setText(Integer.toString(diasDiferencia));
+						comprobarImporte();
+					} else {
+						lblComprobacionFecha.setIcon(imagenx);
+					}
+					break;
+				case 1:
+					int diasDiferencia = 0;
+					switch (mesEntrada) {
+						case 1:
+						case 3:
+						case 5:
+						case 7:
+						case 8:
+						case 10:
+						case 12:
+							diasDiferencia = 31 - diaEntrada + diaSalida;
+							break;
+						case 4:
+						case 6:
+						case 9:
+						case 11:
+							diasDiferencia = 30 - diaEntrada + diaSalida;
+							break;
+						case 2:
+							if (((anoSalida % 4 == 0) && !(anoSalida % 100 == 0)) || (anoSalida % 400 == 0)) {
+								diasDiferencia = 29 - diaEntrada + diaSalida;
+							} else {
+								diasDiferencia = 28 - diaEntrada + diaSalida;
+							}
+							break;
+						}
+					if (diasDiferencia <32  && anoEntrada == anoSalida) {
+						lblComprobacionFecha.setIcon(imagentick);
+						textFieldNumeroNoches.setText(Integer.toString(diasDiferencia));
+						comprobarImporte();
+					} else {
+						lblComprobacionFecha.setIcon(imagenx);
+					}
+					break;
+				default:
+					lblComprobacionFecha.setIcon(imagenx);
+					break;
+				}
+		} else {
+			lblComprobacionFecha.setIcon(imagenx);
+		}
 		
-		panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		panel.setBorder(new SoftBevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, null, null, null));
-		panel.setBounds(0, 0, 1280, 30);
-		contentPane.add(panel);
-		panel.setLayout(null);
+	}
+	private boolean comprobarMes(int ano, int mes, int dia) {
+		if (dia>0 && dia<32 && mes>0 && mes<13) {
+			switch (mes) {
+				case 1:
+				case 3:
+				case 5:
+				case 7:
+				case 8:
+				case 10:
+				case 12:
+					return true;
+				case 4:
+				case 6:
+				case 9:
+				case 11:
+					if (dia<31) {
+						return true;
+					}
+					break;
+				case 2:
+					if (dia<29 || ((((ano % 4 == 0) && !(ano % 100 == 0)) || (ano % 400 == 0)) && dia<30)) {
+						return true;
+					}
+					break;
+			}
+		}
+		return false;
 		
-		lblNombreApp = new JLabel("Hotel Stefan *****");
-		lblNombreApp.setVerticalAlignment(SwingConstants.BOTTOM);
-		lblNombreApp.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNombreApp.setFont(new Font("Perpetua Titling MT", Font.BOLD, 18));
-		lblNombreApp.setForeground(new Color(184, 134, 11));
-		lblNombreApp.setBounds(538, 0, 212, 30);
-		panel.add(lblNombreApp);
-		
-		lblCerrar = new JLabel("");
-		lblCerrar.addMouseListener(new LblCerrarMouseListener());
-		lblCerrar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCerrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblCerrar.setToolTipText("Cerrar");
-		lblCerrar.setIcon(new ImageIcon(".\\recursos\\close.png"));
-		lblCerrar.setBounds(22, 9, 14, 14);
-		panel.add(lblCerrar);
-		
-		lblMinimizar = new JLabel("");
-		lblMinimizar.addMouseListener(new LblMinimizarMouseListener());
-		lblMinimizar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblMinimizar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMinimizar.setToolTipText("Minimizar");
-		lblMinimizar.setIcon(new ImageIcon(".\\recursos\\minimize.png"));
-		lblMinimizar.setBounds(46, 9, 14, 14);
-		panel.add(lblMinimizar);
-		
-		lblMaximizar = new JLabel("");
-		lblMaximizar.addMouseListener(new LblMaximizarMouseListener());
-		lblMaximizar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblMaximizar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMaximizar.setToolTipText("Maximizar");
-		lblMaximizar.setIcon(new ImageIcon(".\\recursos\\maximize.png"));
-		lblMaximizar.setBounds(70, 9, 14, 14);
-		panel.add(lblMaximizar);
-                
-                initApp();
 	}
 	private class LblCerrarMouseListener extends MouseAdapter {
 		@Override
@@ -163,9 +447,529 @@ public class Reservar extends JFrame {
                         
 		}
 	}
+	private class TextNombreFocusListener extends FocusAdapter {
+		@Override
+		public void focusGained(FocusEvent e) {
+			if (textNombre.getText().equals("Nombre")) {
+				textNombre.setText("");
+				cambiarTextoNombre();
+			}
+		}
+		@Override
+		public void focusLost(FocusEvent e) {
+			if (textNombre.getText().equals("")) {
+				cambiarTextoNombreDefault();
+			}
+			comprobarBotonEnviar();
+		}
+	}
+	private class TextApellidoFocusListener extends FocusAdapter {
+		@Override
+		public void focusGained(FocusEvent e) {
+			if (textApellido.getText().equals("Apellido")) {
+				textApellido.setText("");
+				cambiarTextoApellido();
+			}
+		}
+		@Override
+		public void focusLost(FocusEvent e) {
+			if (textApellido.getText().equals("")) {
+				cambiarTextoApellidoDefault();
+			}
+			comprobarBotonEnviar();
+		}
+	}
+	private class TextFieldAnoSalidaFocusListener extends FocusAdapter {
+		@Override
+		public void focusLost(FocusEvent e) {
+			comprobarNumNoches();
+			comprobarBotonEnviar();
+		}
+	}
+	private class TextFieldDiaSalidaFocusListener extends FocusAdapter {
+		@Override
+		public void focusLost(FocusEvent e) {
+			comprobarNumNoches();
+			comprobarBotonEnviar();
+		}
+	}
+	private class TextFieldAnoEntradaFocusListener extends FocusAdapter {
+		@Override
+		public void focusLost(FocusEvent e) {
+			comprobarNumNoches();
+			comprobarBotonEnviar();
+		}
+	}
+	private class TextFieldMesSalidaFocusListener extends FocusAdapter {
+		@Override
+		public void focusLost(FocusEvent e) {
+			comprobarNumNoches();
+			comprobarBotonEnviar();
+		}
+	}
+	private class TextFieldMesEntradaFocusListener extends FocusAdapter {
+		@Override
+		public void focusLost(FocusEvent e) {
+			comprobarNumNoches();
+			comprobarBotonEnviar();
+		}
+	}
+	private class TextFieldDiaEntradaFocusListener extends FocusAdapter {
+		@Override
+		public void focusLost(FocusEvent e) {
+			comprobarNumNoches();
+			comprobarBotonEnviar();
+		}
+	}
+	private class RdbtnPcFocusListener extends FocusAdapter {
+		@Override
+		public void focusLost(FocusEvent e) {
+			comprobarImporte();
+		}
+	}
+	private class RdbtnMpFocusListener extends FocusAdapter {
+		@Override
+		public void focusLost(FocusEvent e) {
+			comprobarImporte();
+		}
+	}
+	private class RdbtnTriFocusListener extends FocusAdapter {
+		@Override
+		public void focusLost(FocusEvent e) {
+			comprobarImporte();
+			comprobarDisponibilidad();
+		}
+		@Override
+		public void focusGained(FocusEvent e) {
+			comprobarImporte();
+			comprobarDisponibilidad();
+		}
+	}
+	private class RdbtnDbFocusListener extends FocusAdapter {
+		@Override
+		public void focusLost(FocusEvent e) {
+			comprobarImporte();
+			comprobarDisponibilidad();
+		}
+		@Override
+		public void focusGained(FocusEvent e) {
+			comprobarImporte();
+			comprobarDisponibilidad();
+		}
+	}
+	private class RdbtnDuiFocusListener extends FocusAdapter {
+		@Override
+		public void focusLost(FocusEvent e) {
+			comprobarImporte();
+			comprobarDisponibilidad();
+		}
+		@Override
+		public void focusGained(FocusEvent e) {
+			comprobarImporte();
+			comprobarDisponibilidad();
+		}
+		
+	}
+	private class RdbtnSuiteFocusListener extends FocusAdapter {
+		@Override
+		public void focusLost(FocusEvent e) {
+			comprobarImporte();
+			comprobarDisponibilidad();
+		}
+		@Override
+		public void focusGained(FocusEvent e) {
+			comprobarImporte();
+			comprobarDisponibilidad();
+		}
+	}
+	private class RdbtnAdFocusListener extends FocusAdapter {
+		@Override
+		public void focusLost(FocusEvent e) {
+			comprobarImporte();
+			
+		}
+	}
+	private class RdbtnHaFocusListener extends FocusAdapter {
+		@Override
+		public void focusLost(FocusEvent e) {
+			comprobarImporte();
+			
+		}
+	}
+	private class BtnPagarMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			new Pago(usuarioReservas,reserva).setVisible(true);
+			dispose();
+		}
+	}
+	private class BtnSalirMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			new ReservasCliente(usuarioReservas).setVisible(true);
+			dispose();
+		}
+	}
         private void initApp() {
-            OperacionHabitacion operaciones = new OperacionHabitacion();
-            operaciones.cargarHabitaciones();
-            
+        	operaciones.cargarHabitaciones();
+    		setResizable(false);
+    		setUndecorated(true);
+    		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    		setBounds(100, 100, 1280, 750);
+    		contentPane = new JPanel();
+    		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+    		setContentPane(contentPane);
+    		contentPane.setLayout(null);
+    		
+    		lblComprobacionFecha = new JLabel("");
+    		lblComprobacionFecha.setBounds(1137, 100, 30, 30);
+    		contentPane.add(lblComprobacionFecha);
+    		
+    		lblComprobacionHabitacion = new JLabel("");
+    		lblComprobacionHabitacion.setBounds(512, 225, 30, 30);
+    		contentPane.add(lblComprobacionHabitacion);
+    		
+    		btnSalir = new JButton("Salir");
+    		btnSalir.addMouseListener(new BtnSalirMouseListener());
+    		btnSalir.setBounds(900, 600, 180, 50);
+    		contentPane.add(btnSalir);
+    		
+    		btnPagar = new JButton("Pagar");
+    		btnPagar.addMouseListener(new BtnPagarMouseListener());
+    		btnPagar.setEnabled(false);
+    		btnPagar.setBounds(200, 600, 180, 50);
+    		contentPane.add(btnPagar);
+    		
+    		txtrImporteTotal = new JTextArea();
+    		txtrImporteTotal.setText("Importe Total:");
+    		txtrImporteTotal.setOpaque(false);
+    		txtrImporteTotal.setForeground(Color.WHITE);
+    		txtrImporteTotal.setFont(new Font("Monospaced", Font.PLAIN, 16));
+    		txtrImporteTotal.setEditable(false);
+    		txtrImporteTotal.setBounds(691, 369, 180, 30);
+    		contentPane.add(txtrImporteTotal);
+    		
+    		textFieldImporte = new JTextField();
+    		textFieldImporte.setEditable(false);
+    		textFieldImporte.setColumns(10);
+    		textFieldImporte.setBackground(Color.WHITE);
+    		textFieldImporte.setBounds(910, 369, 105, 30);
+    		contentPane.add(textFieldImporte);
+    		
+    		textFieldNumeroNoches = new JTextField();
+    		textFieldNumeroNoches.setEditable(false);
+    		textFieldNumeroNoches.setColumns(10);
+    		textFieldNumeroNoches.setBackground(Color.WHITE);
+    		textFieldNumeroNoches.setBounds(910, 225, 40, 30);
+    		contentPane.add(textFieldNumeroNoches);
+    		
+    		txtrNumeroNoches = new JTextArea();
+    		txtrNumeroNoches.setEditable(false);
+    		txtrNumeroNoches.setText("Numero Noches:");
+    		txtrNumeroNoches.setOpaque(false);
+    		txtrNumeroNoches.setForeground(Color.WHITE);
+    		txtrNumeroNoches.setFont(new Font("Monospaced", Font.PLAIN, 16));
+    		txtrNumeroNoches.setBounds(691, 225, 180, 30);
+    		contentPane.add(txtrNumeroNoches);
+    		
+    		txtrFechaSalida = new JTextArea();
+    		txtrFechaSalida.setEditable(false);
+    		txtrFechaSalida.setForeground(Color.WHITE);
+    		txtrFechaSalida.setText("Fecha Salida:");
+    		txtrFechaSalida.setFont(new Font("Monospaced", Font.PLAIN, 16));
+    		txtrFechaSalida.setBounds(691, 121, 180, 30);
+    		txtrFechaSalida.setOpaque(false);
+    		contentPane.add(txtrFechaSalida);
+    		
+    		txtrFechaEntrada = new JTextArea();
+    		txtrFechaEntrada.setEditable(false);
+    		txtrFechaEntrada.setForeground(Color.WHITE);
+    		txtrFechaEntrada.setFont(new Font("Monospaced", Font.PLAIN, 16));
+    		txtrFechaEntrada.setText("Fecha Entrada:");
+    		txtrFechaEntrada.setBounds(691, 80, 180, 30);
+    		txtrFechaEntrada.setOpaque(false);
+    		contentPane.add(txtrFechaEntrada);
+    		
+    		textAreaMesAnoSalida = new JTextArea();
+    		textAreaMesAnoSalida.setForeground(Color.WHITE);
+    		textAreaMesAnoSalida.setEditable(false);
+    		textAreaMesAnoSalida.setText("/");
+    		textAreaMesAnoSalida.setFont(new Font("Monospaced", Font.PLAIN, 23));
+    		textAreaMesAnoSalida.setBounds(1025, 121, 13, 30);
+    		textAreaMesAnoSalida.setOpaque(false);
+    		contentPane.add(textAreaMesAnoSalida);
+    		
+    		textAreaMesAnoEntrada = new JTextArea();
+    		textAreaMesAnoEntrada.setForeground(Color.WHITE);
+    		textAreaMesAnoEntrada.setEditable(false);
+    		textAreaMesAnoEntrada.setText("/");
+    		textAreaMesAnoEntrada.setFont(new Font("Monospaced", Font.PLAIN, 23));
+    		textAreaMesAnoEntrada.setBounds(1025, 80, 13, 30);
+    		contentPane.add(textAreaMesAnoEntrada);
+    		textAreaMesAnoEntrada.setOpaque(false);
+    		
+    		textAreaDiaMesSalida = new JTextArea();
+    		textAreaDiaMesSalida.setForeground(Color.WHITE);
+    		textAreaDiaMesSalida.setEditable(false);
+    		textAreaDiaMesSalida.setText("/");
+    		textAreaDiaMesSalida.setFont(new Font("Monospaced", Font.PLAIN, 23));
+    		textAreaDiaMesSalida.setBounds(960, 121, 13, 30);
+    		textAreaDiaMesSalida.setOpaque(false);
+    		contentPane.add(textAreaDiaMesSalida);
+    		
+    		textAreaDiaMesEntrada = new JTextArea();
+    		textAreaDiaMesEntrada.setForeground(Color.WHITE);
+    		textAreaDiaMesEntrada.setEditable(false);
+    		textAreaDiaMesEntrada.setFont(new Font("Monospaced", Font.PLAIN, 23));
+    		textAreaDiaMesEntrada.setText("/");
+    		textAreaDiaMesEntrada.setBounds(960, 80, 13, 30);
+    		textAreaDiaMesEntrada.setOpaque(false);;
+    		contentPane.add(textAreaDiaMesEntrada);
+    		
+    		textFieldAnoSalida = new JTextField();
+    		textFieldAnoSalida.addFocusListener(new TextFieldAnoSalidaFocusListener());
+    		textFieldAnoSalida.setColumns(10);
+    		textFieldAnoSalida.setBackground(Color.WHITE);
+    		textFieldAnoSalida.setBounds(1040, 121, 40, 30);
+    		contentPane.add(textFieldAnoSalida);
+    		
+    		textFieldMesEntrada = new JTextField();
+    		textFieldMesEntrada.addFocusListener(new TextFieldMesEntradaFocusListener());
+    		textFieldMesEntrada.setColumns(10);
+    		textFieldMesEntrada.setBackground(Color.WHITE);
+    		textFieldMesEntrada.setBounds(975, 80, 40, 30);
+    		
+    		contentPane.add(textFieldMesEntrada);
+    		
+    		textFieldDiaSalida = new JTextField();
+    		textFieldDiaSalida.addFocusListener(new TextFieldDiaSalidaFocusListener());
+    		textFieldDiaSalida.setColumns(10);
+    		textFieldDiaSalida.setBackground(Color.WHITE);
+    		textFieldDiaSalida.setBounds(910, 121, 40, 30);
+    		contentPane.add(textFieldDiaSalida);
+    		
+    		textFieldMesSalida = new JTextField();
+    		textFieldMesSalida.addFocusListener(new TextFieldMesSalidaFocusListener());
+    		textFieldMesSalida.setColumns(10);
+    		textFieldMesSalida.setBackground(Color.WHITE);
+    		textFieldMesSalida.setBounds(975, 121, 40, 30);
+    		contentPane.add(textFieldMesSalida);
+    		
+    		textFieldAnoEntrada = new JTextField();
+    		textFieldAnoEntrada.addFocusListener(new TextFieldAnoEntradaFocusListener());
+    		textFieldAnoEntrada.setColumns(10);
+    		textFieldAnoEntrada.setBackground(Color.WHITE);
+    		textFieldAnoEntrada.setBounds(1040, 80, 40, 30);
+    		contentPane.add(textFieldAnoEntrada);
+    		
+    		textFieldDiaEntrada = new JTextField();
+    		textFieldDiaEntrada.addFocusListener(new TextFieldDiaEntradaFocusListener());
+    		textFieldDiaEntrada.setColumns(10);
+    		textFieldDiaEntrada.setBackground(Color.WHITE);
+    		textFieldDiaEntrada.setBounds(910, 80, 40, 30);
+    		contentPane.add(textFieldDiaEntrada);
+    		
+    		rdbtnHombre = new JRadioButton("Hombre");
+    		buttonGroupSexo.add(rdbtnHombre);
+    		rdbtnHombre.setOpaque(false);
+    		rdbtnHombre.setForeground(Color.WHITE);
+    		rdbtnHombre.setFont(new Font("Tahoma", Font.PLAIN, 17));
+    		rdbtnHombre.setBounds(200, 369, 136, 30);
+    		contentPane.add(rdbtnHombre);
+    		
+    		txtrSexo = new JTextArea();
+    		txtrSexo.setText("Sexo:");
+    		txtrSexo.setOpaque(false);
+    		txtrSexo.setForeground(Color.WHITE);
+    		txtrSexo.setFont(new Font("Monospaced", Font.PLAIN, 16));
+    		txtrSexo.setEditable(false);
+    		txtrSexo.setBounds(200, 332, 180, 30);
+    		contentPane.add(txtrSexo);
+    		
+    		rdbtnMujer = new JRadioButton("Mujer");
+    		buttonGroupSexo.add(rdbtnMujer);
+    		rdbtnMujer.setOpaque(false);
+    		rdbtnMujer.setForeground(Color.WHITE);
+    		rdbtnMujer.setFont(new Font("Tahoma", Font.PLAIN, 17));
+    		rdbtnMujer.setBounds(344, 369, 136, 30);
+    		contentPane.add(rdbtnMujer);
+    		
+    		txtrTipoRegimen = new JTextArea();
+    		txtrTipoRegimen.setText("Tipo Regimen:");
+    		txtrTipoRegimen.setOpaque(false);
+    		txtrTipoRegimen.setForeground(Color.WHITE);
+    		txtrTipoRegimen.setFont(new Font("Monospaced", Font.PLAIN, 16));
+    		txtrTipoRegimen.setEditable(false);
+    		txtrTipoRegimen.setBounds(200, 262, 180, 30);
+    		contentPane.add(txtrTipoRegimen);
+    		
+    		rdbtnHa = new JRadioButton("HA");
+    		rdbtnHa.addFocusListener(new RdbtnHaFocusListener());
+    		buttonGroupRegimen.add(rdbtnHa);
+    		rdbtnHa.setOpaque(false);
+    		rdbtnHa.setForeground(Color.WHITE);
+    		rdbtnHa.setFont(new Font("Tahoma", Font.PLAIN, 17));
+    		rdbtnHa.setBounds(200, 299, 70, 30);
+    		contentPane.add(rdbtnHa);
+    		
+    		rdbtnMp = new JRadioButton("MP");
+    		rdbtnMp.addFocusListener(new RdbtnMpFocusListener());
+    		buttonGroupRegimen.add(rdbtnMp);
+    		rdbtnMp.setOpaque(false);
+    		rdbtnMp.setForeground(Color.WHITE);
+    		rdbtnMp.setFont(new Font("Tahoma", Font.PLAIN, 17));
+    		rdbtnMp.setBounds(344, 299, 70, 30);
+    		contentPane.add(rdbtnMp);
+    		
+    		rdbtnPc = new JRadioButton("PC");
+    		rdbtnPc.addFocusListener(new RdbtnPcFocusListener());
+    		buttonGroupRegimen.add(rdbtnPc);
+    		rdbtnPc.setOpaque(false);
+    		rdbtnPc.setForeground(Color.WHITE);
+    		rdbtnPc.setFont(new Font("Tahoma", Font.PLAIN, 17));
+    		rdbtnPc.setBounds(416, 299, 90, 30);
+    		contentPane.add(rdbtnPc);
+    		
+    		rdbtnAd = new JRadioButton("AD");
+    		rdbtnAd.addFocusListener(new RdbtnAdFocusListener());
+    		buttonGroupRegimen.add(rdbtnAd);
+    		rdbtnAd.setOpaque(false);
+    		rdbtnAd.setForeground(Color.WHITE);
+    		rdbtnAd.setFont(new Font("Tahoma", Font.PLAIN, 17));
+    		rdbtnAd.setBounds(272, 299, 70, 30);
+    		contentPane.add(rdbtnAd);
+    		
+    		textNombre = new JTextField();
+    		textNombre.addFocusListener(new TextNombreFocusListener());
+    		textNombre.setText("Nombre");
+    		cambiarTextoNombreDefault();
+    		textNombre.setBackground(Color.WHITE);
+    		textNombre.setBounds(310, 80, 170, 30);
+    		
+    		contentPane.add(textNombre);
+    		textNombre.setColumns(10);
+    		
+    		textApellido = new JTextField();
+    		textApellido.addFocusListener(new TextApellidoFocusListener());
+    		textApellido.setText("Apellido");
+    		textApellido.setColumns(10);
+    		cambiarTextoApellidoDefault();
+    		textApellido.setBounds(310, 121, 170, 30);
+    		contentPane.add(textApellido);
+    		
+    		rdbtnTri = new JRadioButton("TRI");
+    		rdbtnTri.addFocusListener(new RdbtnTriFocusListener());
+    		rdbtnTri.setForeground(Color.WHITE);
+    		buttonGroupHabitaciones.add(rdbtnTri);
+    		rdbtnTri.setFont(new Font("Tahoma", Font.PLAIN, 17));
+    		rdbtnTri.setOpaque(false);
+    		rdbtnTri.setBounds(344, 225, 70, 30);
+    		contentPane.add(rdbtnTri);
+    		
+    		rdbtnSuite = new JRadioButton("SUITE");
+    		rdbtnSuite.addFocusListener(new RdbtnSuiteFocusListener());
+    		rdbtnSuite.setForeground(Color.WHITE);
+    		buttonGroupHabitaciones.add(rdbtnSuite);
+    		rdbtnSuite.setOpaque(false);
+    		rdbtnSuite.setFont(new Font("Tahoma", Font.PLAIN, 17));
+    		rdbtnSuite.setBounds(416, 225, 90, 30);
+    		contentPane.add(rdbtnSuite);
+    		
+    		rdbtnDb = new JRadioButton("DB");
+    		rdbtnDb.addFocusListener(new RdbtnDbFocusListener());
+    		rdbtnDb.setForeground(Color.WHITE);
+    		buttonGroupHabitaciones.add(rdbtnDb);
+    		rdbtnDb.setOpaque(false);
+    		rdbtnDb.setFont(new Font("Tahoma", Font.PLAIN, 17));
+    		rdbtnDb.setBounds(272, 225, 70, 30);
+    		contentPane.add(rdbtnDb);
+    		
+    		rdbtnDui = new JRadioButton("DUI");
+    		rdbtnDui.addFocusListener(new RdbtnDuiFocusListener());
+    		rdbtnDui.setForeground(Color.WHITE);
+    		buttonGroupHabitaciones.add(rdbtnDui);
+    		rdbtnDui.setOpaque(false);
+    		rdbtnDui.setFont(new Font("Tahoma", Font.PLAIN, 17));
+    		rdbtnDui.setBounds(200, 225, 70, 30);
+    		contentPane.add(rdbtnDui);
+    		
+    		txtrTipoHabitacion = new JTextArea();
+    		txtrTipoHabitacion.setForeground(Color.WHITE);
+    		txtrTipoHabitacion.setText("Tipo Habitaci\u00F3n:");
+    		txtrTipoHabitacion.setFont(new Font("Monospaced", Font.PLAIN, 16));
+    		txtrTipoHabitacion.setOpaque(false);
+    		txtrTipoHabitacion.setEditable(false);
+    		txtrTipoHabitacion.setBounds(200, 188, 180, 30);
+    		contentPane.add(txtrTipoHabitacion);
+    		
+    		txtrApellido = new JTextArea();
+    		txtrApellido.setForeground(Color.WHITE);
+    		txtrApellido.setText("Apellido:");
+    		txtrApellido.setFont(new Font("Monospaced", Font.PLAIN, 16));
+    		txtrApellido.setEditable(false);
+    		txtrApellido.setOpaque(false);
+    		txtrApellido.setBounds(200, 121, 100, 30);
+    		contentPane.add(txtrApellido);
+    		
+    		txtrNombre = new JTextArea();
+    		txtrNombre.setForeground(Color.WHITE);
+    		txtrNombre.setFont(new Font("Monospaced", Font.PLAIN, 16));
+    		txtrNombre.setText("Nombre:");
+    		txtrNombre.setOpaque(false);
+    		txtrNombre.setEditable(false);
+    		txtrNombre.setBounds(200, 80, 100, 30);
+    		contentPane.add(txtrNombre);
+    		
+    		lblNewLabel = new JLabel("New label");
+    		lblNewLabel.setIcon(new ImageIcon(".\\recursos\\fondo.jpg"));
+    		lblNewLabel.setBounds(0, 30, 1280, 720);
+    		contentPane.add(lblNewLabel);
+    		
+    		panel = new JPanel();
+    		panel.setBackground(Color.WHITE);
+    		panel.setBorder(new SoftBevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, null, null, null));
+    		panel.setBounds(0, 0, 1280, 30);
+    		contentPane.add(panel);
+    		panel.setLayout(null);
+    		
+    		lblNombreApp = new JLabel("Hotel Stefan *****");
+    		lblNombreApp.setVerticalAlignment(SwingConstants.BOTTOM);
+    		lblNombreApp.setHorizontalAlignment(SwingConstants.CENTER);
+    		lblNombreApp.setFont(new Font("Perpetua Titling MT", Font.BOLD, 18));
+    		lblNombreApp.setForeground(new Color(184, 134, 11));
+    		lblNombreApp.setBounds(538, 0, 212, 30);
+    		panel.add(lblNombreApp);
+    		
+    		lblCerrar = new JLabel("");
+    		lblCerrar.addMouseListener(new LblCerrarMouseListener());
+    		lblCerrar.setHorizontalAlignment(SwingConstants.CENTER);
+    		lblCerrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    		lblCerrar.setToolTipText("Cerrar");
+    		lblCerrar.setIcon(new ImageIcon(".\\recursos\\close.png"));
+    		lblCerrar.setBounds(22, 9, 14, 14);
+    		panel.add(lblCerrar);
+    		
+    		lblMinimizar = new JLabel("");
+    		lblMinimizar.addMouseListener(new LblMinimizarMouseListener());
+    		lblMinimizar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    		lblMinimizar.setHorizontalAlignment(SwingConstants.CENTER);
+    		lblMinimizar.setToolTipText("Minimizar");
+    		lblMinimizar.setIcon(new ImageIcon(".\\recursos\\minimize.png"));
+    		lblMinimizar.setBounds(46, 9, 14, 14);
+    		panel.add(lblMinimizar);
+    		
+    		lblMaximizar = new JLabel("");
+    		lblMaximizar.addMouseListener(new LblMaximizarMouseListener());
+    		lblMaximizar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    		lblMaximizar.setHorizontalAlignment(SwingConstants.CENTER);
+    		lblMaximizar.setToolTipText("Maximizar");
+    		lblMaximizar.setIcon(new ImageIcon(".\\recursos\\maximize.png"));
+    		lblMaximizar.setBounds(70, 9, 14, 14);
+    		panel.add(lblMaximizar);
+            rdbtnDui.setSelected(true);
+            rdbtnHa.setSelected(true);
+            rdbtnHombre.setSelected(true);
+        	
+        	comprobarDisponibilidad();
         }
 }

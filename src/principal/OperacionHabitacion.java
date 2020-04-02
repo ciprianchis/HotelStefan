@@ -96,6 +96,13 @@ public class OperacionHabitacion{
         }
     };
     
+    public boolean comprobarHabitacion(int pos) {
+    	return vHabitaciones[pos].getDisponible();
+    }
+    
+    public void reservarHabitacion(int pos) {
+    	vHabitaciones[pos].reservarHabitacion();
+    }
     public void guardarHabitaciones() {
         File fichero = new File(".\\recursos\\habitaciones.dat");
             try {

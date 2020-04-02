@@ -12,7 +12,15 @@ import java.io.Serializable;
  * @author areka
  */
 public class Habitacion implements Serializable  {
-    private int numHabitacion;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8009767995534135276L;
+	/**
+	 * 
+	 */
+	
+	private int numHabitacion;
     private String tipoHabitacion;
     private boolean disponible;
 
@@ -27,5 +35,11 @@ public class Habitacion implements Serializable  {
         return "Habitacion{" + "numHabitacion=" + numHabitacion + ", tipoHabitacion=" + tipoHabitacion + ", disponible=" + disponible + '}';
     }
     
+    public boolean getDisponible() {
+    	return disponible;
+    }
     
+    public void reservarHabitacion() {
+    	disponible = false;
+    }
 }
