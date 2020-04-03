@@ -30,6 +30,10 @@ import javax.swing.ButtonGroup;
 import javax.swing.JTextField;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Reservar extends JFrame {
 
@@ -251,7 +255,11 @@ public class Reservar extends JFrame {
 				seleccionRegimen = "pc";
 			}
 			int precio;
-			int precioHab = Integer.parseInt(textFieldNumeroNoches.getText());
+			int precioHab=0;
+			if (!textFieldNumeroNoches.getText().equals("")) {
+				precioHab = Integer.parseInt(textFieldNumeroNoches.getText());
+			}
+			
 			int precioReg = precioHab;
 			
 			switch (seleccionHabitacion) {
@@ -460,7 +468,6 @@ public class Reservar extends JFrame {
 			if (textNombre.getText().equals("")) {
 				cambiarTextoNombreDefault();
 			}
-			comprobarBotonEnviar();
 		}
 	}
 	private class TextApellidoFocusListener extends FocusAdapter {
@@ -476,129 +483,60 @@ public class Reservar extends JFrame {
 			if (textApellido.getText().equals("")) {
 				cambiarTextoApellidoDefault();
 			}
-			comprobarBotonEnviar();
 		}
 	}
-	private class TextFieldAnoSalidaFocusListener extends FocusAdapter {
-		@Override
-		public void focusLost(FocusEvent e) {
-			comprobarNumNoches();
-			comprobarBotonEnviar();
+	private String sacarHabitacion() {
+		String seleccionHabitacion = "";
+		if (rdbtnDui.isSelected()) {
+			seleccionHabitacion = "dui";
 		}
-	}
-	private class TextFieldDiaSalidaFocusListener extends FocusAdapter {
-		@Override
-		public void focusLost(FocusEvent e) {
-			comprobarNumNoches();
-			comprobarBotonEnviar();
+		if (rdbtnDb.isSelected()) {
+			seleccionHabitacion = "db";
 		}
-	}
-	private class TextFieldAnoEntradaFocusListener extends FocusAdapter {
-		@Override
-		public void focusLost(FocusEvent e) {
-			comprobarNumNoches();
-			comprobarBotonEnviar();
+		if (rdbtnTri.isSelected()) {
+			seleccionHabitacion = "tri";
 		}
-	}
-	private class TextFieldMesSalidaFocusListener extends FocusAdapter {
-		@Override
-		public void focusLost(FocusEvent e) {
-			comprobarNumNoches();
-			comprobarBotonEnviar();
-		}
-	}
-	private class TextFieldMesEntradaFocusListener extends FocusAdapter {
-		@Override
-		public void focusLost(FocusEvent e) {
-			comprobarNumNoches();
-			comprobarBotonEnviar();
-		}
-	}
-	private class TextFieldDiaEntradaFocusListener extends FocusAdapter {
-		@Override
-		public void focusLost(FocusEvent e) {
-			comprobarNumNoches();
-			comprobarBotonEnviar();
-		}
-	}
-	private class RdbtnPcFocusListener extends FocusAdapter {
-		@Override
-		public void focusLost(FocusEvent e) {
-			comprobarImporte();
-		}
-	}
-	private class RdbtnMpFocusListener extends FocusAdapter {
-		@Override
-		public void focusLost(FocusEvent e) {
-			comprobarImporte();
-		}
-	}
-	private class RdbtnTriFocusListener extends FocusAdapter {
-		@Override
-		public void focusLost(FocusEvent e) {
-			comprobarImporte();
-			comprobarDisponibilidad();
-		}
-		@Override
-		public void focusGained(FocusEvent e) {
-			comprobarImporte();
-			comprobarDisponibilidad();
-		}
-	}
-	private class RdbtnDbFocusListener extends FocusAdapter {
-		@Override
-		public void focusLost(FocusEvent e) {
-			comprobarImporte();
-			comprobarDisponibilidad();
-		}
-		@Override
-		public void focusGained(FocusEvent e) {
-			comprobarImporte();
-			comprobarDisponibilidad();
-		}
-	}
-	private class RdbtnDuiFocusListener extends FocusAdapter {
-		@Override
-		public void focusLost(FocusEvent e) {
-			comprobarImporte();
-			comprobarDisponibilidad();
-		}
-		@Override
-		public void focusGained(FocusEvent e) {
-			comprobarImporte();
-			comprobarDisponibilidad();
+		if (rdbtnSuite.isSelected()) {
+			seleccionHabitacion = "suite";
 		}
 		
+		return seleccionHabitacion;
 	}
-	private class RdbtnSuiteFocusListener extends FocusAdapter {
-		@Override
-		public void focusLost(FocusEvent e) {
-			comprobarImporte();
-			comprobarDisponibilidad();
+	private String sacarRegimen() {
+		String seleccionRegimen = "";
+		if (rdbtnHa.isSelected()) {
+			seleccionRegimen = "ha";
 		}
-		@Override
-		public void focusGained(FocusEvent e) {
-			comprobarImporte();
-			comprobarDisponibilidad();
+		if (rdbtnAd.isSelected()) {
+			seleccionRegimen = "ad";
 		}
+		if (rdbtnMp.isSelected()) {
+			seleccionRegimen = "mp";
+		}
+		if (rdbtnPc.isSelected()) {
+			seleccionRegimen = "pc";
+		}
+		return seleccionRegimen;
 	}
-	private class RdbtnAdFocusListener extends FocusAdapter {
-		@Override
-		public void focusLost(FocusEvent e) {
-			comprobarImporte();
-			
+	
+	private String sacarSexo() {
+		String seleccionSexo = "";
+		if (rdbtnHombre.isSelected()) {
+			seleccionSexo = "Hombre";
+		} else {
+			seleccionSexo = "Mujer";
 		}
+		return seleccionSexo;
 	}
-	private class RdbtnHaFocusListener extends FocusAdapter {
-		@Override
-		public void focusLost(FocusEvent e) {
-			comprobarImporte();
-			
-		}
+	
+	private int reservarHabitacion() {
+		operaciones.reservarHabitacion(pos);
+		return operaciones.sacarNumeroHabitación(pos);
 	}
 	private class BtnPagarMouseListener extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent e) {
+			reserva = new Reserva(usuarioReservas, txtrNombre.getText(), txtrApellido.getText(), (textFieldDiaEntrada +" / "+ textFieldMesEntrada +" / "+ textFieldAnoEntrada), (textFieldDiaEntrada +" / "+ textFieldMesEntrada +" / "+ textFieldAnoEntrada), sacarHabitacion(), sacarRegimen(), sacarSexo(), Integer.parseInt(textFieldImporte.getText()), Integer.parseInt(textFieldNumeroNoches.getText()),reservarHabitacion());
 			new Pago(usuarioReservas,reserva).setVisible(true);
 			dispose();
 		}
@@ -608,6 +546,116 @@ public class Reservar extends JFrame {
 		public void mouseClicked(MouseEvent e) {
 			new ReservasCliente(usuarioReservas).setVisible(true);
 			dispose();
+		}
+	}
+	private class RdbtnHaMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			comprobarImporte();
+			comprobarDisponibilidad();
+		}
+	}
+	private class RdbtnDuiMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			comprobarImporte();
+			comprobarDisponibilidad();
+		}
+	}
+	private class RdbtnDbMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			comprobarImporte();
+			comprobarDisponibilidad();
+		}
+	}
+	private class RdbtnTriMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			comprobarImporte();
+			comprobarDisponibilidad();
+		}
+	}
+	private class RdbtnAdMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			comprobarImporte();
+			comprobarDisponibilidad();
+		}
+	}
+	private class RdbtnSuiteMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			comprobarImporte();
+			comprobarDisponibilidad();
+		}
+	}
+	private class RdbtnMpMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			comprobarImporte();
+			comprobarDisponibilidad();
+		}
+	}
+	private class RdbtnPcMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			comprobarImporte();
+			comprobarDisponibilidad();
+		}
+	}
+	private class TextFieldMesSalidaKeyListener extends KeyAdapter {
+		@Override
+		public void keyReleased(KeyEvent e) {
+			comprobarNumNoches();
+			comprobarBotonEnviar();
+		}
+	}
+	private class TextFieldDiaEntradaKeyListener extends KeyAdapter {
+		@Override
+		public void keyReleased(KeyEvent e) {
+			comprobarNumNoches();
+			comprobarBotonEnviar();
+		}
+	}
+	private class TextFieldAnoEntradaKeyListener extends KeyAdapter {
+		@Override
+		public void keyReleased(KeyEvent e) {
+			comprobarNumNoches();
+			comprobarBotonEnviar();
+		}
+	}
+	private class TextFieldDiaSalidaKeyListener extends KeyAdapter {
+		@Override
+		public void keyReleased(KeyEvent e) {
+			comprobarNumNoches();
+			comprobarBotonEnviar();
+		}
+	}
+	private class TextFieldAnoSalidaKeyListener extends KeyAdapter {
+		@Override
+		public void keyReleased(KeyEvent e) {
+			comprobarNumNoches();
+			comprobarBotonEnviar();
+		}
+	}
+	private class TextFieldMesEntradaKeyListener extends KeyAdapter {
+		@Override
+		public void keyReleased(KeyEvent e) {
+			comprobarNumNoches();
+			comprobarBotonEnviar();
+		}
+	}
+	private class TextApellidoKeyListener extends KeyAdapter {
+		@Override
+		public void keyReleased(KeyEvent e) {
+			comprobarBotonEnviar();
+		}
+	}
+	private class TextNombreKeyListener extends KeyAdapter {
+		@Override
+		public void keyReleased(KeyEvent e) {
+			comprobarBotonEnviar();
 		}
 	}
         private void initApp() {
@@ -727,14 +775,14 @@ public class Reservar extends JFrame {
     		contentPane.add(textAreaDiaMesEntrada);
     		
     		textFieldAnoSalida = new JTextField();
-    		textFieldAnoSalida.addFocusListener(new TextFieldAnoSalidaFocusListener());
+    		textFieldAnoSalida.addKeyListener(new TextFieldAnoSalidaKeyListener());
     		textFieldAnoSalida.setColumns(10);
     		textFieldAnoSalida.setBackground(Color.WHITE);
     		textFieldAnoSalida.setBounds(1040, 121, 40, 30);
     		contentPane.add(textFieldAnoSalida);
     		
     		textFieldMesEntrada = new JTextField();
-    		textFieldMesEntrada.addFocusListener(new TextFieldMesEntradaFocusListener());
+    		textFieldMesEntrada.addKeyListener(new TextFieldMesEntradaKeyListener());
     		textFieldMesEntrada.setColumns(10);
     		textFieldMesEntrada.setBackground(Color.WHITE);
     		textFieldMesEntrada.setBounds(975, 80, 40, 30);
@@ -742,28 +790,28 @@ public class Reservar extends JFrame {
     		contentPane.add(textFieldMesEntrada);
     		
     		textFieldDiaSalida = new JTextField();
-    		textFieldDiaSalida.addFocusListener(new TextFieldDiaSalidaFocusListener());
+    		textFieldDiaSalida.addKeyListener(new TextFieldDiaSalidaKeyListener());
     		textFieldDiaSalida.setColumns(10);
     		textFieldDiaSalida.setBackground(Color.WHITE);
     		textFieldDiaSalida.setBounds(910, 121, 40, 30);
     		contentPane.add(textFieldDiaSalida);
     		
     		textFieldMesSalida = new JTextField();
-    		textFieldMesSalida.addFocusListener(new TextFieldMesSalidaFocusListener());
+    		textFieldMesSalida.addKeyListener(new TextFieldMesSalidaKeyListener());
     		textFieldMesSalida.setColumns(10);
     		textFieldMesSalida.setBackground(Color.WHITE);
     		textFieldMesSalida.setBounds(975, 121, 40, 30);
     		contentPane.add(textFieldMesSalida);
     		
     		textFieldAnoEntrada = new JTextField();
-    		textFieldAnoEntrada.addFocusListener(new TextFieldAnoEntradaFocusListener());
+    		textFieldAnoEntrada.addKeyListener(new TextFieldAnoEntradaKeyListener());
     		textFieldAnoEntrada.setColumns(10);
     		textFieldAnoEntrada.setBackground(Color.WHITE);
     		textFieldAnoEntrada.setBounds(1040, 80, 40, 30);
     		contentPane.add(textFieldAnoEntrada);
     		
     		textFieldDiaEntrada = new JTextField();
-    		textFieldDiaEntrada.addFocusListener(new TextFieldDiaEntradaFocusListener());
+    		textFieldDiaEntrada.addKeyListener(new TextFieldDiaEntradaKeyListener());
     		textFieldDiaEntrada.setColumns(10);
     		textFieldDiaEntrada.setBackground(Color.WHITE);
     		textFieldDiaEntrada.setBounds(910, 80, 40, 30);
@@ -804,7 +852,7 @@ public class Reservar extends JFrame {
     		contentPane.add(txtrTipoRegimen);
     		
     		rdbtnHa = new JRadioButton("HA");
-    		rdbtnHa.addFocusListener(new RdbtnHaFocusListener());
+    		rdbtnHa.addMouseListener(new RdbtnHaMouseListener());
     		buttonGroupRegimen.add(rdbtnHa);
     		rdbtnHa.setOpaque(false);
     		rdbtnHa.setForeground(Color.WHITE);
@@ -813,7 +861,7 @@ public class Reservar extends JFrame {
     		contentPane.add(rdbtnHa);
     		
     		rdbtnMp = new JRadioButton("MP");
-    		rdbtnMp.addFocusListener(new RdbtnMpFocusListener());
+    		rdbtnMp.addMouseListener(new RdbtnMpMouseListener());
     		buttonGroupRegimen.add(rdbtnMp);
     		rdbtnMp.setOpaque(false);
     		rdbtnMp.setForeground(Color.WHITE);
@@ -822,7 +870,7 @@ public class Reservar extends JFrame {
     		contentPane.add(rdbtnMp);
     		
     		rdbtnPc = new JRadioButton("PC");
-    		rdbtnPc.addFocusListener(new RdbtnPcFocusListener());
+    		rdbtnPc.addMouseListener(new RdbtnPcMouseListener());
     		buttonGroupRegimen.add(rdbtnPc);
     		rdbtnPc.setOpaque(false);
     		rdbtnPc.setForeground(Color.WHITE);
@@ -831,7 +879,7 @@ public class Reservar extends JFrame {
     		contentPane.add(rdbtnPc);
     		
     		rdbtnAd = new JRadioButton("AD");
-    		rdbtnAd.addFocusListener(new RdbtnAdFocusListener());
+    		rdbtnAd.addMouseListener(new RdbtnAdMouseListener());
     		buttonGroupRegimen.add(rdbtnAd);
     		rdbtnAd.setOpaque(false);
     		rdbtnAd.setForeground(Color.WHITE);
@@ -840,6 +888,7 @@ public class Reservar extends JFrame {
     		contentPane.add(rdbtnAd);
     		
     		textNombre = new JTextField();
+    		textNombre.addKeyListener(new TextNombreKeyListener());
     		textNombre.addFocusListener(new TextNombreFocusListener());
     		textNombre.setText("Nombre");
     		cambiarTextoNombreDefault();
@@ -850,6 +899,7 @@ public class Reservar extends JFrame {
     		textNombre.setColumns(10);
     		
     		textApellido = new JTextField();
+    		textApellido.addKeyListener(new TextApellidoKeyListener());
     		textApellido.addFocusListener(new TextApellidoFocusListener());
     		textApellido.setText("Apellido");
     		textApellido.setColumns(10);
@@ -858,7 +908,7 @@ public class Reservar extends JFrame {
     		contentPane.add(textApellido);
     		
     		rdbtnTri = new JRadioButton("TRI");
-    		rdbtnTri.addFocusListener(new RdbtnTriFocusListener());
+    		rdbtnTri.addMouseListener(new RdbtnTriMouseListener());
     		rdbtnTri.setForeground(Color.WHITE);
     		buttonGroupHabitaciones.add(rdbtnTri);
     		rdbtnTri.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -867,7 +917,7 @@ public class Reservar extends JFrame {
     		contentPane.add(rdbtnTri);
     		
     		rdbtnSuite = new JRadioButton("SUITE");
-    		rdbtnSuite.addFocusListener(new RdbtnSuiteFocusListener());
+    		rdbtnSuite.addMouseListener(new RdbtnSuiteMouseListener());
     		rdbtnSuite.setForeground(Color.WHITE);
     		buttonGroupHabitaciones.add(rdbtnSuite);
     		rdbtnSuite.setOpaque(false);
@@ -876,7 +926,7 @@ public class Reservar extends JFrame {
     		contentPane.add(rdbtnSuite);
     		
     		rdbtnDb = new JRadioButton("DB");
-    		rdbtnDb.addFocusListener(new RdbtnDbFocusListener());
+    		rdbtnDb.addMouseListener(new RdbtnDbMouseListener());
     		rdbtnDb.setForeground(Color.WHITE);
     		buttonGroupHabitaciones.add(rdbtnDb);
     		rdbtnDb.setOpaque(false);
@@ -885,7 +935,7 @@ public class Reservar extends JFrame {
     		contentPane.add(rdbtnDb);
     		
     		rdbtnDui = new JRadioButton("DUI");
-    		rdbtnDui.addFocusListener(new RdbtnDuiFocusListener());
+    		rdbtnDui.addMouseListener(new RdbtnDuiMouseListener());
     		rdbtnDui.setForeground(Color.WHITE);
     		buttonGroupHabitaciones.add(rdbtnDui);
     		rdbtnDui.setOpaque(false);

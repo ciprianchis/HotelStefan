@@ -34,7 +34,9 @@ public class Habitacion implements Serializable  {
     public String toString() {
         return "Habitacion{" + "numHabitacion=" + numHabitacion + ", tipoHabitacion=" + tipoHabitacion + ", disponible=" + disponible + '}';
     }
-    
+    public int getNumHabitacion() {
+    	return numHabitacion;
+    }
     public boolean getDisponible() {
     	return disponible;
     }

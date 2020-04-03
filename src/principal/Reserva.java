@@ -15,11 +15,12 @@ public class Reserva implements Serializable {
 	private String tipoHabitacion;
 	private String regimen;
 	private String sexo;
+	private int numHabitacion;
 	private double precio;
 	private int numeroNoches;
 
 	public Reserva(String usuario,String nombreReserva, String apellidosReserva, String fechaEntrada,
-			String fechaSalida, String tipoHabitacion, String regimen, String sexo, double precio, int numeroNoches) {
+			String fechaSalida, String tipoHabitacion, String regimen, String sexo, double precio, int numeroNoches, int numHabitacion) {
 		this.usuario = usuario;
 		this.nombreReserva = nombreReserva;
 		this.apellidosReserva = apellidosReserva;
@@ -30,6 +31,7 @@ public class Reserva implements Serializable {
 		this.sexo = sexo;
 		this.precio = precio;
 		this.numeroNoches = numeroNoches;
+		this.numHabitacion = numHabitacion;
 	}
 
 	public String getUsuario() {
@@ -111,7 +113,7 @@ public class Reserva implements Serializable {
 	@Override
 	public String toString() {
 		return  nombreReserva + " " + apellidosReserva + " " + fechaEntrada + " " + fechaSalida + " " + tipoHabitacion + " " + regimen + " "
-				+ sexo + " " + precio + " " + numeroNoches;
+				+ sexo + " " + precio + " " + numeroNoches + " " + numHabitacion;
 	}
 
 }

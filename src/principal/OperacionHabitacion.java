@@ -111,6 +111,9 @@ public class OperacionHabitacion{
     public void reservarHabitacion(int pos) {
     	vHabitaciones[pos].reservarHabitacion();
     }
+    public int sacarNumeroHabitación(int pos) {
+    	return vHabitaciones[pos].getNumHabitacion();
+    }
     public void guardarHabitaciones() {
         File fichero = new File(".\\recursos\\habitaciones.dat");
             try {
