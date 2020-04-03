@@ -405,6 +405,37 @@ public class Reservar extends JFrame {
 		return false;
 		
 	}
+	
+	public boolean comprobarMesTest(int ano, int mes, int dia) {
+		if (dia>0 && dia<32 && mes>0 && mes<13) {
+			switch (mes) {
+				case 1:
+				case 3:
+				case 5:
+				case 7:
+				case 8:
+				case 10:
+				case 12:
+					return true;
+				case 4:
+				case 6:
+				case 9:
+				case 11:
+					if (dia<31) {
+						return true;
+					}
+					break;
+				case 2:
+					if (dia<29 || ((((ano % 4 == 0) && !(ano % 100 == 0)) || (ano % 400 == 0)) && dia<30)) {
+						return true;
+					}
+					break;
+			}
+		}
+		return false;
+		
+	}
+	
 	private class LblCerrarMouseListener extends MouseAdapter {
 		@Override
 		public void mouseEntered(MouseEvent e) {
