@@ -1,7 +1,13 @@
 package principal;
 
-public class Reserva {
-	private int codigoReserva;
+import java.io.Serializable;
+
+public class Reserva implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2002972975913738373L;
+	private String usuario;
 	private String nombreReserva;
 	private String apellidosReserva;
 	private String fechaEntrada;
@@ -9,15 +15,12 @@ public class Reserva {
 	private String tipoHabitacion;
 	private String regimen;
 	private String sexo;
-	private String numeroCuenta;
-	private String fechaCaducidad;
 	private double precio;
 	private int numeroNoches;
 
-	public Reserva(int codigoReserva, String nombreReserva, String apellidosReserva, String fechaEntrada,
-			String fechaSalida, String tipoHabitacion, String regimen, String sexo, String numeroCuenta,
-			String fechaCaducidad, double precio, int numeroNoches) {
-		this.codigoReserva = codigoReserva;
+	public Reserva(String usuario,String nombreReserva, String apellidosReserva, String fechaEntrada,
+			String fechaSalida, String tipoHabitacion, String regimen, String sexo, double precio, int numeroNoches) {
+		this.usuario = usuario;
 		this.nombreReserva = nombreReserva;
 		this.apellidosReserva = apellidosReserva;
 		this.fechaEntrada = fechaEntrada;
@@ -25,16 +28,13 @@ public class Reserva {
 		this.tipoHabitacion = tipoHabitacion;
 		this.regimen = regimen;
 		this.sexo = sexo;
-		this.numeroCuenta = numeroCuenta;
-		this.fechaCaducidad = fechaCaducidad;
 		this.precio = precio;
 		this.numeroNoches = numeroNoches;
 	}
 
-	public int getCodigoReserva() {
-		return codigoReserva;
+	public String getUsuario() {
+		return usuario;
 	}
-
 	public String getNombreReserva() {
 		return nombreReserva;
 	}
@@ -63,24 +63,12 @@ public class Reserva {
 		return sexo;
 	}
 
-	public String getNumeroCuenta() {
-		return numeroCuenta;
-	}
-
-	public String getFechaCaducidad() {
-		return fechaCaducidad;
-	}
-
 	public double getPrecio() {
 		return precio;
 	}
 
 	public int getNumeroNoches() {
 		return numeroNoches;
-	}
-
-	public void setCodigoReserva(int codigoReserva) {
-		this.codigoReserva = codigoReserva;
 	}
 
 	public void setNombreReserva(String nombreReserva) {
@@ -111,13 +99,6 @@ public class Reserva {
 		this.sexo = sexo;
 	}
 
-	public void setNumeroCuenta(String numeroCuenta) {
-		this.numeroCuenta = numeroCuenta;
-	}
-
-	public void setFechaCaducidad(String fechaCaducidad) {
-		this.fechaCaducidad = fechaCaducidad;
-	}
 
 	public void setPrecio(double precio) {
 		this.precio = precio;
@@ -129,8 +110,8 @@ public class Reserva {
 
 	@Override
 	public String toString() {
-		return codigoReserva + nombreReserva + apellidosReserva + fechaEntrada + fechaSalida + tipoHabitacion + regimen
-				+ sexo + numeroCuenta + fechaCaducidad + precio + numeroNoches;
+		return  nombreReserva + " " + apellidosReserva + " " + fechaEntrada + " " + fechaSalida + " " + tipoHabitacion + " " + regimen + " "
+				+ sexo + " " + precio + " " + numeroNoches;
 	}
 
 }
