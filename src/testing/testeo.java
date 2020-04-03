@@ -8,14 +8,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import principal.OperacionHabitacion;
+import principal.Reservar;
 
 class testeo {
 
 	OperacionHabitacion opHab;
-	
+	Reservar reserva;
 	@BeforeEach
 	void setUp() throws Exception {
 		opHab = new OperacionHabitacion();
+		reserva = new Reservar();
 	}
 
 	@Test
@@ -33,5 +35,19 @@ class testeo {
 		}
 		assertFalse(false);
 	}
-
+	
+	@Test
+	void testValorLimiteFecha() {
+		assertEquals(true, reserva.comprobarMesTest(2002, 12, 31));
+	}
+	
+	@Test
+	void testValorLimiteFecha_2() {
+		assertEquals(false, reserva.comprobarMesTest(1900, 2, 29));
+	}
+	
+	@Test
+	void testValorLimiteFecha_3() {
+		assertEquals(false, reserva.comprobarMesTest(2003, 2, 29));
+	}
 }
