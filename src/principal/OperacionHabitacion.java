@@ -100,6 +100,14 @@ public class OperacionHabitacion{
     	return vHabitaciones[pos].getDisponible();
     }
     
+    public boolean comprobarHabitacionTest(int pos) {
+    	if (vHabitaciones[pos]==null) {
+    		return true;
+		}
+    	return false;
+    	
+    }
+    
     public void reservarHabitacion(int pos) {
     	vHabitaciones[pos].reservarHabitacion();
     }
