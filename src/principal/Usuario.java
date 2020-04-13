@@ -1,8 +1,9 @@
 package principal;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Usuario {
+public class Usuario implements Serializable{
 	private String nombreUsuario;
 	private String password;
 	private boolean esAdmin;
@@ -41,7 +42,8 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario: " + nombreUsuario + "Password: " + password + "Admin: " + esAdmin;
+		return "\n"+ nombreUsuario + "-" + password + "-" + esAdmin;
 	}
+	
 
 }

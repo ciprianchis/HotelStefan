@@ -16,6 +16,7 @@ import javax.swing.JMenuBar;
 import java.awt.Color;
 import javax.swing.border.BevelBorder;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
 
@@ -26,9 +27,12 @@ import java.awt.TextField;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LogIn extends JFrame {
 
@@ -40,11 +44,11 @@ public class LogIn extends JFrame {
 	private JLabel lblMinimizar;
 	private JLabel lblMaximizar;
 	private JTextField textFieldUser;
-	private JPasswordField passwordField;
+	private JPasswordField passwordFieldPass;
 	private JLabel lblLogin;
 	private JButton btnEntrar;
-	private JButton btnSalir;
 	private JButton btnSignup;
+	//private ArrayList<Usuario> vUsuarios;
 	/**
 	 * Launch the application.
 	 */
@@ -125,13 +129,14 @@ public class LogIn extends JFrame {
 		contentPane.add(textFieldUser);
 		textFieldUser.setColumns(10);
 		
-		passwordField = new JPasswordField();
-		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
-		passwordField.setEchoChar('•');
-		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		passwordField.setBounds(460, 240, 368, 40);
-		contentPane.add(passwordField);
-		passwordField.setText("CONTRASEÑA");
+		passwordFieldPass = new JPasswordField();
+		passwordFieldPass.addFocusListener(new PasswordFieldFocusListener());
+		passwordFieldPass.setHorizontalAlignment(SwingConstants.CENTER);
+		passwordFieldPass.setEchoChar('•');
+		passwordFieldPass.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		passwordFieldPass.setBounds(460, 240, 368, 40);
+		contentPane.add(passwordFieldPass);
+		passwordFieldPass.setText("CONTRASEÑA");
 		
 		lblLogin = new JLabel("SIGN IN");
 		lblLogin.setForeground(new Color(184, 134, 11));
@@ -141,16 +146,15 @@ public class LogIn extends JFrame {
 		contentPane.add(lblLogin);
 		
 		btnEntrar = new JButton("ENTRAR");
+		btnEntrar.addActionListener(new BtnEntrarActionListener());
 		btnEntrar.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnEntrar.setBounds(460, 344, 368, 50);
 		contentPane.add(btnEntrar);
 		
-		btnSalir = new JButton("SALIR");
-		btnSalir.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnSalir.setBounds(272, 511, 368, 50);
-		contentPane.add(btnSalir);
 		
 		btnSignup = new JButton("REGISTRO");
+		btnSignup.addActionListener(new BtnSignupActionListener());
+		btnSignup.addMouseListener(new BtnSignupMouseListener());
 		btnSignup.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnSignup.setBounds(650, 511, 368, 50);
 		contentPane.add(btnSignup);
@@ -161,6 +165,7 @@ public class LogIn extends JFrame {
 		contentPane.add(lblFondo);
 		lblFondo.setFocusable(true);
 		lblFondo.requestFocus();
+		//vUsuarios = IoDatos.leerDatos();
 		
 	}
 	private class LblCerrarMouseListener extends MouseAdapter {
@@ -210,4 +215,72 @@ public class LogIn extends JFrame {
 			}
 		}
 	}
+	private class BtnSignupMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			
+		}
+	}
+	private class BtnSignupActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			Registro reg = new Registro();
+			reg.setVisible(true);
+			dispose();
+		}
+	}
+	private class PasswordFieldFocusListener extends FocusAdapter {
+		@Override
+		public void focusGained(FocusEvent arg0) {
+			passwordFieldPass.setText("");
+		}
+		@Override
+		public void focusLost(FocusEvent arg0) {
+			
+			if (String.copyValueOf(passwordFieldPass.getPassword()).equals("")) {
+				passwordFieldPass.setText("contraseña");
+			}
+			
+			if ((passwordFieldPass.getPassword().toString().equals("")) && (passwordFieldPass.getPassword().toString().equals("contraseña"))) {
+				passwordFieldPass.setText(passwordFieldPass.getPassword().toString());
+			}
+			
+		}
+	}
+	private class BtnEntrarActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if((textFieldUser.getText().equals("")||passwordFieldPass.getPassword().equals(""))||(textFieldUser.getText().equals("USUARIO")||passwordFieldPass.getPassword().equals("CONTRASEÑA"))) { 
+				JOptionPane.showMessageDialog(null,"Valores no introducidos" );
+			}
+			ArrayList<Usuario> vUsuarios = IoDatos.leerDatos();
+			
+			if (IoDatos.comprobarUser(textFieldUser.getText(), String.valueOf(passwordFieldPass.getPassword()))) {
+				for (Usuario user : vUsuarios) {
+					if (user.getNombreUsuario().equals(textFieldUser.getText())) {
+						/*if (user.isEsAdmin()) {
+							Registro reg = new Registro();
+							reg.setVisible(true);
+							dispose();
+							break;
+						}
+						mostrar la ventana del Administrador
+						*/
+						/*if (!user.isEsAdmin()) {
+							Registro reg = new Registro();
+							reg.setVisible(true);
+							dispose();
+							break;
+						}
+						mostrar la ventana del Cliente
+						*/
+					}
+				}
+			}else {
+				JOptionPane.showMessageDialog(null, "Los datos del usuario introducidos no coinciden o este no está registrado");
+				
+			}
+			
+			
+		}
+	}
+
 }

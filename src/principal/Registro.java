@@ -16,8 +16,11 @@ import javax.swing.JMenuBar;
 import java.awt.Color;
 import javax.swing.border.BevelBorder;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
+
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -26,9 +29,15 @@ import java.awt.TextField;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JCheckBox;
 
 public class Registro extends JFrame {
 
@@ -44,6 +53,8 @@ public class Registro extends JFrame {
 	private JButton btnAñadirUser;
 	private JButton btnSignIn;
 	private JTextField txtContrasea;
+	private JCheckBox chckbxAdmin;
+	private ArrayList<Usuario> vUsuarios;
 	/**
 	 * Launch the application.
 	 */
@@ -132,16 +143,20 @@ public class Registro extends JFrame {
 		contentPane.add(lblRegistro);
 		
 		btnAñadirUser = new JButton("A\u00D1ADIR");
+		btnAñadirUser.addActionListener(new BtnAñadirUserActionListener());
 		btnAñadirUser.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnAñadirUser.setBounds(460, 344, 368, 50);
+		btnAñadirUser.setBounds(460, 405, 368, 50);
 		contentPane.add(btnAñadirUser);
 		
 		btnSignIn = new JButton("VOLVER");
+		btnSignIn.addActionListener(new BtnSignInActionListener());
+		btnSignIn.addMouseListener(new BtnSignInMouseListener());
 		btnSignIn.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnSignIn.setBounds(650, 511, 368, 50);
 		contentPane.add(btnSignIn);
 		
 		txtContrasea = new JTextField();
+		txtContrasea.addFocusListener(new TxtContraseaFocusListener());
 		txtContrasea.setFont(new Font("Tahoma", Font.BOLD, 20));
 		txtContrasea.setText("CONTRASE\u00D1A");
 		txtContrasea.setHorizontalAlignment(SwingConstants.CENTER);
@@ -149,12 +164,19 @@ public class Registro extends JFrame {
 		contentPane.add(txtContrasea);
 		txtContrasea.setColumns(10);
 		
+		chckbxAdmin = new JCheckBox("ADMINISTRADOR");
+		chckbxAdmin.setHorizontalAlignment(SwingConstants.CENTER);
+		chckbxAdmin.setFont(new Font("Tahoma", Font.BOLD, 20));
+		chckbxAdmin.setBounds(460, 332, 368, 40);
+		contentPane.add(chckbxAdmin);
+		
 		lblFondo = new JLabel("");
 		lblFondo.setIcon(new ImageIcon(".\\recursos\\fondo.jpg"));
 		lblFondo.setBounds(0, 30, 1280, 720);
 		contentPane.add(lblFondo);
 		lblFondo.setFocusable(true);
 		lblFondo.requestFocus();
+		vUsuarios = IoDatos.leerDatos();
 		
 	}
 	private class LblCerrarMouseListener extends MouseAdapter {
@@ -202,6 +224,72 @@ public class Registro extends JFrame {
 			if (textFieldUser.getText().equals("")) {
 				textFieldUser.setText("USUARIO");
 			}
+		}
+	}
+	private class BtnSignInMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+		
+		}
+	}
+	private class BtnSignInActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			LogIn log = new LogIn();
+			log.setVisible(true);
+			dispose();
+		}
+	}
+	private class TxtContraseaFocusListener extends FocusAdapter {
+		@Override
+		public void focusGained(FocusEvent e) {
+			txtContrasea.setText("");
+		}	
+		@Override
+		public void focusLost(FocusEvent arg0) {
+			txtContrasea.setText(txtContrasea.getText());
+			
+			Pattern pPasswd = Pattern.compile("^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{8,16}$");
+			Matcher mPasswd = pPasswd.matcher(txtContrasea.getText());
+			
+			if (txtContrasea.getText().equals("")) {
+				txtContrasea.setText("CONTRASEÑA");
+			}
+			
+			if (!mPasswd.matches()) {
+				JOptionPane.showMessageDialog(null, "La contraseña debe contener un mínimo de 8 carácteres y máximo 16."+ "\n"
+						+ "Mayúsculas, minúsculas y números, uno de cada tipo por lo menos.");
+			}
+			
+			
+		}
+	}
+	private class BtnAñadirUserActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+								
+			for (Usuario usuario : vUsuarios) {
+				if (usuario.getNombreUsuario().equals(textFieldUser.getText())) {
+					JOptionPane.showMessageDialog(null, "El usuario indicado ya fue introducido anteriormente");
+					textFieldUser.setText("USUARIO");
+					txtContrasea.setText("CONTRASEÑA");
+					chckbxAdmin.setSelected(false);
+					return;
+				}
+			}
+			
+			
+			JOptionPane.showMessageDialog(null, "El nuevo usuario fue introducido");
+			
+			
+			Usuario usu = new Usuario(textFieldUser.getText(), txtContrasea.getText(), chckbxAdmin.isSelected());
+			vUsuarios.add(usu);
+			
+			IoDatos.guardarUsusarios(vUsuarios);
+			textFieldUser.setText("USUARIO");
+			txtContrasea.setText("CONTRASEÑA");
+			chckbxAdmin.setSelected(false);
+			
+			
+			
 		}
 	}
 }
