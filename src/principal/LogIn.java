@@ -280,7 +280,7 @@ public class LogIn extends JFrame {
 						}
 
 						if (!user.isEsAdmin()) {
-							ReservasCliente cliente = new ReservasCliente(user.getNombreUsuario());
+							ReservasCliente cliente = new ReservasCliente(textFieldUser.getText());
 							cliente.setVisible(true);
 							dispose();
 							break;
