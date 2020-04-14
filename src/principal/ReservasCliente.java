@@ -152,7 +152,8 @@ public class ReservasCliente extends JFrame {
 	private class BtnSalirMouseListener extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			new Login().setVisible(true);
+			LogIn log = new LogIn();
+			log.setVisible(true);
 			dispose();
 		}
 	}

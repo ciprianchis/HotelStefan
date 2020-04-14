@@ -264,14 +264,12 @@ public class LogIn extends JFrame {
 						}
 						mostrar la ventana del Administrador
 						*/
-						/*if (!user.isEsAdmin()) {
-							Registro reg = new Registro();
-							reg.setVisible(true);
+						if (!user.isEsAdmin()) {
+							ReservasCliente cliente = new ReservasCliente();
+							cliente.setVisible(true);
 							dispose();
 							break;
 						}
-						mostrar la ventana del Cliente
-						*/
 					}
 				}
 			}else {

@@ -20,8 +20,6 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
-
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
