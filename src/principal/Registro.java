@@ -53,6 +53,7 @@ public class Registro extends JFrame {
 	private JTextField txtContrasea;
 	private JCheckBox chckbxAdmin;
 	private ArrayList<Usuario> vUsuarios;
+	private boolean maximizado = false;
 	/**
 	 * Launch the application.
 	 */
@@ -200,6 +201,10 @@ public class Registro extends JFrame {
 		public void mouseExited(MouseEvent e) {
 			lblMinimizar.setIcon(new ImageIcon(".\\recursos\\minimize.png"));
 		}
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			setState(JFrame.ICONIFIED);
+		}
 	}
 	private class LblMaximizarMouseListener extends MouseAdapter {
 		@Override
@@ -209,6 +214,17 @@ public class Registro extends JFrame {
 		@Override
 		public void mouseExited(MouseEvent e) {
 			lblMaximizar.setIcon(new ImageIcon(".\\recursos\\maximize.png"));
+		}
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			if (!maximizado) {
+				setExtendedState(JFrame.MAXIMIZED_BOTH);
+				maximizado = true;
+			} else {
+				setExtendedState(JFrame.NORMAL);
+				maximizado = false;
+			}
+
 		}
 	}
 	private class TextFieldUserFocusListener extends FocusAdapter {

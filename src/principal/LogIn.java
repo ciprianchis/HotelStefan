@@ -48,6 +48,7 @@ public class LogIn extends JFrame {
 	private JLabel lblLogin;
 	private JButton btnEntrar;
 	private JButton btnSignup;
+	private boolean maximizado = false;
 	//private ArrayList<Usuario> vUsuarios;
 	/**
 	 * Launch the application.
@@ -191,6 +192,10 @@ public class LogIn extends JFrame {
 		public void mouseExited(MouseEvent e) {
 			lblMinimizar.setIcon(new ImageIcon(".\\recursos\\minimize.png"));
 		}
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			setState(JFrame.ICONIFIED);
+		}
 	}
 	private class LblMaximizarMouseListener extends MouseAdapter {
 		@Override
@@ -200,6 +205,17 @@ public class LogIn extends JFrame {
 		@Override
 		public void mouseExited(MouseEvent e) {
 			lblMaximizar.setIcon(new ImageIcon(".\\recursos\\maximize.png"));
+		}
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			if (!maximizado) {
+				setExtendedState(JFrame.MAXIMIZED_BOTH);
+				maximizado = true;
+			} else {
+				setExtendedState(JFrame.NORMAL);
+				maximizado = false;
+			}
+
 		}
 	}
 	private class TextFieldUserFocusListener extends FocusAdapter {
@@ -256,16 +272,15 @@ public class LogIn extends JFrame {
 			if (IoDatos.comprobarUser(textFieldUser.getText(), String.valueOf(passwordFieldPass.getPassword()))) {
 				for (Usuario user : vUsuarios) {
 					if (user.getNombreUsuario().equals(textFieldUser.getText())) {
-						/*if (user.isEsAdmin()) {
-							Registro reg = new Registro();
-							reg.setVisible(true);
+						if (user.isEsAdmin()) {
+							Hotel hotel = new Hotel();
+							hotel.setVisible(true);
 							dispose();
 							break;
 						}
-						mostrar la ventana del Administrador
-						*/
+
 						if (!user.isEsAdmin()) {
-							ReservasCliente cliente = new ReservasCliente();
+							ReservasCliente cliente = new ReservasCliente(user.getNombreUsuario());
 							cliente.setVisible(true);
 							dispose();
 							break;
