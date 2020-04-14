@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import principal.IoDatos;
 import principal.OperacionHabitacion;
 import principal.Reservar;
 
@@ -49,5 +50,15 @@ class testeo {
 	@Test
 	void testValorLimiteFecha_3() {
 		assertEquals(false, reserva.comprobarMesTest(2003, 2, 29));
+	}
+	
+	@Test
+	void testComprobacionUsuario() {
+		assertEquals(true, IoDatos.comprobarUser("Borja", "12345"));
+	}
+	
+	@Test
+	void testComprobacionUsuario_2() {
+		assertEquals(false, IoDatos.comprobarUser("Iván", "001122"));
 	}
 }
