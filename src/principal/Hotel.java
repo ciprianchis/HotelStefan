@@ -158,7 +158,7 @@ public class Hotel extends JFrame {
 		contentPane.add(txtFinal);
 		
 		lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Alex Noe\\Desktop\\GRADO SUPERIOR\\PROGRAMACION\\HotelStefan\\recursos\\fondo.jpg"));
+		lblNewLabel.setIcon(new ImageIcon(".\\recursos\\fondo.jpg"));
         lblNewLabel.setBounds(0, 30, 1280, 720);
         contentPane.add(lblNewLabel);
 		
@@ -182,7 +182,7 @@ public class Hotel extends JFrame {
 		lblCerrar.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCerrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblCerrar.setToolTipText("Cerrar");
-		lblCerrar.setIcon(new ImageIcon("C:\\Users\\Alex Noe\\Desktop\\GRADO SUPERIOR\\PROGRAMACION\\HotelStefan\\recursos\\close.png"));
+		lblCerrar.setIcon(new ImageIcon(".\\recursos\\close.png"));
 		lblCerrar.setBounds(22, 9, 14, 14);
 		panel.add(lblCerrar);
 		
@@ -191,7 +191,7 @@ public class Hotel extends JFrame {
 		lblMinimizar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblMinimizar.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMinimizar.setToolTipText("Minimizar");
-		lblMinimizar.setIcon(new ImageIcon("C:\\Users\\Alex Noe\\Desktop\\GRADO SUPERIOR\\PROGRAMACION\\HotelStefan\\recursos\\minimize.png"));
+		lblMinimizar.setIcon(new ImageIcon(".\\recursos\\minimize.png"));
 		lblMinimizar.setBounds(46, 9, 14, 14);
 		panel.add(lblMinimizar);
 		
@@ -200,18 +200,18 @@ public class Hotel extends JFrame {
 		lblMaximizar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblMaximizar.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMaximizar.setToolTipText("Maximizar");
-		lblMaximizar.setIcon(new ImageIcon("C:\\Users\\Alex Noe\\Desktop\\GRADO SUPERIOR\\PROGRAMACION\\HotelStefan\\recursos\\maximize.png"));
+		lblMaximizar.setIcon(new ImageIcon(".\\recursos\\maximize.png"));
 		lblMaximizar.setBounds(70, 9, 14, 14);
 		panel.add(lblMaximizar);
 	}
 	private class LblCerrarMouseListener extends MouseAdapter {
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			lblCerrar.setIcon(new ImageIcon("C:\\Users\\Alex Noe\\Desktop\\GRADO SUPERIOR\\PROGRAMACION\\HotelStefan\\recursos\\closeSelected.png"));
+			lblCerrar.setIcon(new ImageIcon(".\\recursos\\closeSelected.png"));
 		}
 		@Override
 		public void mouseExited(MouseEvent e) {
-			lblCerrar.setIcon(new ImageIcon("C:\\Users\\Alex Noe\\Desktop\\GRADO SUPERIOR\\PROGRAMACION\\HotelStefan\\recursos\\close.png"));
+			lblCerrar.setIcon(new ImageIcon(".\\recursos\\close.png"));
 		}
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -221,21 +221,21 @@ public class Hotel extends JFrame {
 	private class LblMinimizarMouseListener extends MouseAdapter {
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			lblMinimizar.setIcon(new ImageIcon("C:\\Users\\Alex Noe\\Desktop\\GRADO SUPERIOR\\PROGRAMACION\\HotelStefan\\recursos\\minimizeSelected.png"));
+			lblMinimizar.setIcon(new ImageIcon(".\\recursos\\minimizeSelected.png"));
 		}
 		@Override
 		public void mouseExited(MouseEvent e) {
-			lblMinimizar.setIcon(new ImageIcon("C:\\Users\\Alex Noe\\Desktop\\GRADO SUPERIOR\\PROGRAMACION\\HotelStefan\\recursos\\minimize.png"));
+			lblMinimizar.setIcon(new ImageIcon(".\\recursos\\minimize.png"));
 		}
 	}
 	private class LblMaximizarMouseListener extends MouseAdapter {
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			lblMaximizar.setIcon(new ImageIcon("C:\\Users\\Alex Noe\\Desktop\\GRADO SUPERIOR\\PROGRAMACION\\HotelStefan\\recursos\\maximizeSelected.png"));
+			lblMaximizar.setIcon(new ImageIcon(".\\recursos\\maximizeSelected.png"));
 		}
 		@Override
 		public void mouseExited(MouseEvent e) {
-			lblMaximizar.setIcon(new ImageIcon("C:\\Users\\Alex Noe\\Desktop\\GRADO SUPERIOR\\PROGRAMACION\\HotelStefan\\recursos\\maximize.png"));
+			lblMaximizar.setIcon(new ImageIcon(".\\recursos\\maximize.png"));
 		}
 	}
 	private class BtnBorrarBusquedaMouseListener extends MouseAdapter {
