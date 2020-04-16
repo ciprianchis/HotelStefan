@@ -31,10 +31,12 @@ class testeo {
 	void testDisponibilidadHabitaciones_2() {
 		try {
 			opHab.comprobarHabitacion(60);
+			assertFalse(false);
+			//De esta manera si no hay excepción salta a false
 		} catch (IndexOutOfBoundsException e) {
 			assertTrue(true);
 		}
-		assertFalse(false);
+		
 	}
 	
 	@Test
@@ -59,6 +61,6 @@ class testeo {
 	
 	@Test
 	void testComprobacionUsuario_2() {
-		assertEquals(false, IoDatos.comprobarUser("Iv�n", "001122"));
+		assertEquals(false, IoDatos.comprobarUser("Iván", "001122"));
 	}
 }
