@@ -25,8 +25,7 @@ class testeo {
 	void testDisponibilidadHabitaciones() {
 		assertEquals(true, opHab.comprobarHabitacionTest(0));
 	}
-	
-
+		
 	@Test
 	void testDisponibilidadHabitaciones_2() {
 		try {
