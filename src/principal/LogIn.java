@@ -127,7 +127,7 @@ public class LogIn extends JFrame {
 		textFieldUser.addFocusListener(new TextFieldUserFocusListener());
 		textFieldUser.setText("USUARIO");
 		textFieldUser.setHorizontalAlignment(SwingConstants.CENTER);
-		textFieldUser.setFont(new Font("Tahoma", Font.BOLD, 20));
+		textFieldUser.setFont(new Font("Monospaced", Font.PLAIN, 20));
 		textFieldUser.setBounds(432, 250, 400, 40);
 		contentPane.add(textFieldUser);
 		textFieldUser.setColumns(10);
@@ -141,14 +141,16 @@ public class LogIn extends JFrame {
 		contentPane.add(passwordFieldPass);
 		passwordFieldPass.setText("CONTRASEÑA");
 		
-		lblLogin = new JLabel("SIGN IN");
+		lblLogin = new JLabel("ACCESO");
+		lblLogin.setFocusable(false);
 		lblLogin.setForeground(new Color(184, 134, 11));
-		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 50));
+		lblLogin.setFont(new Font("Monospaced", Font.PLAIN, 50));
 		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogin.setBounds(433, 95, 399, 70);
 		contentPane.add(lblLogin);
 		
 		btnEntrar = new JButton("ENTRAR");
+		btnEntrar.setFocusable(false);
 		btnEntrar.addActionListener(new BtnEntrarActionListener());
 		btnEntrar.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnEntrar.setBounds(200, 511, 368, 50);
@@ -156,6 +158,7 @@ public class LogIn extends JFrame {
 		
 		
 		btnSignup = new JButton("REGISTRO");
+		btnSignup.setFocusable(false);
 		btnSignup.addActionListener(new BtnSignupActionListener());
 		btnSignup.addMouseListener(new BtnSignupMouseListener());
 		btnSignup.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -166,7 +169,7 @@ public class LogIn extends JFrame {
 		lblFondo.setIcon(new ImageIcon(".\\recursos\\fondo.jpg"));
 		lblFondo.setBounds(0, 30, 1280, 720);
 		contentPane.add(lblFondo);
-		lblFondo.setFocusable(true);
+		lblFondo.setFocusable(false);
 		lblFondo.requestFocus();
 		//vUsuarios = IoDatos.leerDatos();
 		

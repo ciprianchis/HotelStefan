@@ -179,6 +179,7 @@ public class ReservasCliente extends JFrame {
 		contentPane.setLayout(null);
 
 		btnSalir = new JButton("Salir");
+		btnSalir.setFocusable(false);
 		btnSalir.addMouseListener(new BtnSalirMouseListener());
 
 		txtrReservasLista = new JTextArea();
@@ -192,21 +193,24 @@ public class ReservasCliente extends JFrame {
 		contentPane.add(btnSalir);
 
 		btnNuevaReserva = new JButton("Nueva Reserva");
+		btnNuevaReserva.setFocusable(false);
 		btnNuevaReserva.addMouseListener(new BtnNuevaReservaMouseListener());
 		btnNuevaReserva.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		btnNuevaReserva.setBounds(50, 650, 250, 50);
 		contentPane.add(btnNuevaReserva);
 
 		txtrReservas = new JTextArea();
+		txtrReservas.setFocusable(false);
 		txtrReservas.setText("Tus Reservas:");
 		txtrReservas.setOpaque(false);
 		txtrReservas.setForeground(Color.WHITE);
-		txtrReservas.setFont(new Font("Segoe UI Symbol", Font.BOLD, 25));
+		txtrReservas.setFont(new Font("Monospaced", Font.PLAIN, 30));
 		txtrReservas.setEditable(false);
-		txtrReservas.setBounds(50, 80, 200, 38);
+		txtrReservas.setBounds(50, 80, 231, 50);
 		contentPane.add(txtrReservas);
 
 		lblNewLabel = new JLabel("New label");
+		lblNewLabel.setFocusable(false);
 		lblNewLabel.setIcon(new ImageIcon(".\\recursos\\fondo.jpg"));
 		lblNewLabel.setBounds(0, 30, 1280, 720);
 		contentPane.add(lblNewLabel);

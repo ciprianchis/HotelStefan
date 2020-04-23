@@ -187,6 +187,7 @@ public class Pago extends JFrame {
     		contentPane.add(textArea);
     		
     		btnNewButton = new JButton("Pagar");
+    		btnNewButton.setFocusable(false);
     		btnNewButton.addMouseListener(new BtnNewButtonMouseListener());
     		btnNewButton.setBounds(550, 500, 150, 39);
     		contentPane.add(btnNewButton);
@@ -198,6 +199,7 @@ public class Pago extends JFrame {
     		contentPane.add(textFieldCVV);
     		
     		textCVV = new JTextArea();
+    		textCVV.setFocusable(false);
     		textCVV.setForeground(Color.WHITE);
     		textCVV.setOpaque(false);
     		textCVV.setText("CVV:");
@@ -224,6 +226,7 @@ public class Pago extends JFrame {
     		textFieldNom.setColumns(10);
     		
     		textNum = new JTextArea();
+    		textNum.setFocusable(false);
     		textNum.setForeground(Color.WHITE);
     		textNum.setOpaque(false);
     		textNum.setText("Numero Tarjeta:");
@@ -232,6 +235,7 @@ public class Pago extends JFrame {
     		contentPane.add(textNum);
     		
     		textDireccion = new JTextArea();
+    		textDireccion.setFocusable(false);
     		textDireccion.setForeground(Color.WHITE);
     		textDireccion.setOpaque(false);
     		textDireccion.setText("Direccion Titular Tarjeta:");
@@ -240,6 +244,7 @@ public class Pago extends JFrame {
     		contentPane.add(textDireccion);
     		
     		textApe = new JTextArea();
+    		textApe.setFocusable(false);
     		textApe.setForeground(Color.WHITE);
     		textApe.setOpaque(false);
     		textApe.setText("Apellido Titular Tarjeta:");
@@ -248,6 +253,7 @@ public class Pago extends JFrame {
     		contentPane.add(textApe);
     		
     		textNom = new JTextArea();
+    		textNom.setFocusable(false);
     		textNom.setForeground(Color.WHITE);
     		textNom.setOpaque(false);
     		textNom.setFont(new Font("Monospaced", Font.PLAIN, 18));
@@ -256,6 +262,7 @@ public class Pago extends JFrame {
     		contentPane.add(textNom);
     		
     		lblReservar = new JLabel("New label");
+    		lblReservar.setFocusable(false);
     		lblReservar.setIcon(new ImageIcon(".\\recursos\\fondo.jpg"));
     		lblReservar.setBounds(0, 30, 1280, 720);
     		contentPane.add(lblReservar);
