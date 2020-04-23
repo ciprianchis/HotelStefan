@@ -91,9 +91,11 @@ public class Hotel extends JFrame {
 		contentPane.setLayout(null);
 
 		btnAsignar = new JButton("ASIGNAR HABITACI\u00D3N");
+		btnAsignar.setFocusable(false);
 		btnAsignar.addMouseListener(new BtnAsignarMouseListener());
 
 		btnSalir = new JButton("Salir");
+		btnSalir.setFocusable(false);
 		btnSalir.addMouseListener(new BtnSalirMouseListener());
 		btnSalir.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		btnSalir.setBounds(1020, 671, 250, 50);
@@ -101,31 +103,44 @@ public class Hotel extends JFrame {
 		btnAsignar.setBounds(597, 690, 152, 23);
 		contentPane.add(btnAsignar);
 
-		lblFinal = new JLabel("Fecha final:");
+		lblFinal = new JLabel("Fecha de salida:");
+		lblFinal.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFinal.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		lblFinal.setFocusable(false);
 		lblFinal.setForeground(Color.WHITE);
-		lblFinal.setBounds(835, 219, 67, 14);
+		lblFinal.setBounds(744, 217, 160, 18);
 		contentPane.add(lblFinal);
 
 		list = new JList();
+		list.setFocusable(false);
 		list.setBounds(358, 407, 646, 255);
 		contentPane.add(list);
 
-		lblInicio = new JLabel("Fecha inicio:");
+		lblInicio = new JLabel("Fecha de entrada:");
+		lblInicio.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInicio.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		lblInicio.setFocusable(false);
 		lblInicio.setForeground(Color.WHITE);
-		lblInicio.setBounds(835, 167, 81, 14);
+		lblInicio.setBounds(744, 165, 170, 18);
 		contentPane.add(lblInicio);
 
 		lblReserva = new JLabel("Reserva:");
+		lblReserva.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		lblReserva.setFocusable(false);
 		lblReserva.setForeground(Color.WHITE);
-		lblReserva.setBounds(358, 163, 81, 22);
+		lblReserva.setBounds(326, 163, 81, 22);
 		contentPane.add(lblReserva);
 
 		lblNombre = new JLabel("Nombre: ");
+		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNombre.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		lblNombre.setFocusable(false);
 		lblNombre.setForeground(Color.WHITE);
-		lblNombre.setBounds(358, 219, 46, 14);
+		lblNombre.setBounds(326, 215, 81, 23);
 		contentPane.add(lblNombre);
 
 		btnBorrarBusqueda = new JButton("BORRAR BUSQUEDA");
+		btnBorrarBusqueda.setFocusable(false);
 		btnBorrarBusqueda.addMouseListener(new BtnBorrarBusquedaMouseListener());
 		btnBorrarBusqueda.setBounds(696, 356, 205, 23);
 		contentPane.add(btnBorrarBusqueda);
@@ -146,6 +161,7 @@ public class Hotel extends JFrame {
 		txtCodigo.setColumns(10);
 
 		btnBuscar = new JButton("BUSCAR");
+		btnBuscar.setFocusable(false);
 		btnBuscar.addMouseListener(new BtnBuscarMouseListener());
 		btnBuscar.setBounds(513, 356, 89, 23);
 		contentPane.add(btnBuscar);
@@ -156,8 +172,11 @@ public class Hotel extends JFrame {
 		contentPane.add(txtInicio);
 
 		lblApellidos = new JLabel("Apellidos:");
+		lblApellidos.setHorizontalAlignment(SwingConstants.CENTER);
+		lblApellidos.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		lblApellidos.setFocusable(false);
 		lblApellidos.setForeground(Color.WHITE);
-		lblApellidos.setBounds(358, 282, 46, 14);
+		lblApellidos.setBounds(316, 276, 117, 23);
 		contentPane.add(lblApellidos);
 
 		txtFinal = new JTextField();
@@ -166,6 +185,7 @@ public class Hotel extends JFrame {
 		contentPane.add(txtFinal);
 
 		lblNewLabel = new JLabel("New label");
+		lblNewLabel.setFocusable(false);
 		lblNewLabel.setIcon(new ImageIcon(".\\recursos\\fondo.jpg"));
 		lblNewLabel.setBounds(0, 30, 1280, 720);
 		contentPane.add(lblNewLabel);

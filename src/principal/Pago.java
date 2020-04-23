@@ -15,6 +15,7 @@ import javax.swing.JMenuBar;
 import java.awt.Color;
 import javax.swing.border.BevelBorder;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
 import java.awt.Font;
@@ -23,6 +24,9 @@ import java.awt.SystemColor;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 
@@ -46,7 +50,7 @@ public class Pago extends JFrame {
         private JTextField textFieldNum;
         private JTextArea textCVV;
         private JTextField textFieldCVV;
-        private JButton btnNewButton;
+        private JLabel btnNewButton;
         private JTextArea textArea;
         private String usuarioReserva;
         private Reserva reservaRealizada;
@@ -129,8 +133,47 @@ public class Pago extends JFrame {
 	private class BtnNewButtonMouseListener extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			new ReservasCliente(usuarioReserva,reservaRealizada).setVisible(true);
-			dispose();
+			Pattern pattern = Pattern.compile("[0-9]{4}\\s[0-9]{4}\\s[0-9]{4}\\s[0-9]{4}");
+			Matcher matcher = pattern.matcher(textFieldNum.getText());
+			if (matcher.matches()) {
+				pattern = Pattern.compile("[0-9]{3}");
+				matcher = pattern.matcher(textFieldCVV.getText());
+				if (matcher.matches()) {
+					JOptionPane.showMessageDialog(rootPane, "Pago realizado con éxito");
+					new ReservasCliente(usuarioReserva,reservaRealizada).setVisible(true);
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(rootPane, "El código CVC debe estar formado por 3 dígitos.");
+					textFieldCVV.setText("");
+				}
+			} else {
+				JOptionPane.showMessageDialog(rootPane, "El número de tarjeta solo puede contener dígitos en bloques de 4 debidamente espaciados (0000 0000 0000 0000)");
+				textFieldNum.setText("");
+			}
+		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			btnNewButton.setIcon(new ImageIcon(".\\recursos\\payment.png"));
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			btnNewButton.setIcon(new ImageIcon(".\\recursos\\paymentBW.png"));
+		}
+	}
+	
+	public boolean testComprobacionNumeroTarjetaYcvc(String numeroTarjeta, String cvc) {
+		Pattern pattern = Pattern.compile("[0-9]{4}\\s[0-9]{4}\\s[0-9]{4}\\s[0-9]{4}");
+		Matcher matcher = pattern.matcher(numeroTarjeta);
+		if (matcher.matches()) {
+			pattern = Pattern.compile("[0-9]{3}");
+			matcher = pattern.matcher(cvc);
+			if (matcher.matches()) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
 		}
 	}
         private void initApp() {
@@ -145,24 +188,31 @@ public class Pago extends JFrame {
     		contentPane.setLayout(null);
     		
     		textArea = new JTextArea();
-    		textArea.setFont(new Font("Tahoma", Font.PLAIN, 18));
+    		textArea.setFont(new Font("Monospaced", Font.PLAIN, 18));
     		textArea.setWrapStyleWord(true);
     		textArea.setRows(19);
     		textArea.setBounds(680, 239, 300, 120);
     		contentPane.add(textArea);
     		
-    		btnNewButton = new JButton("Pagar");
+    		btnNewButton = new JLabel("");
+    		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    		btnNewButton.setIcon(new ImageIcon(".\\recursos\\paymentBW.png"));
+    		btnNewButton.setHorizontalTextPosition(SwingConstants.CENTER);
+    		btnNewButton.setHorizontalAlignment(SwingConstants.CENTER);
+    		btnNewButton.setToolTipText("Pagar");
+    		btnNewButton.setFocusable(false);
     		btnNewButton.addMouseListener(new BtnNewButtonMouseListener());
-    		btnNewButton.setBounds(550, 500, 150, 39);
+    		btnNewButton.setBounds(550, 500, 128, 128);
     		contentPane.add(btnNewButton);
     		
     		textFieldCVV = new JTextField();
-    		textFieldCVV.setFont(new Font("Tahoma", Font.PLAIN, 18));
+    		textFieldCVV.setFont(new Font("Monospaced", Font.PLAIN, 18));
     		textFieldCVV.setColumns(10);
     		textFieldCVV.setBounds(840, 400, 140, 30);
     		contentPane.add(textFieldCVV);
     		
     		textCVV = new JTextArea();
+    		textCVV.setFocusable(false);
     		textCVV.setForeground(Color.WHITE);
     		textCVV.setOpaque(false);
     		textCVV.setText("CVV:");
@@ -171,24 +221,25 @@ public class Pago extends JFrame {
     		contentPane.add(textCVV);
     		
     		textFieldNum = new JTextField();
-    		textFieldNum.setFont(new Font("Tahoma", Font.PLAIN, 18));
+    		textFieldNum.setFont(new Font("Monospaced", Font.PLAIN, 18));
     		textFieldNum.setColumns(10);
     		textFieldNum.setBounds(520, 400, 250, 30);
     		contentPane.add(textFieldNum);
     		
     		textFieldApe = new JTextField();
-    		textFieldApe.setFont(new Font("Tahoma", Font.PLAIN, 18));
+    		textFieldApe.setFont(new Font("Monospaced", Font.PLAIN, 18));
     		textFieldApe.setColumns(10);
     		textFieldApe.setBounds(680, 198, 300, 30);
     		contentPane.add(textFieldApe);
     		
     		textFieldNom = new JTextField();
-    		textFieldNom.setFont(new Font("Tahoma", Font.PLAIN, 18));
+    		textFieldNom.setFont(new Font("Monospaced", Font.PLAIN, 18));
     		textFieldNom.setBounds(680, 152, 300, 30);
     		contentPane.add(textFieldNom);
     		textFieldNom.setColumns(10);
     		
     		textNum = new JTextArea();
+    		textNum.setFocusable(false);
     		textNum.setForeground(Color.WHITE);
     		textNum.setOpaque(false);
     		textNum.setText("Numero Tarjeta:");
@@ -197,6 +248,7 @@ public class Pago extends JFrame {
     		contentPane.add(textNum);
     		
     		textDireccion = new JTextArea();
+    		textDireccion.setFocusable(false);
     		textDireccion.setForeground(Color.WHITE);
     		textDireccion.setOpaque(false);
     		textDireccion.setText("Direccion Titular Tarjeta:");
@@ -205,6 +257,7 @@ public class Pago extends JFrame {
     		contentPane.add(textDireccion);
     		
     		textApe = new JTextArea();
+    		textApe.setFocusable(false);
     		textApe.setForeground(Color.WHITE);
     		textApe.setOpaque(false);
     		textApe.setText("Apellido Titular Tarjeta:");
@@ -213,6 +266,7 @@ public class Pago extends JFrame {
     		contentPane.add(textApe);
     		
     		textNom = new JTextArea();
+    		textNom.setFocusable(false);
     		textNom.setForeground(Color.WHITE);
     		textNom.setOpaque(false);
     		textNom.setFont(new Font("Monospaced", Font.PLAIN, 18));
@@ -221,6 +275,7 @@ public class Pago extends JFrame {
     		contentPane.add(textNom);
     		
     		lblReservar = new JLabel("New label");
+    		lblReservar.setFocusable(false);
     		lblReservar.setIcon(new ImageIcon(".\\recursos\\fondo.jpg"));
     		lblReservar.setBounds(0, 30, 1280, 720);
     		contentPane.add(lblReservar);

@@ -129,25 +129,28 @@ public class Registro extends JFrame {
 		textFieldUser.addFocusListener(new TextFieldUserFocusListener());
 		textFieldUser.setText("USUARIO");
 		textFieldUser.setHorizontalAlignment(SwingConstants.CENTER);
-		textFieldUser.setFont(new Font("Tahoma", Font.BOLD, 20));
+		textFieldUser.setFont(new Font("Monospaced", Font.PLAIN, 20));
 		textFieldUser.setBounds(457, 200, 368, 40);
 		contentPane.add(textFieldUser);
 		textFieldUser.setColumns(10);
 		
 		lblRegistro = new JLabel("REGISTRO");
+		lblRegistro.setFocusable(false);
 		lblRegistro.setForeground(new Color(184, 134, 11));
-		lblRegistro.setFont(new Font("Tahoma", Font.BOLD, 50));
+		lblRegistro.setFont(new Font("Monospaced", Font.PLAIN, 50));
 		lblRegistro.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRegistro.setBounds(457, 62, 368, 70);
 		contentPane.add(lblRegistro);
 		
 		btnAñadirUser = new JButton("A\u00D1ADIR");
+		btnAñadirUser.setFocusable(false);
 		btnAñadirUser.addActionListener(new BtnAñadirUserActionListener());
 		btnAñadirUser.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnAñadirUser.setBounds(250, 550, 368, 50);
 		contentPane.add(btnAñadirUser);
 		
 		btnSignIn = new JButton("VOLVER");
+		btnSignIn.setFocusable(false);
 		btnSignIn.addActionListener(new BtnSignInActionListener());
 		btnSignIn.addMouseListener(new BtnSignInMouseListener());
 		btnSignIn.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -156,7 +159,7 @@ public class Registro extends JFrame {
 		
 		txtContrasea = new JTextField();
 		txtContrasea.addFocusListener(new TxtContraseaFocusListener());
-		txtContrasea.setFont(new Font("Tahoma", Font.BOLD, 20));
+		txtContrasea.setFont(new Font("Monospaced", Font.PLAIN, 20));
 		txtContrasea.setText("CONTRASE\u00D1A");
 		txtContrasea.setHorizontalAlignment(SwingConstants.CENTER);
 		txtContrasea.setBounds(457, 275, 368, 40);
@@ -167,7 +170,7 @@ public class Registro extends JFrame {
 		chckbxAdmin.setForeground(SystemColor.window);
 		chckbxAdmin.setHorizontalAlignment(SwingConstants.CENTER);
 		chckbxAdmin.setOpaque(false);
-		chckbxAdmin.setFont(new Font("Tahoma", Font.BOLD, 20));
+		chckbxAdmin.setFont(new Font("Monospaced", Font.PLAIN, 20));
 		chckbxAdmin.setBounds(457, 400, 368, 40);
 		contentPane.add(chckbxAdmin);
 		
@@ -175,7 +178,7 @@ public class Registro extends JFrame {
 		lblFondo.setIcon(new ImageIcon(".\\recursos\\fondo.jpg"));
 		lblFondo.setBounds(0, 30, 1280, 720);
 		contentPane.add(lblFondo);
-		lblFondo.setFocusable(true);
+		lblFondo.setFocusable(false);
 		lblFondo.requestFocus();
 		vUsuarios = IoDatos.leerDatos();
 		
