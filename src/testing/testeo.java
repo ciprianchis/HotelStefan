@@ -9,16 +9,19 @@ import org.junit.jupiter.api.Test;
 
 import principal.IoDatos;
 import principal.OperacionHabitacion;
+import principal.Pago;
 import principal.Reservar;
 
 class testeo {
 
 	OperacionHabitacion opHab;
 	Reservar reserva;
+	Pago pago;
 	@BeforeEach
 	void setUp() throws Exception {
 		opHab = new OperacionHabitacion();
 		reserva = new Reservar();
+		pago = new Pago();
 	}
 
 	@Test
@@ -61,5 +64,25 @@ class testeo {
 	@Test
 	void testComprobacionUsuario_2() {
 		assertEquals(false, IoDatos.comprobarUser("Iván", "001122"));
+	}
+	
+	@Test
+	void testComprobacionPago() {
+		assertEquals(true, pago.testComprobacionNumeroTarjetaYcvc("1234 1234 1234 1234", "123"));
+	}
+	
+	@Test
+	void testComprobacionPago_2() {
+		assertEquals(false, pago.testComprobacionNumeroTarjetaYcvc("1234123412341234", "123"));
+	}
+	
+	@Test
+	void testComprobacionPago_3() {
+		assertEquals(false, pago.testComprobacionNumeroTarjetaYcvc("1234 1234 1234 123j", "123"));
+	}
+	
+	@Test
+	void testComprobacionPago_4() {
+		assertEquals(false, pago.testComprobacionNumeroTarjetaYcvc("1234 1234 1234 1234", "1j3"));
 	}
 }

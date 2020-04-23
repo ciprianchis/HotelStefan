@@ -152,6 +152,22 @@ public class Pago extends JFrame {
 			}
 		}
 	}
+	
+	public boolean testComprobacionNumeroTarjetaYcvc(String numeroTarjeta, String cvc) {
+		Pattern pattern = Pattern.compile("[0-9]{4}\\s[0-9]{4}\\s[0-9]{4}\\s[0-9]{4}");
+		Matcher matcher = pattern.matcher(numeroTarjeta);
+		if (matcher.matches()) {
+			pattern = Pattern.compile("[0-9]{3}");
+			matcher = pattern.matcher(cvc);
+			if (matcher.matches()) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
         private void initApp() {
             operaciones.cargarHabitaciones();
             setResizable(false);
