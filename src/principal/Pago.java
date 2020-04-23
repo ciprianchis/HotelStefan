@@ -15,6 +15,7 @@ import javax.swing.JMenuBar;
 import java.awt.Color;
 import javax.swing.border.BevelBorder;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
 import java.awt.Font;
@@ -23,6 +24,9 @@ import java.awt.SystemColor;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 
@@ -129,8 +133,23 @@ public class Pago extends JFrame {
 	private class BtnNewButtonMouseListener extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			new ReservasCliente(usuarioReserva,reservaRealizada).setVisible(true);
-			dispose();
+			Pattern pattern = Pattern.compile("[0-9]{4}\\s[0-9]{4}\\s[0-9]{4}\\s[0-9]{4}");
+			Matcher matcher = pattern.matcher(textFieldNum.getText());
+			if (matcher.matches()) {
+				pattern = Pattern.compile("[0-9]{3}");
+				matcher = pattern.matcher(textFieldCVV.getText());
+				if (matcher.matches()) {
+					JOptionPane.showMessageDialog(rootPane, "Pago realizado con éxito");
+					new ReservasCliente(usuarioReserva,reservaRealizada).setVisible(true);
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(rootPane, "El código CVC debe estar formado por 3 dígitos.");
+					textFieldCVV.setText("");
+				}
+			} else {
+				JOptionPane.showMessageDialog(rootPane, "El número de tarjeta solo puede contener dígitos en bloques de 4 debidamente espaciados (0000 0000 0000 0000)");
+				textFieldNum.setText("");
+			}
 		}
 	}
         private void initApp() {
