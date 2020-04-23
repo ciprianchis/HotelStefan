@@ -202,7 +202,9 @@ public class Pago extends JFrame {
 					}
 					break;
 				case 65: case 66: case 67: case 68: case 69: case 70: case 71: case 72: case 73: case 74: case 75: case 76: case 77: case 78: case 79: case 80:
-				case 81: case 82: case 83: case 84: case 85: case 86: case 87: case 88: case 89: case 90:
+				case 81: case 82: case 83: case 84: case 85: case 86: case 87: case 88: case 89: case 90: case 44: case 45: case 46: case 47: case 32: case 59:
+				case 61: case 91: case 92: case 93: case 106: case 107: case 108: case 109: case 110: case 111: case 150: case 151: case 152: case 160: case 161:
+				case 162: case 192: case 512: case 513: case 514: case 515: case 516: case 517: case 518: case 519: case 520: case 521: case 522: case 523:
 					txtmodif = tc.substring(0,tc.length()-1);
 					break;
 				default:
@@ -229,7 +231,9 @@ public class Pago extends JFrame {
 					}
 					break;
 				case 65: case 66: case 67: case 68: case 69: case 70: case 71: case 72: case 73: case 74: case 75: case 76: case 77: case 78: case 79: case 80:
-				case 81: case 82: case 83: case 84: case 85: case 86: case 87: case 88: case 89: case 90:
+				case 81: case 82: case 83: case 84: case 85: case 86: case 87: case 88: case 89: case 90: case 44: case 45: case 46: case 47: case 32: case 59:
+				case 61: case 91: case 92: case 93: case 106: case 107: case 108: case 109: case 110: case 111: case 150: case 151: case 152: case 160: case 161:
+				case 162: case 192: case 512: case 513: case 514: case 515: case 516: case 517: case 518: case 519: case 520: case 521: case 522: case 523:
 					txtmodif = tc.substring(0,tc.length()-1);
 					break;
 				default:
