@@ -1,5 +1,6 @@
 package principal;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -7,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,8 +16,8 @@ public class OperacionReserva {
 	ArrayList<Reserva> listaReservas;
 	
 	@SuppressWarnings("unchecked")
-	public void cargarReservas() {
-        File fichero = new File(".\\recursos\\reservas.dat");
+	public void cargarReservas(String usuario) {
+        File fichero = new File(".\\recursos\\reservas" + usuario + ".dat");
             try {
                 if (!fichero.exists()) {
                     fichero.createNewFile();
@@ -26,10 +28,19 @@ public class OperacionReserva {
                      listaReservas = (ArrayList<Reserva>) oi.readObject();
                      oi.close();
                 }
-            } catch (IOException ex) {
+            } catch (EOFException ef) {
+            	listaReservas = new ArrayList<Reserva>();
+            } 
+            catch (IOException ex) {
                 Logger.getLogger(OperacionHabitacion.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+                
+        } 
+            catch (ClassNotFoundException ex) {
             Logger.getLogger(OperacionHabitacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Iterator it = listaReservas.iterator();
+        while (it.hasNext()) {
+        	System.out.println(it.next());
         }
     };
     
@@ -37,18 +48,18 @@ public class OperacionReserva {
     	listaReservas.add(reserva);
     }
     
-    public ArrayList<Reserva> cargarReservasPorNombre(String usuario) {
-    	ArrayList<Reserva> reservasUsuario = new ArrayList<Reserva>();
-    	for (int i=0;i<listaReservas.size();i++) {
-    		if (listaReservas.get(i).getUsuario()==usuario) {
-    			reservasUsuario.add(listaReservas.get(i));
-    		}
-    	}
-    	return reservasUsuario;
+    public String cargarArray() {
+    	String contenido = "";
+    	Iterator it = listaReservas.iterator();
+        while (it.hasNext()) {
+        	contenido += it.next() + "\n";
+        	
+        }
+        return contenido;
     }
     
-    public void guardarReservas() {
-        File fichero = new File(".\\recursos\\reservas.dat");
+    public void guardarReservas(String usuario) {
+        File fichero = new File(".\\recursos\\reservas" + usuario + ".dat");
             try {
                 if (!fichero.exists()) {
                     fichero.createNewFile();

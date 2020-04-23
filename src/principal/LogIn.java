@@ -128,7 +128,7 @@ public class LogIn extends JFrame {
 		textFieldUser.setText("USUARIO");
 		textFieldUser.setHorizontalAlignment(SwingConstants.CENTER);
 		textFieldUser.setFont(new Font("Tahoma", Font.BOLD, 20));
-		textFieldUser.setBounds(460, 189, 368, 40);
+		textFieldUser.setBounds(432, 250, 400, 40);
 		contentPane.add(textFieldUser);
 		textFieldUser.setColumns(10);
 		
@@ -137,7 +137,7 @@ public class LogIn extends JFrame {
 		passwordFieldPass.setHorizontalAlignment(SwingConstants.CENTER);
 		passwordFieldPass.setEchoChar('•');
 		passwordFieldPass.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		passwordFieldPass.setBounds(460, 240, 368, 40);
+		passwordFieldPass.setBounds(432, 350, 400, 40);
 		contentPane.add(passwordFieldPass);
 		passwordFieldPass.setText("CONTRASEÑA");
 		
@@ -145,13 +145,13 @@ public class LogIn extends JFrame {
 		lblLogin.setForeground(new Color(184, 134, 11));
 		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 50));
 		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogin.setBounds(460, 76, 368, 70);
+		lblLogin.setBounds(433, 95, 399, 70);
 		contentPane.add(lblLogin);
 		
 		btnEntrar = new JButton("ENTRAR");
 		btnEntrar.addActionListener(new BtnEntrarActionListener());
 		btnEntrar.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnEntrar.setBounds(460, 344, 368, 50);
+		btnEntrar.setBounds(200, 511, 368, 50);
 		contentPane.add(btnEntrar);
 		
 		
@@ -159,7 +159,7 @@ public class LogIn extends JFrame {
 		btnSignup.addActionListener(new BtnSignupActionListener());
 		btnSignup.addMouseListener(new BtnSignupMouseListener());
 		btnSignup.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnSignup.setBounds(650, 511, 368, 50);
+		btnSignup.setBounds(692, 511, 368, 50);
 		contentPane.add(btnSignup);
 		
 		lblFondo = new JLabel("");
@@ -282,7 +282,8 @@ public class LogIn extends JFrame {
 						}
 
 						if (!user.isEsAdmin()) {
-							ReservasCliente cliente = new ReservasCliente(textFieldUser.getText());
+							String usuario = textFieldUser.getText();
+							ReservasCliente cliente = new ReservasCliente(usuario);
 							cliente.setVisible(true);
 							dispose();
 							break;

@@ -114,7 +114,7 @@ public class Reservar extends JFrame {
 		initApp();  
 	}
 	public Reservar(String usuario) {
-		usuarioReservas="";
+		usuarioReservas= usuario;
 		initApp();  
 	}
 	private void cambiarTextoNombreDefault() {
@@ -567,7 +567,7 @@ public class Reservar extends JFrame {
 	private class BtnPagarMouseListener extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			reserva = new Reserva(usuarioReservas, txtrNombre.getText(), txtrApellido.getText(), (textFieldDiaEntrada +" / "+ textFieldMesEntrada +" / "+ textFieldAnoEntrada), (textFieldDiaEntrada +" / "+ textFieldMesEntrada +" / "+ textFieldAnoEntrada), sacarHabitacion(), sacarRegimen(), sacarSexo(), Integer.parseInt(textFieldImporte.getText()), Integer.parseInt(textFieldNumeroNoches.getText()),reservarHabitacion());
+			reserva = new Reserva(usuarioReservas, textNombre.getText(), textApellido.getText(), (textFieldDiaEntrada.getText() +"/"+ textFieldMesEntrada.getText() +"/"+ textFieldAnoEntrada.getText()), (textFieldDiaEntrada.getText() +"/"+ textFieldMesEntrada.getText() +"/"+ textFieldAnoEntrada.getText()), sacarHabitacion(), sacarRegimen(), sacarSexo(), Integer.parseInt(textFieldImporte.getText()), Integer.parseInt(textFieldNumeroNoches.getText()),reservarHabitacion());
 			new Pago(usuarioReservas,reserva).setVisible(true);
 			dispose();
 		}
@@ -701,11 +701,11 @@ public class Reservar extends JFrame {
     		contentPane.setLayout(null);
     		
     		lblComprobacionFecha = new JLabel("");
-    		lblComprobacionFecha.setBounds(1137, 100, 30, 30);
+    		lblComprobacionFecha.setBounds(1122, 214, 30, 30);
     		contentPane.add(lblComprobacionFecha);
     		
     		lblComprobacionHabitacion = new JLabel("");
-    		lblComprobacionHabitacion.setBounds(512, 225, 30, 30);
+    		lblComprobacionHabitacion.setBounds(512, 347, 30, 30);
     		contentPane.add(lblComprobacionHabitacion);
     		
     		btnSalir = new JButton("Salir");
@@ -725,21 +725,21 @@ public class Reservar extends JFrame {
     		txtrImporteTotal.setForeground(Color.WHITE);
     		txtrImporteTotal.setFont(new Font("Monospaced", Font.PLAIN, 16));
     		txtrImporteTotal.setEditable(false);
-    		txtrImporteTotal.setBounds(691, 369, 180, 30);
+    		txtrImporteTotal.setBounds(691, 500, 180, 30);
     		contentPane.add(txtrImporteTotal);
     		
     		textFieldImporte = new JTextField();
     		textFieldImporte.setEditable(false);
     		textFieldImporte.setColumns(10);
     		textFieldImporte.setBackground(Color.WHITE);
-    		textFieldImporte.setBounds(910, 369, 105, 30);
+    		textFieldImporte.setBounds(900, 500, 105, 30);
     		contentPane.add(textFieldImporte);
     		
     		textFieldNumeroNoches = new JTextField();
     		textFieldNumeroNoches.setEditable(false);
     		textFieldNumeroNoches.setColumns(10);
     		textFieldNumeroNoches.setBackground(Color.WHITE);
-    		textFieldNumeroNoches.setBounds(910, 225, 40, 30);
+    		textFieldNumeroNoches.setBounds(900, 385, 40, 30);
     		contentPane.add(textFieldNumeroNoches);
     		
     		txtrNumeroNoches = new JTextArea();
@@ -748,7 +748,7 @@ public class Reservar extends JFrame {
     		txtrNumeroNoches.setOpaque(false);
     		txtrNumeroNoches.setForeground(Color.WHITE);
     		txtrNumeroNoches.setFont(new Font("Monospaced", Font.PLAIN, 16));
-    		txtrNumeroNoches.setBounds(691, 225, 180, 30);
+    		txtrNumeroNoches.setBounds(691, 385, 180, 30);
     		contentPane.add(txtrNumeroNoches);
     		
     		txtrFechaSalida = new JTextArea();
@@ -756,7 +756,7 @@ public class Reservar extends JFrame {
     		txtrFechaSalida.setForeground(Color.WHITE);
     		txtrFechaSalida.setText("Fecha Salida:");
     		txtrFechaSalida.setFont(new Font("Monospaced", Font.PLAIN, 16));
-    		txtrFechaSalida.setBounds(691, 121, 180, 30);
+    		txtrFechaSalida.setBounds(691, 240, 180, 30);
     		txtrFechaSalida.setOpaque(false);
     		contentPane.add(txtrFechaSalida);
     		
@@ -765,7 +765,7 @@ public class Reservar extends JFrame {
     		txtrFechaEntrada.setForeground(Color.WHITE);
     		txtrFechaEntrada.setFont(new Font("Monospaced", Font.PLAIN, 16));
     		txtrFechaEntrada.setText("Fecha Entrada:");
-    		txtrFechaEntrada.setBounds(691, 80, 180, 30);
+    		txtrFechaEntrada.setBounds(691, 189, 180, 30);
     		txtrFechaEntrada.setOpaque(false);
     		contentPane.add(txtrFechaEntrada);
     		
@@ -774,7 +774,7 @@ public class Reservar extends JFrame {
     		textAreaMesAnoSalida.setEditable(false);
     		textAreaMesAnoSalida.setText("/");
     		textAreaMesAnoSalida.setFont(new Font("Monospaced", Font.PLAIN, 23));
-    		textAreaMesAnoSalida.setBounds(1025, 121, 13, 30);
+    		textAreaMesAnoSalida.setBounds(1025, 240, 13, 30);
     		textAreaMesAnoSalida.setOpaque(false);
     		contentPane.add(textAreaMesAnoSalida);
     		
@@ -783,7 +783,7 @@ public class Reservar extends JFrame {
     		textAreaMesAnoEntrada.setEditable(false);
     		textAreaMesAnoEntrada.setText("/");
     		textAreaMesAnoEntrada.setFont(new Font("Monospaced", Font.PLAIN, 23));
-    		textAreaMesAnoEntrada.setBounds(1025, 80, 13, 30);
+    		textAreaMesAnoEntrada.setBounds(1025, 189, 13, 30);
     		contentPane.add(textAreaMesAnoEntrada);
     		textAreaMesAnoEntrada.setOpaque(false);
     		
@@ -792,7 +792,7 @@ public class Reservar extends JFrame {
     		textAreaDiaMesSalida.setEditable(false);
     		textAreaDiaMesSalida.setText("/");
     		textAreaDiaMesSalida.setFont(new Font("Monospaced", Font.PLAIN, 23));
-    		textAreaDiaMesSalida.setBounds(960, 121, 13, 30);
+    		textAreaDiaMesSalida.setBounds(950, 240, 13, 30);
     		textAreaDiaMesSalida.setOpaque(false);
     		contentPane.add(textAreaDiaMesSalida);
     		
@@ -801,7 +801,7 @@ public class Reservar extends JFrame {
     		textAreaDiaMesEntrada.setEditable(false);
     		textAreaDiaMesEntrada.setFont(new Font("Monospaced", Font.PLAIN, 23));
     		textAreaDiaMesEntrada.setText("/");
-    		textAreaDiaMesEntrada.setBounds(960, 80, 13, 30);
+    		textAreaDiaMesEntrada.setBounds(950, 189, 13, 30);
     		textAreaDiaMesEntrada.setOpaque(false);;
     		contentPane.add(textAreaDiaMesEntrada);
     		
@@ -809,14 +809,14 @@ public class Reservar extends JFrame {
     		textFieldAnoSalida.addKeyListener(new TextFieldAnoSalidaKeyListener());
     		textFieldAnoSalida.setColumns(10);
     		textFieldAnoSalida.setBackground(Color.WHITE);
-    		textFieldAnoSalida.setBounds(1040, 121, 40, 30);
+    		textFieldAnoSalida.setBounds(1048, 240, 40, 30);
     		contentPane.add(textFieldAnoSalida);
     		
     		textFieldMesEntrada = new JTextField();
     		textFieldMesEntrada.addKeyListener(new TextFieldMesEntradaKeyListener());
     		textFieldMesEntrada.setColumns(10);
     		textFieldMesEntrada.setBackground(Color.WHITE);
-    		textFieldMesEntrada.setBounds(975, 80, 40, 30);
+    		textFieldMesEntrada.setBounds(975, 189, 40, 30);
     		
     		contentPane.add(textFieldMesEntrada);
     		
@@ -824,28 +824,28 @@ public class Reservar extends JFrame {
     		textFieldDiaSalida.addKeyListener(new TextFieldDiaSalidaKeyListener());
     		textFieldDiaSalida.setColumns(10);
     		textFieldDiaSalida.setBackground(Color.WHITE);
-    		textFieldDiaSalida.setBounds(910, 121, 40, 30);
+    		textFieldDiaSalida.setBounds(900, 240, 40, 30);
     		contentPane.add(textFieldDiaSalida);
     		
     		textFieldMesSalida = new JTextField();
     		textFieldMesSalida.addKeyListener(new TextFieldMesSalidaKeyListener());
     		textFieldMesSalida.setColumns(10);
     		textFieldMesSalida.setBackground(Color.WHITE);
-    		textFieldMesSalida.setBounds(975, 121, 40, 30);
+    		textFieldMesSalida.setBounds(975, 240, 40, 30);
     		contentPane.add(textFieldMesSalida);
     		
     		textFieldAnoEntrada = new JTextField();
     		textFieldAnoEntrada.addKeyListener(new TextFieldAnoEntradaKeyListener());
     		textFieldAnoEntrada.setColumns(10);
     		textFieldAnoEntrada.setBackground(Color.WHITE);
-    		textFieldAnoEntrada.setBounds(1040, 80, 40, 30);
+    		textFieldAnoEntrada.setBounds(1048, 189, 40, 30);
     		contentPane.add(textFieldAnoEntrada);
     		
     		textFieldDiaEntrada = new JTextField();
     		textFieldDiaEntrada.addKeyListener(new TextFieldDiaEntradaKeyListener());
     		textFieldDiaEntrada.setColumns(10);
     		textFieldDiaEntrada.setBackground(Color.WHITE);
-    		textFieldDiaEntrada.setBounds(910, 80, 40, 30);
+    		textFieldDiaEntrada.setBounds(900, 189, 40, 30);
     		contentPane.add(textFieldDiaEntrada);
     		
     		rdbtnHombre = new JRadioButton("Hombre");
@@ -853,7 +853,7 @@ public class Reservar extends JFrame {
     		rdbtnHombre.setOpaque(false);
     		rdbtnHombre.setForeground(Color.WHITE);
     		rdbtnHombre.setFont(new Font("Tahoma", Font.PLAIN, 17));
-    		rdbtnHombre.setBounds(200, 369, 136, 30);
+    		rdbtnHombre.setBounds(200, 497, 136, 30);
     		contentPane.add(rdbtnHombre);
     		
     		txtrSexo = new JTextArea();
@@ -862,7 +862,7 @@ public class Reservar extends JFrame {
     		txtrSexo.setForeground(Color.WHITE);
     		txtrSexo.setFont(new Font("Monospaced", Font.PLAIN, 16));
     		txtrSexo.setEditable(false);
-    		txtrSexo.setBounds(200, 332, 180, 30);
+    		txtrSexo.setBounds(200, 460, 180, 30);
     		contentPane.add(txtrSexo);
     		
     		rdbtnMujer = new JRadioButton("Mujer");
@@ -870,7 +870,7 @@ public class Reservar extends JFrame {
     		rdbtnMujer.setOpaque(false);
     		rdbtnMujer.setForeground(Color.WHITE);
     		rdbtnMujer.setFont(new Font("Tahoma", Font.PLAIN, 17));
-    		rdbtnMujer.setBounds(344, 369, 136, 30);
+    		rdbtnMujer.setBounds(344, 497, 136, 30);
     		contentPane.add(rdbtnMujer);
     		
     		txtrTipoRegimen = new JTextArea();
@@ -879,7 +879,7 @@ public class Reservar extends JFrame {
     		txtrTipoRegimen.setForeground(Color.WHITE);
     		txtrTipoRegimen.setFont(new Font("Monospaced", Font.PLAIN, 16));
     		txtrTipoRegimen.setEditable(false);
-    		txtrTipoRegimen.setBounds(200, 262, 180, 30);
+    		txtrTipoRegimen.setBounds(200, 385, 180, 30);
     		contentPane.add(txtrTipoRegimen);
     		
     		rdbtnHa = new JRadioButton("HA");
@@ -888,7 +888,7 @@ public class Reservar extends JFrame {
     		rdbtnHa.setOpaque(false);
     		rdbtnHa.setForeground(Color.WHITE);
     		rdbtnHa.setFont(new Font("Tahoma", Font.PLAIN, 17));
-    		rdbtnHa.setBounds(200, 299, 70, 30);
+    		rdbtnHa.setBounds(200, 423, 70, 30);
     		contentPane.add(rdbtnHa);
     		
     		rdbtnMp = new JRadioButton("MP");
@@ -897,7 +897,7 @@ public class Reservar extends JFrame {
     		rdbtnMp.setOpaque(false);
     		rdbtnMp.setForeground(Color.WHITE);
     		rdbtnMp.setFont(new Font("Tahoma", Font.PLAIN, 17));
-    		rdbtnMp.setBounds(344, 299, 70, 30);
+    		rdbtnMp.setBounds(344, 423, 70, 30);
     		contentPane.add(rdbtnMp);
     		
     		rdbtnPc = new JRadioButton("PC");
@@ -906,7 +906,7 @@ public class Reservar extends JFrame {
     		rdbtnPc.setOpaque(false);
     		rdbtnPc.setForeground(Color.WHITE);
     		rdbtnPc.setFont(new Font("Tahoma", Font.PLAIN, 17));
-    		rdbtnPc.setBounds(416, 299, 90, 30);
+    		rdbtnPc.setBounds(416, 423, 90, 30);
     		contentPane.add(rdbtnPc);
     		
     		rdbtnAd = new JRadioButton("AD");
@@ -915,7 +915,7 @@ public class Reservar extends JFrame {
     		rdbtnAd.setOpaque(false);
     		rdbtnAd.setForeground(Color.WHITE);
     		rdbtnAd.setFont(new Font("Tahoma", Font.PLAIN, 17));
-    		rdbtnAd.setBounds(272, 299, 70, 30);
+    		rdbtnAd.setBounds(272, 423, 70, 30);
     		contentPane.add(rdbtnAd);
     		
     		textNombre = new JTextField();
@@ -924,7 +924,7 @@ public class Reservar extends JFrame {
     		textNombre.setText("Nombre");
     		cambiarTextoNombreDefault();
     		textNombre.setBackground(Color.WHITE);
-    		textNombre.setBounds(310, 80, 170, 30);
+    		textNombre.setBounds(310, 189, 170, 30);
     		
     		contentPane.add(textNombre);
     		textNombre.setColumns(10);
@@ -935,7 +935,7 @@ public class Reservar extends JFrame {
     		textApellido.setText("Apellido");
     		textApellido.setColumns(10);
     		cambiarTextoApellidoDefault();
-    		textApellido.setBounds(310, 121, 170, 30);
+    		textApellido.setBounds(310, 240, 170, 30);
     		contentPane.add(textApellido);
     		
     		rdbtnTri = new JRadioButton("TRI");
@@ -944,7 +944,7 @@ public class Reservar extends JFrame {
     		buttonGroupHabitaciones.add(rdbtnTri);
     		rdbtnTri.setFont(new Font("Tahoma", Font.PLAIN, 17));
     		rdbtnTri.setOpaque(false);
-    		rdbtnTri.setBounds(344, 225, 70, 30);
+    		rdbtnTri.setBounds(344, 347, 70, 30);
     		contentPane.add(rdbtnTri);
     		
     		rdbtnSuite = new JRadioButton("SUITE");
@@ -953,7 +953,7 @@ public class Reservar extends JFrame {
     		buttonGroupHabitaciones.add(rdbtnSuite);
     		rdbtnSuite.setOpaque(false);
     		rdbtnSuite.setFont(new Font("Tahoma", Font.PLAIN, 17));
-    		rdbtnSuite.setBounds(416, 225, 90, 30);
+    		rdbtnSuite.setBounds(416, 347, 90, 30);
     		contentPane.add(rdbtnSuite);
     		
     		rdbtnDb = new JRadioButton("DB");
@@ -962,7 +962,7 @@ public class Reservar extends JFrame {
     		buttonGroupHabitaciones.add(rdbtnDb);
     		rdbtnDb.setOpaque(false);
     		rdbtnDb.setFont(new Font("Tahoma", Font.PLAIN, 17));
-    		rdbtnDb.setBounds(272, 225, 70, 30);
+    		rdbtnDb.setBounds(272, 347, 70, 30);
     		contentPane.add(rdbtnDb);
     		
     		rdbtnDui = new JRadioButton("DUI");
@@ -971,7 +971,7 @@ public class Reservar extends JFrame {
     		buttonGroupHabitaciones.add(rdbtnDui);
     		rdbtnDui.setOpaque(false);
     		rdbtnDui.setFont(new Font("Tahoma", Font.PLAIN, 17));
-    		rdbtnDui.setBounds(200, 225, 70, 30);
+    		rdbtnDui.setBounds(200, 347, 70, 30);
     		contentPane.add(rdbtnDui);
     		
     		txtrTipoHabitacion = new JTextArea();
@@ -980,7 +980,7 @@ public class Reservar extends JFrame {
     		txtrTipoHabitacion.setFont(new Font("Monospaced", Font.PLAIN, 16));
     		txtrTipoHabitacion.setOpaque(false);
     		txtrTipoHabitacion.setEditable(false);
-    		txtrTipoHabitacion.setBounds(200, 188, 180, 30);
+    		txtrTipoHabitacion.setBounds(200, 305, 180, 30);
     		contentPane.add(txtrTipoHabitacion);
     		
     		txtrApellido = new JTextArea();
@@ -989,7 +989,7 @@ public class Reservar extends JFrame {
     		txtrApellido.setFont(new Font("Monospaced", Font.PLAIN, 16));
     		txtrApellido.setEditable(false);
     		txtrApellido.setOpaque(false);
-    		txtrApellido.setBounds(200, 121, 100, 30);
+    		txtrApellido.setBounds(200, 240, 100, 30);
     		contentPane.add(txtrApellido);
     		
     		txtrNombre = new JTextArea();
@@ -998,7 +998,7 @@ public class Reservar extends JFrame {
     		txtrNombre.setText("Nombre:");
     		txtrNombre.setOpaque(false);
     		txtrNombre.setEditable(false);
-    		txtrNombre.setBounds(200, 80, 100, 30);
+    		txtrNombre.setBounds(200, 189, 100, 30);
     		contentPane.add(txtrNombre);
     		
     		lblNewLabel = new JLabel("New label");
