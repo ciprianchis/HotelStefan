@@ -130,7 +130,7 @@ public class Registro extends JFrame {
 		textFieldUser.setText("USUARIO");
 		textFieldUser.setHorizontalAlignment(SwingConstants.CENTER);
 		textFieldUser.setFont(new Font("Tahoma", Font.BOLD, 20));
-		textFieldUser.setBounds(460, 189, 368, 40);
+		textFieldUser.setBounds(457, 200, 368, 40);
 		contentPane.add(textFieldUser);
 		textFieldUser.setColumns(10);
 		
@@ -138,20 +138,20 @@ public class Registro extends JFrame {
 		lblRegistro.setForeground(new Color(184, 134, 11));
 		lblRegistro.setFont(new Font("Tahoma", Font.BOLD, 50));
 		lblRegistro.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRegistro.setBounds(460, 76, 368, 70);
+		lblRegistro.setBounds(457, 62, 368, 70);
 		contentPane.add(lblRegistro);
 		
 		btnAñadirUser = new JButton("A\u00D1ADIR");
 		btnAñadirUser.addActionListener(new BtnAñadirUserActionListener());
 		btnAñadirUser.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnAñadirUser.setBounds(460, 405, 368, 50);
+		btnAñadirUser.setBounds(250, 550, 368, 50);
 		contentPane.add(btnAñadirUser);
 		
 		btnSignIn = new JButton("VOLVER");
 		btnSignIn.addActionListener(new BtnSignInActionListener());
 		btnSignIn.addMouseListener(new BtnSignInMouseListener());
 		btnSignIn.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnSignIn.setBounds(650, 511, 368, 50);
+		btnSignIn.setBounds(660, 550, 368, 50);
 		contentPane.add(btnSignIn);
 		
 		txtContrasea = new JTextField();
@@ -159,14 +159,16 @@ public class Registro extends JFrame {
 		txtContrasea.setFont(new Font("Tahoma", Font.BOLD, 20));
 		txtContrasea.setText("CONTRASE\u00D1A");
 		txtContrasea.setHorizontalAlignment(SwingConstants.CENTER);
-		txtContrasea.setBounds(460, 258, 368, 40);
+		txtContrasea.setBounds(457, 275, 368, 40);
 		contentPane.add(txtContrasea);
 		txtContrasea.setColumns(10);
 		
-		chckbxAdmin = new JCheckBox("ADMINISTRADOR");
+		chckbxAdmin = new JCheckBox(" ADMINISTRADOR");
+		chckbxAdmin.setForeground(SystemColor.window);
 		chckbxAdmin.setHorizontalAlignment(SwingConstants.CENTER);
+		chckbxAdmin.setOpaque(false);
 		chckbxAdmin.setFont(new Font("Tahoma", Font.BOLD, 20));
-		chckbxAdmin.setBounds(460, 332, 368, 40);
+		chckbxAdmin.setBounds(457, 400, 368, 40);
 		contentPane.add(chckbxAdmin);
 		
 		lblFondo = new JLabel("");

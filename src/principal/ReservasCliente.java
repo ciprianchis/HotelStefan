@@ -24,6 +24,7 @@ import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JTextArea;
 
@@ -71,26 +72,23 @@ public class ReservasCliente extends JFrame {
 	public ReservasCliente(String usuario) {
 		initApp();
 		usuarioReservas = usuario;
-		operacion.cargarReservas();
-
+		operacion.cargarReservas(usuarioReservas);
+		cargarReservas();
 	}
 
 	public ReservasCliente(String usuario, Reserva reserva) {
 		initApp();
 		usuarioReservas = usuario;
-		operacion.cargarReservas();
+		operacion.cargarReservas(usuarioReservas);
 		reservaRealizada = reserva;
 		operacion.anadirReserva(reservaRealizada);
 		cargarReservas();
 	}
 
 	public void cargarReservas() {
-		ArrayList<Reserva> reservasUsuario;
-		reservasUsuario = operacion.cargarReservasPorNombre(usuarioReservas);
 		String textoReservas = "";
-		for (int i = 0; i < reservasUsuario.size(); i++) {
-			textoReservas += reservasUsuario.get(i).toString();
-		}
+		textoReservas = operacion.cargarArray();
+		txtrReservasLista.setText(textoReservas);
 	}
 
 	private class LblCerrarMouseListener extends MouseAdapter {
@@ -107,7 +105,7 @@ public class ReservasCliente extends JFrame {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			operacion.guardarReservas();
+			operacion.guardarReservas(usuarioReservas);
 			System.exit(0);
 		}
 	}
@@ -184,7 +182,8 @@ public class ReservasCliente extends JFrame {
 		btnSalir.addMouseListener(new BtnSalirMouseListener());
 
 		txtrReservasLista = new JTextArea();
-		txtrReservasLista.setForeground(Color.WHITE);
+		txtrReservasLista.setFont(new Font("Monospaced", Font.PLAIN, 12));
+		txtrReservasLista.setForeground(Color.BLACK);
 		txtrReservasLista.setEditable(false);
 		txtrReservasLista.setBounds(50, 150, 1180, 450);
 		contentPane.add(txtrReservasLista);
