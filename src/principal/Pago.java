@@ -50,7 +50,7 @@ public class Pago extends JFrame {
         private JTextField textFieldNum;
         private JTextArea textCVV;
         private JTextField textFieldCVV;
-        private JButton btnNewButton;
+        private JLabel btnNewButton;
         private JTextArea textArea;
         private String usuarioReserva;
         private Reserva reservaRealizada;
@@ -151,6 +151,14 @@ public class Pago extends JFrame {
 				textFieldNum.setText("");
 			}
 		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			btnNewButton.setIcon(new ImageIcon(".\\recursos\\payment.png"));
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			btnNewButton.setIcon(new ImageIcon(".\\recursos\\paymentBW.png"));
+		}
 	}
 	
 	public boolean testComprobacionNumeroTarjetaYcvc(String numeroTarjeta, String cvc) {
@@ -180,20 +188,25 @@ public class Pago extends JFrame {
     		contentPane.setLayout(null);
     		
     		textArea = new JTextArea();
-    		textArea.setFont(new Font("Tahoma", Font.PLAIN, 18));
+    		textArea.setFont(new Font("Monospaced", Font.PLAIN, 18));
     		textArea.setWrapStyleWord(true);
     		textArea.setRows(19);
     		textArea.setBounds(680, 239, 300, 120);
     		contentPane.add(textArea);
     		
-    		btnNewButton = new JButton("Pagar");
+    		btnNewButton = new JLabel("");
+    		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    		btnNewButton.setIcon(new ImageIcon(".\\recursos\\paymentBW.png"));
+    		btnNewButton.setHorizontalTextPosition(SwingConstants.CENTER);
+    		btnNewButton.setHorizontalAlignment(SwingConstants.CENTER);
+    		btnNewButton.setToolTipText("Pagar");
     		btnNewButton.setFocusable(false);
     		btnNewButton.addMouseListener(new BtnNewButtonMouseListener());
-    		btnNewButton.setBounds(550, 500, 150, 39);
+    		btnNewButton.setBounds(550, 500, 128, 128);
     		contentPane.add(btnNewButton);
     		
     		textFieldCVV = new JTextField();
-    		textFieldCVV.setFont(new Font("Tahoma", Font.PLAIN, 18));
+    		textFieldCVV.setFont(new Font("Monospaced", Font.PLAIN, 18));
     		textFieldCVV.setColumns(10);
     		textFieldCVV.setBounds(840, 400, 140, 30);
     		contentPane.add(textFieldCVV);
@@ -208,19 +221,19 @@ public class Pago extends JFrame {
     		contentPane.add(textCVV);
     		
     		textFieldNum = new JTextField();
-    		textFieldNum.setFont(new Font("Tahoma", Font.PLAIN, 18));
+    		textFieldNum.setFont(new Font("Monospaced", Font.PLAIN, 18));
     		textFieldNum.setColumns(10);
     		textFieldNum.setBounds(520, 400, 250, 30);
     		contentPane.add(textFieldNum);
     		
     		textFieldApe = new JTextField();
-    		textFieldApe.setFont(new Font("Tahoma", Font.PLAIN, 18));
+    		textFieldApe.setFont(new Font("Monospaced", Font.PLAIN, 18));
     		textFieldApe.setColumns(10);
     		textFieldApe.setBounds(680, 198, 300, 30);
     		contentPane.add(textFieldApe);
     		
     		textFieldNom = new JTextField();
-    		textFieldNom.setFont(new Font("Tahoma", Font.PLAIN, 18));
+    		textFieldNom.setFont(new Font("Monospaced", Font.PLAIN, 18));
     		textFieldNom.setBounds(680, 152, 300, 30);
     		contentPane.add(textFieldNom);
     		textFieldNom.setColumns(10);

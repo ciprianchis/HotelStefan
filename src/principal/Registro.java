@@ -170,7 +170,7 @@ public class Registro extends JFrame {
 		chckbxAdmin.setForeground(SystemColor.window);
 		chckbxAdmin.setHorizontalAlignment(SwingConstants.CENTER);
 		chckbxAdmin.setOpaque(false);
-		chckbxAdmin.setFont(new Font("Tahoma", Font.BOLD, 20));
+		chckbxAdmin.setFont(new Font("Monospaced", Font.PLAIN, 20));
 		chckbxAdmin.setBounds(457, 400, 368, 40);
 		contentPane.add(chckbxAdmin);
 		

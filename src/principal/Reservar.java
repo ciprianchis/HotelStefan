@@ -81,8 +81,8 @@ public class Reservar extends JFrame {
     private JTextField textFieldNumeroNoches;
     private JTextArea txtrImporteTotal;
     private JTextField textFieldImporte;
-    private JButton btnPagar;
-    private JButton btnSalir;
+    private JLabel btnPagar;
+    private JLabel btnSalir;
     private JLabel lblComprobacionHabitacion;
     private OperacionHabitacion operaciones = new OperacionHabitacion();
     private ImageIcon imagentick = new ImageIcon(".\\recursos\\tick.png");
@@ -118,7 +118,7 @@ public class Reservar extends JFrame {
 		initApp();  
 	}
 	private void cambiarTextoNombreDefault() {
-		textNombre.setFont(new Font("Tahoma", Font.ITALIC,12));
+		textNombre.setFont(new Font("Monospaced", Font.PLAIN, 14));
 		textNombre.setForeground(Color.gray);
 		textNombre.setText("Nombre");
 	}
@@ -127,7 +127,7 @@ public class Reservar extends JFrame {
 		textNombre.setForeground(Color.black);
 	}
 	private void cambiarTextoApellidoDefault() {
-		textApellido.setFont(new Font("Tahoma", Font.ITALIC,12));
+		textApellido.setFont(new Font("Monospaced", Font.PLAIN, 14));
 		textApellido.setForeground(Color.gray);
 		textApellido.setText("Apellido");
 	}
@@ -571,12 +571,28 @@ public class Reservar extends JFrame {
 			new Pago(usuarioReservas,reserva).setVisible(true);
 			dispose();
 		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			btnPagar.setIcon(new ImageIcon(".\\recursos\\goToPay.png"));
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			btnPagar.setIcon(new ImageIcon(".\\recursos\\goToPayBW.png"));
+		}
 	}
 	private class BtnSalirMouseListener extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			new ReservasCliente(usuarioReservas).setVisible(true);
 			dispose();
+		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			btnSalir.setIcon(new ImageIcon(".\\recursos\\goBack.png"));
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			btnSalir.setIcon(new ImageIcon(".\\recursos\\goBackBW.png"));
 		}
 	}
 	private class RdbtnHaMouseListener extends MouseAdapter {
@@ -710,17 +726,26 @@ public class Reservar extends JFrame {
     		lblComprobacionHabitacion.setBounds(512, 347, 30, 30);
     		contentPane.add(lblComprobacionHabitacion);
     		
-    		btnSalir = new JButton("Salir");
+    		btnSalir = new JLabel("");
+    		btnSalir.setHorizontalTextPosition(SwingConstants.CENTER);
+    		btnSalir.setHorizontalAlignment(SwingConstants.CENTER);
+    		btnSalir.setToolTipText("Volver");
+    		btnSalir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    		btnSalir.setIcon(new ImageIcon(".\\recursos\\goBackBW.png"));
     		btnSalir.setFocusable(false);
     		btnSalir.addMouseListener(new BtnSalirMouseListener());
-    		btnSalir.setBounds(900, 600, 180, 50);
+    		btnSalir.setBounds(900, 600, 128, 128);
     		contentPane.add(btnSalir);
     		
-    		btnPagar = new JButton("Pagar");
+    		btnPagar = new JLabel("");
+    		btnPagar.setHorizontalTextPosition(SwingConstants.CENTER);
+    		btnPagar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    		btnPagar.setIcon(new ImageIcon(".\\recursos\\goToPayBW.png"));
+    		btnPagar.setToolTipText("Proceder al pago");
+    		btnPagar.setHorizontalAlignment(SwingConstants.CENTER);
     		btnPagar.setFocusable(false);
     		btnPagar.addMouseListener(new BtnPagarMouseListener());
-    		btnPagar.setEnabled(false);
-    		btnPagar.setBounds(200, 600, 180, 50);
+    		btnPagar.setBounds(262, 600, 128, 128);
     		contentPane.add(btnPagar);
     		
     		txtrImporteTotal = new JTextArea();
@@ -734,6 +759,8 @@ public class Reservar extends JFrame {
     		contentPane.add(txtrImporteTotal);
     		
     		textFieldImporte = new JTextField();
+    		textFieldImporte.setFont(new Font("Monospaced", Font.PLAIN, 14));
+    		textFieldImporte.setFocusable(false);
     		textFieldImporte.setEditable(false);
     		textFieldImporte.setColumns(10);
     		textFieldImporte.setBackground(Color.WHITE);
@@ -741,6 +768,8 @@ public class Reservar extends JFrame {
     		contentPane.add(textFieldImporte);
     		
     		textFieldNumeroNoches = new JTextField();
+    		textFieldNumeroNoches.setFont(new Font("Monospaced", Font.PLAIN, 14));
+    		textFieldNumeroNoches.setFocusable(false);
     		textFieldNumeroNoches.setEditable(false);
     		textFieldNumeroNoches.setColumns(10);
     		textFieldNumeroNoches.setBackground(Color.WHITE);
@@ -818,6 +847,7 @@ public class Reservar extends JFrame {
     		contentPane.add(textAreaDiaMesEntrada);
     		
     		textFieldAnoSalida = new JTextField();
+    		textFieldAnoSalida.setFont(new Font("Monospaced", Font.PLAIN, 14));
     		textFieldAnoSalida.addKeyListener(new TextFieldAnoSalidaKeyListener());
     		textFieldAnoSalida.setColumns(10);
     		textFieldAnoSalida.setBackground(Color.WHITE);
@@ -825,6 +855,7 @@ public class Reservar extends JFrame {
     		contentPane.add(textFieldAnoSalida);
     		
     		textFieldMesEntrada = new JTextField();
+    		textFieldMesEntrada.setFont(new Font("Monospaced", Font.PLAIN, 14));
     		textFieldMesEntrada.addKeyListener(new TextFieldMesEntradaKeyListener());
     		textFieldMesEntrada.setColumns(10);
     		textFieldMesEntrada.setBackground(Color.WHITE);
@@ -833,6 +864,7 @@ public class Reservar extends JFrame {
     		contentPane.add(textFieldMesEntrada);
     		
     		textFieldDiaSalida = new JTextField();
+    		textFieldDiaSalida.setFont(new Font("Monospaced", Font.PLAIN, 14));
     		textFieldDiaSalida.addKeyListener(new TextFieldDiaSalidaKeyListener());
     		textFieldDiaSalida.setColumns(10);
     		textFieldDiaSalida.setBackground(Color.WHITE);
@@ -840,6 +872,7 @@ public class Reservar extends JFrame {
     		contentPane.add(textFieldDiaSalida);
     		
     		textFieldMesSalida = new JTextField();
+    		textFieldMesSalida.setFont(new Font("Monospaced", Font.PLAIN, 14));
     		textFieldMesSalida.addKeyListener(new TextFieldMesSalidaKeyListener());
     		textFieldMesSalida.setColumns(10);
     		textFieldMesSalida.setBackground(Color.WHITE);
@@ -847,6 +880,7 @@ public class Reservar extends JFrame {
     		contentPane.add(textFieldMesSalida);
     		
     		textFieldAnoEntrada = new JTextField();
+    		textFieldAnoEntrada.setFont(new Font("Monospaced", Font.PLAIN, 14));
     		textFieldAnoEntrada.addKeyListener(new TextFieldAnoEntradaKeyListener());
     		textFieldAnoEntrada.setColumns(10);
     		textFieldAnoEntrada.setBackground(Color.WHITE);
@@ -854,6 +888,7 @@ public class Reservar extends JFrame {
     		contentPane.add(textFieldAnoEntrada);
     		
     		textFieldDiaEntrada = new JTextField();
+    		textFieldDiaEntrada.setFont(new Font("Monospaced", Font.PLAIN, 14));
     		textFieldDiaEntrada.addKeyListener(new TextFieldDiaEntradaKeyListener());
     		textFieldDiaEntrada.setColumns(10);
     		textFieldDiaEntrada.setBackground(Color.WHITE);

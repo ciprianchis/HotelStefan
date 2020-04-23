@@ -40,8 +40,8 @@ public class ReservasCliente extends JFrame {
 	private boolean maximizado = false;
 	private JTextArea txtrReservas;
 	private JTextArea txtrReservasLista;
-	private JButton btnNuevaReserva;
-	private JButton btnSalir;
+	private JLabel btnNuevaReserva;
+	private JLabel btnSalir;
 	private OperacionReserva operacion = new OperacionReserva();
 	private String usuarioReservas = "";
 	private Reserva reservaRealizada;
@@ -157,6 +157,14 @@ public class ReservasCliente extends JFrame {
 			new Reservar(usuarioReservas).setVisible(true);
 			dispose();
 		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			btnNuevaReserva.setIcon(new ImageIcon(".\\recursos\\addReserva.png"));
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			btnNuevaReserva.setIcon(new ImageIcon(".\\recursos\\addReservaBW.png"));
+		}
 	}
 
 	private class BtnSalirMouseListener extends MouseAdapter {
@@ -166,8 +174,16 @@ public class ReservasCliente extends JFrame {
 			log.setVisible(true);
 			dispose();
 		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			btnSalir.setIcon(new ImageIcon(".\\recursos\\goBack.png"));
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			btnSalir.setIcon(new ImageIcon(".\\recursos\\goBackBW.png"));
+		}
 	}
-
+	
 	private void initApp() {
 		setResizable(false);
 		setUndecorated(true);
@@ -178,9 +194,14 @@ public class ReservasCliente extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		btnSalir = new JButton("Salir");
-		btnSalir.setFocusable(false);
+		btnSalir = new JLabel("");
+		btnSalir.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnSalir.setHorizontalAlignment(SwingConstants.CENTER);
+		btnSalir.setToolTipText("Salir");
+		btnSalir.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnSalir.setIcon(new ImageIcon(".\\recursos\\goBackBW.png"));
 		btnSalir.addMouseListener(new BtnSalirMouseListener());
+		btnSalir.setFocusable(false);
 
 		txtrReservasLista = new JTextArea();
 		txtrReservasLista.setFont(new Font("Monospaced", Font.PLAIN, 12));
@@ -189,14 +210,19 @@ public class ReservasCliente extends JFrame {
 		txtrReservasLista.setBounds(50, 150, 1180, 450);
 		contentPane.add(txtrReservasLista);
 		btnSalir.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnSalir.setBounds(980, 650, 250, 50);
+		btnSalir.setBounds(906, 611, 128, 128);
 		contentPane.add(btnSalir);
 
-		btnNuevaReserva = new JButton("Nueva Reserva");
-		btnNuevaReserva.setFocusable(false);
+		btnNuevaReserva = new JLabel("");
+		btnNuevaReserva.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnNuevaReserva.setToolTipText("Nueva reserva");
+		btnNuevaReserva.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNuevaReserva.setIcon(new ImageIcon(".\\recursos\\addReservaBW.png"));
+		btnNuevaReserva.setHorizontalAlignment(SwingConstants.CENTER);
 		btnNuevaReserva.addMouseListener(new BtnNuevaReservaMouseListener());
+		btnNuevaReserva.setFocusable(false);
 		btnNuevaReserva.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnNuevaReserva.setBounds(50, 650, 250, 50);
+		btnNuevaReserva.setBounds(213, 611, 128, 128);
 		contentPane.add(btnNuevaReserva);
 
 		txtrReservas = new JTextArea();
