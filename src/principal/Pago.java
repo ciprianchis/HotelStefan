@@ -29,6 +29,8 @@ import java.util.regex.Pattern;
 
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Pago extends JFrame {
 
@@ -160,6 +162,83 @@ public class Pago extends JFrame {
 			btnNewButton.setIcon(new ImageIcon(".\\recursos\\paymentBW.png"));
 		}
 	}
+	private class TextFieldNumKeyListener extends KeyAdapter {
+		@Override
+		public void keyReleased(KeyEvent e) {
+			int teclaPulsada = e.getKeyCode();
+			int longt = 0;
+			String tc = textFieldNum.getText();
+			longt = tc.length();
+			String txtmodif = "";
+			switch (teclaPulsada) {
+				case 8:
+					if (longt ==  5 || longt == 10 || longt == 15) {
+						switch (longt) {
+							case 5:
+								txtmodif = tc.substring(0,4);
+								break;
+							case 10:
+								txtmodif = tc.substring(0,9);
+								break;
+							case 15:
+								txtmodif = tc.substring(0,14);
+								break;
+						}
+					} else {
+						txtmodif = tc;
+					}
+					break;
+					
+				case 48: case 49: case 50: case 51: case 52: case 53: case 54: case 55: case 56: case 57: case 96: case 97: case 98: case 99: case 100: case 101: case 102: case 103: case 104: case 105:
+					if (longt == 20) {
+						txtmodif = tc.substring(0,19);
+					} else {
+						if (longt ==  4 || longt == 9 || longt == 14) {
+							txtmodif = tc + " ";
+							System.out.println(txtmodif);
+						} else {
+							txtmodif = tc;
+						}
+					}
+					break;
+				case 65: case 66: case 67: case 68: case 69: case 70: case 71: case 72: case 73: case 74: case 75: case 76: case 77: case 78: case 79: case 80:
+				case 81: case 82: case 83: case 84: case 85: case 86: case 87: case 88: case 89: case 90:
+					txtmodif = tc.substring(0,tc.length()-1);
+					break;
+				default:
+					txtmodif = tc;
+					break;
+			}
+			textFieldNum.setText(txtmodif);
+		}
+	}
+	private class TextFieldCVVKeyListener extends KeyAdapter {
+		@Override
+		public void keyReleased(KeyEvent e) {
+			int teclaPulsada = e.getKeyCode();
+			int longt = 0;
+			String tc = textFieldCVV.getText();
+			longt = tc.length();
+			String txtmodif = "";
+			switch (teclaPulsada) {
+				case 48: case 49: case 50: case 51: case 52: case 53: case 54: case 55: case 56: case 57: case 96: case 97: case 98: case 99: case 100: case 101: case 102: case 103: case 104: case 105:
+					if (longt == 4) {
+						txtmodif = tc.substring(0,3);
+					} else {
+						txtmodif = tc;
+					}
+					break;
+				case 65: case 66: case 67: case 68: case 69: case 70: case 71: case 72: case 73: case 74: case 75: case 76: case 77: case 78: case 79: case 80:
+				case 81: case 82: case 83: case 84: case 85: case 86: case 87: case 88: case 89: case 90:
+					txtmodif = tc.substring(0,tc.length()-1);
+					break;
+				default:
+					txtmodif = tc;
+					break;
+			}
+			textFieldCVV.setText(txtmodif);
+		}
+	}
 	
 	public boolean testComprobacionNumeroTarjetaYcvc(String numeroTarjeta, String cvc) {
 		Pattern pattern = Pattern.compile("[0-9]{4}\\s[0-9]{4}\\s[0-9]{4}\\s[0-9]{4}");
@@ -206,6 +285,7 @@ public class Pago extends JFrame {
     		contentPane.add(btnNewButton);
     		
     		textFieldCVV = new JTextField();
+    		textFieldCVV.addKeyListener(new TextFieldCVVKeyListener());
     		textFieldCVV.setFont(new Font("Monospaced", Font.PLAIN, 18));
     		textFieldCVV.setColumns(10);
     		textFieldCVV.setBounds(840, 400, 140, 30);
@@ -221,6 +301,7 @@ public class Pago extends JFrame {
     		contentPane.add(textCVV);
     		
     		textFieldNum = new JTextField();
+    		textFieldNum.addKeyListener(new TextFieldNumKeyListener());
     		textFieldNum.setFont(new Font("Monospaced", Font.PLAIN, 18));
     		textFieldNum.setColumns(10);
     		textFieldNum.setBounds(520, 400, 250, 30);
