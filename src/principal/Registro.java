@@ -284,7 +284,15 @@ public class Registro extends JFrame {
 	}
 	private class BtnAñadirUserActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-								
+			// ERROR CONTRASEÑA					
+			Pattern pPasswd = Pattern.compile("^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{8,16}$");
+			Matcher mPasswd = pPasswd.matcher(txtContrasea.getText());
+			
+			if (!mPasswd.matches()) {
+				JOptionPane.showMessageDialog(null, "La contraseña no cumple los requisitos");
+				return;
+			}
+			//FIN CORRECCIÓN ERROR CONTRASEÑA 
 			for (Usuario usuario : vUsuarios) {
 				if (usuario.getNombreUsuario().equals(textFieldUser.getText())) {
 					JOptionPane.showMessageDialog(null, "El usuario indicado ya fue introducido anteriormente");
