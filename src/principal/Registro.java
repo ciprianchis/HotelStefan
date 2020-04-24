@@ -178,7 +178,7 @@ public class Registro extends JFrame {
 		lblFondo.setIcon(new ImageIcon(".\\recursos\\fondo.jpg"));
 		lblFondo.setBounds(0, 30, 1280, 720);
 		contentPane.add(lblFondo);
-		lblFondo.setFocusable(false);
+		lblFondo.setFocusable(true);
 		lblFondo.requestFocus();
 		vUsuarios = IoDatos.leerDatos();
 		
