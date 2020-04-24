@@ -50,10 +50,13 @@ public class Registro extends JFrame {
 	private JLabel lblRegistro;
 	private JButton btnAñadirUser;
 	private JButton btnSignIn;
-	private JTextField txtContrasea;
+	private JTextField txtContraseaVisible;
 	private JCheckBox chckbxAdmin;
 	private ArrayList<Usuario> vUsuarios;
 	private boolean maximizado = false;
+	private JButton btnVerContraseña;
+	private boolean mostrar = false;
+	private JPasswordField passwordFieldOculto;
 	/**
 	 * Launch the application.
 	 */
@@ -74,6 +77,8 @@ public class Registro extends JFrame {
 	 * Create the frame.
 	 */
 	public Registro() {
+		
+		
 		setResizable(false);
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -157,14 +162,14 @@ public class Registro extends JFrame {
 		btnSignIn.setBounds(660, 550, 368, 50);
 		contentPane.add(btnSignIn);
 		
-		txtContrasea = new JTextField();
-		txtContrasea.addFocusListener(new TxtContraseaFocusListener());
-		txtContrasea.setFont(new Font("Monospaced", Font.PLAIN, 20));
-		txtContrasea.setText("CONTRASE\u00D1A");
-		txtContrasea.setHorizontalAlignment(SwingConstants.CENTER);
-		txtContrasea.setBounds(457, 275, 368, 40);
-		contentPane.add(txtContrasea);
-		txtContrasea.setColumns(10);
+		txtContraseaVisible = new JTextField();
+		txtContraseaVisible.addFocusListener(new TxtContraseaFocusListener());
+		txtContraseaVisible.setFont(new Font("Monospaced", Font.PLAIN, 20));
+		txtContraseaVisible.setText("Contraseña");
+		txtContraseaVisible.setHorizontalAlignment(SwingConstants.CENTER);
+		txtContraseaVisible.setBounds(457, 275, 368, 40);
+		contentPane.add(txtContraseaVisible);
+		txtContraseaVisible.setColumns(10);
 		
 		chckbxAdmin = new JCheckBox(" ADMINISTRADOR");
 		chckbxAdmin.setForeground(SystemColor.window);
@@ -174,6 +179,16 @@ public class Registro extends JFrame {
 		chckbxAdmin.setBounds(457, 400, 368, 40);
 		contentPane.add(chckbxAdmin);
 		
+		btnVerContraseña = new JButton("--");
+		btnVerContraseña.addActionListener(new BtnVerContraseñaActionListener());
+		btnVerContraseña.setBounds(835, 287, 89, 23);
+		contentPane.add(btnVerContraseña);
+		
+		passwordFieldOculto = new JPasswordField();
+		passwordFieldOculto.setHorizontalAlignment(SwingConstants.CENTER);
+		passwordFieldOculto.setBounds(457, 275, 368, 40);
+		contentPane.add(passwordFieldOculto);
+		
 		lblFondo = new JLabel("");
 		lblFondo.setIcon(new ImageIcon(".\\recursos\\fondo.jpg"));
 		lblFondo.setBounds(0, 30, 1280, 720);
@@ -181,6 +196,10 @@ public class Registro extends JFrame {
 		lblFondo.setFocusable(true);
 		lblFondo.requestFocus();
 		vUsuarios = IoDatos.leerDatos();
+		
+		txtContraseaVisible.setVisible(false);
+		passwordFieldOculto.setVisible(true);
+		
 		
 	}
 	private class LblCerrarMouseListener extends MouseAdapter {
@@ -235,7 +254,10 @@ public class Registro extends JFrame {
 	private class TextFieldUserFocusListener extends FocusAdapter {
 		@Override
 		public void focusGained(FocusEvent arg0) {
-			textFieldUser.setText("");
+			if (textFieldUser.getText().equals("USUARIO")) {
+				textFieldUser.setText("");
+			}
+			
 			lblFondo.setFocusable(false);
 		}
 		@Override
@@ -261,17 +283,17 @@ public class Registro extends JFrame {
 	private class TxtContraseaFocusListener extends FocusAdapter {
 		@Override
 		public void focusGained(FocusEvent e) {
-			txtContrasea.setText("");
+			txtContraseaVisible.setText("");
 		}	
 		@Override
 		public void focusLost(FocusEvent arg0) {
-			txtContrasea.setText(txtContrasea.getText());
+			txtContraseaVisible.setText(txtContraseaVisible.getText());
 			
 			Pattern pPasswd = Pattern.compile("^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{8,16}$");
-			Matcher mPasswd = pPasswd.matcher(txtContrasea.getText());
+			Matcher mPasswd = pPasswd.matcher(txtContraseaVisible.getText());
 			
-			if (txtContrasea.getText().equals("")) {
-				txtContrasea.setText("CONTRASEÑA");
+			if (txtContraseaVisible.getText().equals("")) {
+				txtContraseaVisible.setText("CONTRASEÑA");
 			}
 			
 			if (!mPasswd.matches()) {
@@ -286,7 +308,7 @@ public class Registro extends JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			// ERROR CONTRASEÑA					
 			Pattern pPasswd = Pattern.compile("^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{8,16}$");
-			Matcher mPasswd = pPasswd.matcher(txtContrasea.getText());
+			Matcher mPasswd = pPasswd.matcher(txtContraseaVisible.getText());
 			
 			if (!mPasswd.matches()) {
 				JOptionPane.showMessageDialog(null, "La contraseña no cumple los requisitos");
@@ -297,7 +319,7 @@ public class Registro extends JFrame {
 				if (usuario.getNombreUsuario().equals(textFieldUser.getText())) {
 					JOptionPane.showMessageDialog(null, "El usuario indicado ya fue introducido anteriormente");
 					textFieldUser.setText("USUARIO");
-					txtContrasea.setText("CONTRASEÑA");
+					txtContraseaVisible.setText("CONTRASEÑA");
 					chckbxAdmin.setSelected(false);
 					return;
 				}
@@ -307,16 +329,31 @@ public class Registro extends JFrame {
 			JOptionPane.showMessageDialog(null, "El nuevo usuario fue introducido");
 			
 			
-			Usuario usu = new Usuario(textFieldUser.getText(), txtContrasea.getText(), chckbxAdmin.isSelected());
+			Usuario usu = new Usuario(textFieldUser.getText(), txtContraseaVisible.getText(), chckbxAdmin.isSelected());
 			vUsuarios.add(usu);
 			
 			IoDatos.guardarUsusarios(vUsuarios);
 			textFieldUser.setText("USUARIO");
-			txtContrasea.setText("CONTRASEÑA");
+			txtContraseaVisible.setText("CONTRASEÑA");
 			chckbxAdmin.setSelected(false);
 			
 			
 			
+		}
+	}
+	private class BtnVerContraseñaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			if (mostrar) {
+				txtContraseaVisible.setVisible(true);
+				passwordFieldOculto.setVisible(false);
+				txtContraseaVisible.setText(String.valueOf(passwordFieldOculto.getPassword()));
+				mostrar = false;
+			}else {
+				txtContraseaVisible.setVisible(false);
+				passwordFieldOculto.setVisible(true);
+				passwordFieldOculto.setText(txtContraseaVisible.getText());
+				mostrar = true;
+			}
 		}
 	}
 }
