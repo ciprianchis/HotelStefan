@@ -150,7 +150,7 @@ public class Registro extends JFrame {
 		btnAñadirUser = new JLabel("");
 		btnAñadirUser.setToolTipText("A\u00F1adir usuario");
 		btnAñadirUser.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnAñadirUser.setIcon(new ImageIcon("C:\\Users\\34658\\gitKraken\\HotelStefan\\HotelStefan\\recursos\\addUserBW.png"));
+		btnAñadirUser.setIcon(new ImageIcon(".\\recursos\\addUserBW.png"));
 		btnAñadirUser.addMouseListener(new BtnAñadirUserMouseListener());
 		btnAñadirUser.setHorizontalAlignment(SwingConstants.CENTER);
 		btnAñadirUser.setFocusable(false);
@@ -162,7 +162,7 @@ public class Registro extends JFrame {
 		btnSignIn.setToolTipText("Volver a Login");
 		btnSignIn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnSignIn.setIcon(
-				new ImageIcon("C:\\Users\\34658\\gitKraken\\HotelStefan\\HotelStefan\\recursos\\goBackBW.png"));
+				new ImageIcon(".\\recursos\\goBackBW.png"));
 		btnSignIn.setHorizontalAlignment(SwingConstants.CENTER);
 		btnSignIn.setFocusable(false);
 		btnSignIn.setFont(new Font("Tahoma", Font.BOLD, 20));
