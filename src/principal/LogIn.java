@@ -48,8 +48,8 @@ public class LogIn extends JFrame {
 	private JTextField textFieldUser;
 	private JPasswordField passwordFieldPass;
 	private JLabel lblLogin;
-	private JButton btnEntrar;
-	private JButton btnSignup;
+	private JLabel btnEntrar;
+	private JLabel btnSignup;
 	private boolean maximizado = false;
 	//private ArrayList<Usuario> vUsuarios;
 	/**
@@ -149,20 +149,22 @@ public class LogIn extends JFrame {
 		lblLogin.setBounds(433, 95, 399, 70);
 		contentPane.add(lblLogin);
 		
-		btnEntrar = new JButton("ENTRAR");
+		btnEntrar = new JLabel("");
+		btnEntrar.setToolTipText("LogIn");
+		btnEntrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnEntrar.setHorizontalAlignment(SwingConstants.CENTER);
 		btnEntrar.setFocusable(false);
-		btnEntrar.addActionListener(new BtnEntrarActionListener());
 		btnEntrar.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnEntrar.setBounds(200, 511, 368, 50);
+		btnEntrar.setBounds(371, 511, 128, 128);
 		contentPane.add(btnEntrar);
 		
 		
-		btnSignup = new JButton("REGISTRO");
+		btnSignup = new JLabel("");
+		btnSignup.setToolTipText("Registrar usuario");
+		btnSignup.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnSignup.setFocusable(false);
-		btnSignup.addActionListener(new BtnSignupActionListener());
-		btnSignup.addMouseListener(new BtnSignupMouseListener());
 		btnSignup.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnSignup.setBounds(692, 511, 368, 50);
+		btnSignup.setBounds(762, 511, 128, 128);
 		contentPane.add(btnSignup);
 		
 		lblFondo = new JLabel("");
