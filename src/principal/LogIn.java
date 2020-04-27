@@ -48,10 +48,11 @@ public class LogIn extends JFrame {
 	private JTextField textFieldUser;
 	private JPasswordField passwordFieldPass;
 	private JLabel lblLogin;
-	private JButton btnEntrar;
-	private JButton btnSignup;
+	private JLabel btnEntrar;
+	private JLabel btnSignup;
 	private boolean maximizado = false;
-	//private ArrayList<Usuario> vUsuarios;
+
+	// private ArrayList<Usuario> vUsuarios;
 	/**
 	 * Launch the application.
 	 */
@@ -80,14 +81,14 @@ public class LogIn extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBorder(new SoftBevelBorder(BevelBorder.RAISED, Color.LIGHT_GRAY, null, null, null));
 		panel.setBounds(0, 0, 1280, 30);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 		lblNombreApp = new JLabel("Hotel Stefan *****");
 		lblNombreApp.setBounds(538, 0, 212, 30);
 		lblNombreApp.setVerticalAlignment(SwingConstants.BOTTOM);
@@ -95,7 +96,7 @@ public class LogIn extends JFrame {
 		lblNombreApp.setFont(new Font("Perpetua Titling MT", Font.BOLD, 18));
 		lblNombreApp.setForeground(new Color(184, 134, 11));
 		panel.add(lblNombreApp);
-		
+
 		lblCerrar = new JLabel("");
 		lblCerrar.setBounds(22, 9, 14, 14);
 		lblCerrar.addMouseListener(new LblCerrarMouseListener());
@@ -104,7 +105,7 @@ public class LogIn extends JFrame {
 		lblCerrar.setToolTipText("Cerrar");
 		lblCerrar.setIcon(new ImageIcon(".\\recursos\\close.png"));
 		panel.add(lblCerrar);
-		
+
 		lblMinimizar = new JLabel("");
 		lblMinimizar.setBounds(46, 9, 14, 14);
 		lblMinimizar.addMouseListener(new LblMinimizarMouseListener());
@@ -113,7 +114,7 @@ public class LogIn extends JFrame {
 		lblMinimizar.setToolTipText("Minimizar");
 		lblMinimizar.setIcon(new ImageIcon(".\\recursos\\minimize.png"));
 		panel.add(lblMinimizar);
-		
+
 		lblMaximizar = new JLabel("");
 		lblMaximizar.setBounds(70, 9, 14, 14);
 		lblMaximizar.addMouseListener(new LblMaximizarMouseListener());
@@ -122,7 +123,7 @@ public class LogIn extends JFrame {
 		lblMaximizar.setToolTipText("Maximizar");
 		lblMaximizar.setIcon(new ImageIcon(".\\recursos\\maximize.png"));
 		panel.add(lblMaximizar);
-		
+
 		textFieldUser = new JTextField();
 		textFieldUser.addFocusListener(new TextFieldUserFocusListener());
 		textFieldUser.setText("USUARIO");
@@ -131,7 +132,7 @@ public class LogIn extends JFrame {
 		textFieldUser.setBounds(432, 250, 400, 40);
 		contentPane.add(textFieldUser);
 		textFieldUser.setColumns(10);
-		
+
 		passwordFieldPass = new JPasswordField();
 		passwordFieldPass.addFocusListener(new PasswordFieldFocusListener());
 		passwordFieldPass.setHorizontalAlignment(SwingConstants.CENTER);
@@ -140,7 +141,7 @@ public class LogIn extends JFrame {
 		passwordFieldPass.setBounds(432, 350, 400, 40);
 		contentPane.add(passwordFieldPass);
 		passwordFieldPass.setText("CONTRASEÑA");
-		
+
 		lblLogin = new JLabel("ACCESO");
 		lblLogin.setFocusable(false);
 		lblLogin.setForeground(new Color(184, 134, 11));
@@ -148,69 +149,83 @@ public class LogIn extends JFrame {
 		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogin.setBounds(433, 95, 399, 70);
 		contentPane.add(lblLogin);
-		
-		btnEntrar = new JButton("ENTRAR");
+
+		btnEntrar = new JLabel("");
+		btnEntrar.setIcon(new ImageIcon(".\\recursos\\enterBW.png"));
+		btnEntrar.addMouseListener(new BtnEntrarMouseListener());
+		btnEntrar.setToolTipText("LogIn");
+		btnEntrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnEntrar.setHorizontalAlignment(SwingConstants.CENTER);
 		btnEntrar.setFocusable(false);
-		btnEntrar.addActionListener(new BtnEntrarActionListener());
 		btnEntrar.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnEntrar.setBounds(200, 511, 368, 50);
+		btnEntrar.setBounds(380, 511, 128, 128);
 		contentPane.add(btnEntrar);
-		
-		
-		btnSignup = new JButton("REGISTRO");
+
+		btnSignup = new JLabel("");
+		btnSignup.setIcon(new ImageIcon(".\\recursos\\registerBW.png"));
+		btnSignup.setToolTipText("Registrar usuario");
+		btnSignup.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnSignup.setFocusable(false);
-		btnSignup.addActionListener(new BtnSignupActionListener());
-		btnSignup.addMouseListener(new BtnSignupMouseListener());
 		btnSignup.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnSignup.setBounds(692, 511, 368, 50);
+		btnSignup.setBounds(762, 511, 128, 128);
+		btnSignup.addMouseListener(new BtnSignupMouseListener());
 		contentPane.add(btnSignup);
-		
+
 		lblFondo = new JLabel("");
 		lblFondo.setIcon(new ImageIcon(".\\recursos\\fondo.jpg"));
 		lblFondo.setBounds(0, 30, 1280, 720);
 		contentPane.add(lblFondo);
 		lblFondo.setFocusable(true);
 		lblFondo.requestFocus();
-		//vUsuarios = IoDatos.leerDatos();
-		
+		// vUsuarios = IoDatos.leerDatos();
+
 	}
+
 	private class LblCerrarMouseListener extends MouseAdapter {
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			lblCerrar.setIcon(new ImageIcon(".\\recursos\\closeSelected.png"));
 		}
+
 		@Override
 		public void mouseExited(MouseEvent e) {
 			lblCerrar.setIcon(new ImageIcon(".\\recursos\\close.png"));
 		}
+
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			System.exit(0);
 		}
 	}
+
 	private class LblMinimizarMouseListener extends MouseAdapter {
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			lblMinimizar.setIcon(new ImageIcon(".\\recursos\\minimizeSelected.png"));
 		}
+
 		@Override
 		public void mouseExited(MouseEvent e) {
 			lblMinimizar.setIcon(new ImageIcon(".\\recursos\\minimize.png"));
 		}
+
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			setState(JFrame.ICONIFIED);
 		}
 	}
+
 	private class LblMaximizarMouseListener extends MouseAdapter {
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			lblMaximizar.setIcon(new ImageIcon(".\\recursos\\maximizeSelected.png"));
 		}
+
 		@Override
 		public void mouseExited(MouseEvent e) {
 			lblMaximizar.setIcon(new ImageIcon(".\\recursos\\maximize.png"));
 		}
+
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			if (!maximizado) {
@@ -223,12 +238,14 @@ public class LogIn extends JFrame {
 
 		}
 	}
+
 	private class TextFieldUserFocusListener extends FocusAdapter {
 		@Override
 		public void focusGained(FocusEvent arg0) {
 			textFieldUser.setText("");
 			lblFondo.setFocusable(false);
 		}
+
 		@Override
 		public void focusLost(FocusEvent arg0) {
 			if (textFieldUser.getText().equals("")) {
@@ -236,44 +253,55 @@ public class LogIn extends JFrame {
 			}
 		}
 	}
+
 	private class BtnSignupMouseListener extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			
-		}
-	}
-	private class BtnSignupActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
 			Registro reg = new Registro();
 			reg.setVisible(true);
 			dispose();
 		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			btnSignup.setIcon(new ImageIcon(".\\recursos\\register.png"));
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			btnSignup.setIcon(new ImageIcon(".\\recursos\\registerBW.png"));
+		}
 	}
+
 	private class PasswordFieldFocusListener extends FocusAdapter {
 		@Override
 		public void focusGained(FocusEvent arg0) {
 			passwordFieldPass.setText("");
 		}
+
 		@Override
 		public void focusLost(FocusEvent arg0) {
-			
+
 			if (String.copyValueOf(passwordFieldPass.getPassword()).equals("")) {
 				passwordFieldPass.setText("contraseña");
 			}
-			
-			if ((passwordFieldPass.getPassword().toString().equals("")) && (passwordFieldPass.getPassword().toString().equals("contraseña"))) {
+
+			if ((passwordFieldPass.getPassword().toString().equals(""))
+					&& (passwordFieldPass.getPassword().toString().equals("contraseña"))) {
 				passwordFieldPass.setText(passwordFieldPass.getPassword().toString());
 			}
-			
+
 		}
 	}
-	private class BtnEntrarActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			if((textFieldUser.getText().equals("")||passwordFieldPass.getPassword().equals(""))||(textFieldUser.getText().equals("USUARIO")||passwordFieldPass.getPassword().equals("CONTRASEÑA"))) { 
-				JOptionPane.showMessageDialog(null,"Valores no introducidos" );
+	
+	private class BtnEntrarMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			if ((textFieldUser.getText().equals("") || passwordFieldPass.getPassword().equals(""))
+					|| (textFieldUser.getText().equals("USUARIO")
+							|| passwordFieldPass.getPassword().equals("CONTRASEÑA"))) {
+				JOptionPane.showMessageDialog(null, "Valores no introducidos");
 			}
 			ArrayList<Usuario> vUsuarios = IoDatos.leerDatos();
-			
+
 			if (IoDatos.comprobarUser(textFieldUser.getText(), String.valueOf(passwordFieldPass.getPassword()))) {
 				for (Usuario user : vUsuarios) {
 					if (user.getNombreUsuario().equals(textFieldUser.getText())) {
@@ -293,13 +321,18 @@ public class LogIn extends JFrame {
 						}
 					}
 				}
-			}else {
-				JOptionPane.showMessageDialog(null, "Los datos del usuario introducidos no coinciden o este no está registrado");
-				
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"Los datos del usuario introducidos no coinciden o este no está registrado");
 			}
-			
-			
+		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			btnEntrar.setIcon(new ImageIcon(".\\recursos\\enter.png"));
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			btnEntrar.setIcon(new ImageIcon(".\\recursos\\enterBW.png"));
 		}
 	}
-
 }
