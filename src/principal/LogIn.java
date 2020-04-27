@@ -151,7 +151,7 @@ public class LogIn extends JFrame {
 		contentPane.add(lblLogin);
 
 		btnEntrar = new JLabel("");
-		btnEntrar.setIcon(new ImageIcon("C:\\Users\\34658\\gitKraken\\HotelStefan\\HotelStefan\\recursos\\enterBW.png"));
+		btnEntrar.setIcon(new ImageIcon(".\\recursos\\enterBW.png"));
 		btnEntrar.addMouseListener(new BtnEntrarMouseListener());
 		btnEntrar.setToolTipText("LogIn");
 		btnEntrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -162,7 +162,7 @@ public class LogIn extends JFrame {
 		contentPane.add(btnEntrar);
 
 		btnSignup = new JLabel("");
-		btnSignup.setIcon(new ImageIcon("C:\\Users\\34658\\gitKraken\\HotelStefan\\HotelStefan\\recursos\\registerBW.png"));
+		btnSignup.setIcon(new ImageIcon(".\\recursos\\registerBW.png"));
 		btnSignup.setToolTipText("Registrar usuario");
 		btnSignup.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnSignup.setFocusable(false);
