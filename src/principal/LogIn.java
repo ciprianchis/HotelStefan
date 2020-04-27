@@ -151,16 +151,18 @@ public class LogIn extends JFrame {
 		contentPane.add(lblLogin);
 
 		btnEntrar = new JLabel("");
+		btnEntrar.setIcon(new ImageIcon("C:\\Users\\34658\\gitKraken\\HotelStefan\\HotelStefan\\recursos\\enterBW.png"));
 		btnEntrar.addMouseListener(new BtnEntrarMouseListener());
 		btnEntrar.setToolTipText("LogIn");
 		btnEntrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEntrar.setHorizontalAlignment(SwingConstants.CENTER);
 		btnEntrar.setFocusable(false);
 		btnEntrar.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnEntrar.setBounds(371, 511, 128, 128);
+		btnEntrar.setBounds(380, 511, 128, 128);
 		contentPane.add(btnEntrar);
 
 		btnSignup = new JLabel("");
+		btnSignup.setIcon(new ImageIcon("C:\\Users\\34658\\gitKraken\\HotelStefan\\HotelStefan\\recursos\\registerBW.png"));
 		btnSignup.setToolTipText("Registrar usuario");
 		btnSignup.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnSignup.setFocusable(false);
@@ -259,6 +261,14 @@ public class LogIn extends JFrame {
 			reg.setVisible(true);
 			dispose();
 		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			btnSignup.setIcon(new ImageIcon(".\\recursos\\register.png"));
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			btnSignup.setIcon(new ImageIcon(".\\recursos\\registerBW.png"));
+		}
 	}
 
 	private class PasswordFieldFocusListener extends FocusAdapter {
@@ -315,6 +325,14 @@ public class LogIn extends JFrame {
 				JOptionPane.showMessageDialog(null,
 						"Los datos del usuario introducidos no coinciden o este no está registrado");
 			}
+		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			btnEntrar.setIcon(new ImageIcon(".\\recursos\\enter.png"));
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			btnEntrar.setIcon(new ImageIcon(".\\recursos\\enterBW.png"));
 		}
 	}
 }
