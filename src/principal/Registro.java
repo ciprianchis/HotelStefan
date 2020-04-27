@@ -48,8 +48,8 @@ public class Registro extends JFrame {
 	private JLabel lblMaximizar;
 	private JTextField textFieldUser;
 	private JLabel lblRegistro;
-	private JButton btnAñadirUser;
-	private JButton btnSignIn;
+	private JLabel btnAñadirUser;
+	private JLabel btnSignIn;
 	private JTextField txtContraseaVisible;
 	private JCheckBox chckbxAdmin;
 	private ArrayList<Usuario> vUsuarios;
@@ -147,19 +147,20 @@ public class Registro extends JFrame {
 		lblRegistro.setBounds(457, 62, 368, 70);
 		contentPane.add(lblRegistro);
 		
-		btnAñadirUser = new JButton("A\u00D1ADIR");
+		btnAñadirUser = new JLabel("");
+		btnAñadirUser.setHorizontalAlignment(SwingConstants.CENTER);
 		btnAñadirUser.setFocusable(false);
-		btnAñadirUser.addActionListener(new BtnAñadirUserActionListener());
 		btnAñadirUser.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnAñadirUser.setBounds(250, 550, 368, 50);
+		btnAñadirUser.setBounds(250, 550, 128, 128);
 		contentPane.add(btnAñadirUser);
 		
-		btnSignIn = new JButton("VOLVER");
+		btnSignIn = new JLabel("");
+		btnSignIn.setHorizontalAlignment(SwingConstants.CENTER);
 		btnSignIn.setFocusable(false);
-		btnSignIn.addActionListener(new BtnSignInActionListener());
-		btnSignIn.addMouseListener(new BtnSignInMouseListener());
 		btnSignIn.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnSignIn.setBounds(660, 550, 368, 50);
+		btnSignIn.setBounds(660, 550, 128, 128);
+		btnSignIn.addMouseListener(new BtnSignInMouseListener());
+		
 		contentPane.add(btnSignIn);
 		
 		txtContraseaVisible = new JTextField();
@@ -270,16 +271,12 @@ public class Registro extends JFrame {
 	private class BtnSignInMouseListener extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-		
-		}
-	}
-	private class BtnSignInActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
 			LogIn log = new LogIn();
 			log.setVisible(true);
 			dispose();
 		}
 	}
+	
 	private class TxtContraseaFocusListener extends FocusAdapter {
 		@Override
 		public void focusGained(FocusEvent e) {

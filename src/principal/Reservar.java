@@ -542,7 +542,7 @@ public class Reservar extends JFrame {
 	
 	private int reservarHabitacion() {
 		operaciones.reservarHabitacion(pos);
-		return operaciones.sacarNumeroHabitaciÃ³n(pos);
+		return operaciones.sacarNumeroHabitación(pos);
 	}
 	private class BtnPagarMouseListener extends MouseAdapter {
 		@Override
