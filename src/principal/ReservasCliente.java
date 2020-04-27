@@ -183,7 +183,7 @@ public class ReservasCliente extends JFrame {
 			btnSalir.setIcon(new ImageIcon(".\\recursos\\goBackBW.png"));
 		}
 	}
-	
+	/** Todas las variables y los apartados para la ejecución de la app (VIVA NETBEANS) */
 	private void initApp() {
 		setResizable(false);
 		setUndecorated(true);

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Reserva implements Serializable {
 	/**
-	 * 
+	 * Clase de reserva, para guardar todos los datos de las reservas realizadas por los clientes
 	 */
 	private static final long serialVersionUID = -2002972975913738373L;
 	private String usuario;

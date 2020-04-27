@@ -16,6 +16,7 @@ public class OperacionReserva {
 	ArrayList<Reserva> listaReservas;
 	
 	@SuppressWarnings("unchecked")
+	/** Carga todas las reservas de un archivo en local */
 	public void cargarReservas(String usuario) {
         File fichero = new File(".\\recursos\\reservas" + usuario + ".dat");
             try {
@@ -43,10 +44,12 @@ public class OperacionReserva {
         	System.out.println(it.next());
         }
     };
-    
+    /** Método para añadir reserva realiza en el array (no guarda en local) */
     public void anadirReserva(Reserva reserva) {
     	listaReservas.add(reserva);
     }
+    
+    /** Carga el toString del array de reservas entero del cliente */
     
     public String cargarArray() {
     	String contenido = "";
@@ -57,7 +60,7 @@ public class OperacionReserva {
         }
         return contenido;
     }
-    
+    /** Método para guardar las reservas realizadas en un archivo con el nombre de usuario */
     public void guardarReservas(String usuario) {
         File fichero = new File(".\\recursos\\reservas" + usuario + ".dat");
             try {
