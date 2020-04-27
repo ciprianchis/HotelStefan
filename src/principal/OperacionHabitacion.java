@@ -79,6 +79,7 @@ public class OperacionHabitacion{
         
     } */
     
+    /** Método para cargas todas las habitaciones con su estado de local */
     public void cargarHabitaciones() {
         File fichero = new File(".\\recursos\\habitaciones.dat");
             try {
@@ -95,25 +96,21 @@ public class OperacionHabitacion{
             Logger.getLogger(OperacionHabitacion.class.getName()).log(Level.SEVERE, null, ex);
         }
     };
-    
+    /** Comprobar si una habitación está disponible */
     public boolean comprobarHabitacion(int pos) {
     	return vHabitaciones[pos].getDisponible();
     }
     
-    public boolean comprobarHabitacionTest(int pos) {
-    	if (vHabitaciones[pos]==null) {
-    		return true;
-		}
-    	return false;
-    	
-    }
-    
+   /** Cambiar el estado de una habitación a reservada */
     public void reservarHabitacion(int pos) {
     	vHabitaciones[pos].reservarHabitacion();
     }
+    
+    /** Nos da el número de habitación dando la posición */
     public int sacarNumeroHabitación(int pos) {
     	return vHabitaciones[pos].getNumHabitacion();
     }
+    /** Guarda todas las habitaciones en local */
     public void guardarHabitaciones() {
         File fichero = new File(".\\recursos\\habitaciones.dat");
             try {
@@ -128,6 +125,7 @@ public class OperacionHabitacion{
                 Logger.getLogger(OperacionHabitacion.class.getName()).log(Level.SEVERE, null, ex);
         }
     };
+    /** Imprime todos los datos por consola de las habitaciones */
     public void imprimirHabitaciones() {
         for (int i=0;i<vHabitaciones.length;i++) {
             System.out.println(vHabitaciones[i]);

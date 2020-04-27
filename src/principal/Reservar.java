@@ -117,6 +117,8 @@ public class Reservar extends JFrame {
 		usuarioReservas= usuario;
 		initApp();  
 	}
+	
+	/** Método para añadir y quitar texto de los apartados de entrada de texto */
 	private void cambiarTextoNombreDefault() {
 		textNombre.setFont(new Font("Monospaced", Font.PLAIN, 14));
 		textNombre.setForeground(Color.gray);
@@ -143,6 +145,8 @@ public class Reservar extends JFrame {
 			btnPagar.setEnabled(false);
 		}
 	}
+	
+	/** Método para comprobar si existen habitaciones del tipo elegido */
 	
 	private void comprobarDisponibilidad() {
 
@@ -224,7 +228,7 @@ public class Reservar extends JFrame {
 			lblComprobacionHabitacion.setIcon(imagenx);
 		}
 	}
-	
+	/** Método para comprobar el importe de las habitaciones */
 	private void comprobarImporte() {
 		if (!textFieldNumeroNoches.getText().equals("")) {
 			String seleccionHabitacion = "";
@@ -295,6 +299,7 @@ public class Reservar extends JFrame {
 			
 		}
 	}
+	/** Método para imprimir los números de las noches */
 	private void comprobarNumNoches() {
 		textFieldNumeroNoches.setText("");
 		int diaSalida=0, mesSalida=0, anoSalida=0, diaEntrada=0, mesEntrada=0, anoEntrada=0;
@@ -376,6 +381,7 @@ public class Reservar extends JFrame {
 		}
 		
 	}
+	/** Método para comprobar si el mes y el dia son válidos */
 	private boolean comprobarMes(int ano, int mes, int dia) {
 		if (dia>0 && dia<32 && mes>0 && mes<13) {
 			switch (mes) {
@@ -406,35 +412,7 @@ public class Reservar extends JFrame {
 		
 	}
 	
-	public boolean comprobarMesTest(int ano, int mes, int dia) {
-		if (dia>0 && dia<32 && mes>0 && mes<13) {
-			switch (mes) {
-				case 1:
-				case 3:
-				case 5:
-				case 7:
-				case 8:
-				case 10:
-				case 12:
-					return true;
-				case 4:
-				case 6:
-				case 9:
-				case 11:
-					if (dia<31) {
-						return true;
-					}
-					break;
-				case 2:
-					if (dia<29 || ((((ano % 4 == 0) && !(ano % 100 == 0)) || (ano % 400 == 0)) && dia<30)) {
-						return true;
-					}
-					break;
-			}
-		}
-		return false;
-		
-	}
+	
 	
 	private class LblCerrarMouseListener extends MouseAdapter {
 		@Override
@@ -516,6 +494,7 @@ public class Reservar extends JFrame {
 			}
 		}
 	}
+	/** utilizado para obtener el String de habitación */
 	private String sacarHabitacion() {
 		String seleccionHabitacion = "";
 		if (rdbtnDui.isSelected()) {
@@ -533,6 +512,7 @@ public class Reservar extends JFrame {
 		
 		return seleccionHabitacion;
 	}
+	/** utilizado para obtener el String de régimen */
 	private String sacarRegimen() {
 		String seleccionRegimen = "";
 		if (rdbtnHa.isSelected()) {
@@ -549,7 +529,7 @@ public class Reservar extends JFrame {
 		}
 		return seleccionRegimen;
 	}
-	
+	/** utilizado para obtener el String de sexo */
 	private String sacarSexo() {
 		String seleccionSexo = "";
 		if (rdbtnHombre.isSelected()) {
@@ -562,7 +542,7 @@ public class Reservar extends JFrame {
 	
 	private int reservarHabitacion() {
 		operaciones.reservarHabitacion(pos);
-		return operaciones.sacarNumeroHabitaci�n(pos);
+		return operaciones.sacarNumeroHabitación(pos);
 	}
 	private class BtnPagarMouseListener extends MouseAdapter {
 		@Override
@@ -705,6 +685,7 @@ public class Reservar extends JFrame {
 			comprobarBotonEnviar();
 		}
 	}
+	/** La inicialización de todas las variables y todos los apartados del jframe */
         private void initApp() {
         	operaciones.cargarHabitaciones();
     		setResizable(false);

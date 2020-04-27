@@ -134,6 +134,7 @@ public class Pago extends JFrame {
 	}
 	private class BtnNewButtonMouseListener extends MouseAdapter {
 		@Override
+		/** Comprobaciones generales de longitud de código de tarjeta, cvc y su validad */
 		public void mouseClicked(MouseEvent e) {
 			Pattern pattern = Pattern.compile("[0-9]{4}\\s[0-9]{4}\\s[0-9]{4}\\s[0-9]{4}");
 			Matcher matcher = pattern.matcher(textFieldNum.getText());
@@ -164,6 +165,7 @@ public class Pago extends JFrame {
 	}
 	private class TextFieldNumKeyListener extends KeyAdapter {
 		@Override
+		/** Este método permite la comprobación de sí el carácter ingresado es un número, excede el rango de la tarjeta, o es una letra o caracter especial */
 		public void keyReleased(KeyEvent e) {
 			int teclaPulsada = e.getKeyCode();
 			int longt = 0;
@@ -216,6 +218,7 @@ public class Pago extends JFrame {
 	}
 	private class TextFieldCVVKeyListener extends KeyAdapter {
 		@Override
+		/** Este método permite la comprobación de sí el carácter ingresado es un número, excede el rango de la tarjeta, o es una letra o caracter especial */
 		public void keyReleased(KeyEvent e) {
 			int teclaPulsada = e.getKeyCode();
 			int longt = 0;
@@ -243,7 +246,7 @@ public class Pago extends JFrame {
 			textFieldCVV.setText(txtmodif);
 		}
 	}
-	
+	/** Realización de la comprobación del código CVC */
 	public boolean testComprobacionNumeroTarjetaYcvc(String numeroTarjeta, String cvc) {
 		Pattern pattern = Pattern.compile("[0-9]{4}\\s[0-9]{4}\\s[0-9]{4}\\s[0-9]{4}");
 		Matcher matcher = pattern.matcher(numeroTarjeta);
@@ -259,6 +262,8 @@ public class Pago extends JFrame {
 			return false;
 		}
 	}
+	
+	/** Inicialización de todos los apartados del programa */
         private void initApp() {
             operaciones.cargarHabitaciones();
             setResizable(false);
