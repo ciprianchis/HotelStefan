@@ -277,7 +277,6 @@ public class Registro extends JFrame {
 		}
 	}
 	
-	
 	private class TxtContraseaFocusListener extends FocusAdapter {
 		@Override
 		public void focusGained(FocusEvent e) {
