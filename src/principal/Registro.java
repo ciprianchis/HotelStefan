@@ -48,15 +48,15 @@ public class Registro extends JFrame {
 	private JLabel lblMaximizar;
 	private JTextField textFieldUser;
 	private JLabel lblRegistro;
-	private JLabel btnAñadirUser;
+	private JLabel btnAÅ„adirUser;
 	private JLabel btnSignIn;
-	private JTextField txtContraseaVisible;
 	private JCheckBox chckbxAdmin;
 	private ArrayList<Usuario> vUsuarios;
 	private boolean maximizado = false;
-	private JButton btnVerContraseña;
+	private JButton btnVerContraseÅ„a;
 	private boolean mostrar = false;
-	private JPasswordField passwordFieldOculto;
+	private JPasswordField pwdContrasena;
+	private boolean escondida = false;
 
 	/**
 	 * Launch the application.
@@ -132,7 +132,7 @@ public class Registro extends JFrame {
 
 		textFieldUser = new JTextField();
 		textFieldUser.addFocusListener(new TextFieldUserFocusListener());
-		textFieldUser.setText("USUARIO");
+		textFieldUser.setText("Usuario");
 		textFieldUser.setHorizontalAlignment(SwingConstants.CENTER);
 		textFieldUser.setFont(new Font("Monospaced", Font.PLAIN, 20));
 		textFieldUser.setBounds(457, 200, 368, 40);
@@ -147,16 +147,16 @@ public class Registro extends JFrame {
 		lblRegistro.setBounds(457, 62, 368, 70);
 		contentPane.add(lblRegistro);
 
-		btnAñadirUser = new JLabel("");
-		btnAñadirUser.setToolTipText("A\u00F1adir usuario");
-		btnAñadirUser.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnAñadirUser.setIcon(new ImageIcon(".\\recursos\\addUserBW.png"));
-		btnAñadirUser.addMouseListener(new BtnAñadirUserMouseListener());
-		btnAñadirUser.setHorizontalAlignment(SwingConstants.CENTER);
-		btnAñadirUser.setFocusable(false);
-		btnAñadirUser.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnAñadirUser.setBounds(406, 550, 128, 128);
-		contentPane.add(btnAñadirUser);
+		btnAÅ„adirUser = new JLabel("");
+		btnAÅ„adirUser.setToolTipText("A\u00F1adir usuario");
+		btnAÅ„adirUser.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnAÅ„adirUser.setIcon(new ImageIcon(".\\recursos\\addUserBW.png"));
+		btnAÅ„adirUser.addMouseListener(new BtnAÅ„adirUserMouseListener());
+		btnAÅ„adirUser.setHorizontalAlignment(SwingConstants.CENTER);
+		btnAÅ„adirUser.setFocusable(false);
+		btnAÅ„adirUser.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnAÅ„adirUser.setBounds(406, 550, 128, 128);
+		contentPane.add(btnAÅ„adirUser);
 
 		btnSignIn = new JLabel("");
 		btnSignIn.setToolTipText("Volver a Login");
@@ -171,15 +171,6 @@ public class Registro extends JFrame {
 
 		contentPane.add(btnSignIn);
 
-		txtContraseaVisible = new JTextField();
-		txtContraseaVisible.addFocusListener(new TxtContraseaFocusListener());
-		txtContraseaVisible.setFont(new Font("Monospaced", Font.PLAIN, 20));
-		txtContraseaVisible.setText("Contraseña");
-		txtContraseaVisible.setHorizontalAlignment(SwingConstants.CENTER);
-		txtContraseaVisible.setBounds(457, 275, 368, 40);
-		contentPane.add(txtContraseaVisible);
-		txtContraseaVisible.setColumns(10);
-
 		chckbxAdmin = new JCheckBox(" ADMINISTRADOR");
 		chckbxAdmin.setForeground(SystemColor.window);
 		chckbxAdmin.setHorizontalAlignment(SwingConstants.CENTER);
@@ -188,15 +179,19 @@ public class Registro extends JFrame {
 		chckbxAdmin.setBounds(457, 400, 368, 40);
 		contentPane.add(chckbxAdmin);
 
-		btnVerContraseña = new JButton("--");
-		btnVerContraseña.addActionListener(new BtnVerContraseñaActionListener());
-		btnVerContraseña.setBounds(835, 287, 89, 23);
-		contentPane.add(btnVerContraseña);
+		btnVerContraseÅ„a = new JButton("--");
+		btnVerContraseÅ„a.addMouseListener(new BtnVerContraseÅ„aMouseListener());
+		btnVerContraseÅ„a.setBounds(835, 287, 89, 23);
+		contentPane.add(btnVerContraseÅ„a);
 
-		passwordFieldOculto = new JPasswordField();
-		passwordFieldOculto.setHorizontalAlignment(SwingConstants.CENTER);
-		passwordFieldOculto.setBounds(457, 275, 368, 40);
-		contentPane.add(passwordFieldOculto);
+		pwdContrasena = new JPasswordField();
+		pwdContrasena.setFont(new Font("Monospaced", Font.PLAIN, 20));
+		pwdContrasena.addFocusListener(new PwdContrasenaFocusListener());
+		pwdContrasena.setEchoChar((char)0);
+		pwdContrasena.setText("ContraseÃ±a");
+		pwdContrasena.setHorizontalAlignment(SwingConstants.CENTER);
+		pwdContrasena.setBounds(457, 275, 368, 40);
+		contentPane.add(pwdContrasena);
 
 		lblFondo = new JLabel("");
 		lblFondo.setIcon(new ImageIcon(".\\recursos\\fondo.jpg"));
@@ -205,9 +200,7 @@ public class Registro extends JFrame {
 		lblFondo.setFocusable(true);
 		lblFondo.requestFocus();
 		vUsuarios = IoDatos.leerDatos();
-
-		txtContraseaVisible.setVisible(false);
-		passwordFieldOculto.setVisible(true);
+		pwdContrasena.setVisible(true);
 
 	}
 
@@ -272,7 +265,7 @@ public class Registro extends JFrame {
 	private class TextFieldUserFocusListener extends FocusAdapter {
 		@Override
 		public void focusGained(FocusEvent arg0) {
-			if (textFieldUser.getText().equals("USUARIO")) {
+			if (textFieldUser.getText().equals("Usuario")) {
 				textFieldUser.setText("");
 			}
 
@@ -282,7 +275,7 @@ public class Registro extends JFrame {
 		@Override
 		public void focusLost(FocusEvent arg0) {
 			if (textFieldUser.getText().equals("")) {
-				textFieldUser.setText("USUARIO");
+				textFieldUser.setText("Usuario");
 			}
 		}
 	}
@@ -306,64 +299,30 @@ public class Registro extends JFrame {
 		}
 	}
 
-	private class TxtContraseaFocusListener extends FocusAdapter {
-		@Override
-		public void focusGained(FocusEvent e) {
-			txtContraseaVisible.setText("");
-		}
+	
 
-		@Override
-		public void focusLost(FocusEvent arg0) {
-			txtContraseaVisible.setText(txtContraseaVisible.getText());
-
-			Pattern pPasswd = Pattern.compile("^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{8,16}$");
-			Matcher mPasswd = pPasswd.matcher(txtContraseaVisible.getText());
-
-			if (txtContraseaVisible.getText().equals("")) {
-				txtContraseaVisible.setText("CONTRASEÑA");
-			}
-
-			if (!mPasswd.matches()) {
-				JOptionPane.showMessageDialog(null, "La contraseña debe contener un mínimo de 8 carácteres y máximo 16."
-						+ "\n" + "Mayúsculas, minúsculas y números, uno de cada tipo por lo menos.");
-			}
-
-		}
-	}
-
-	private class BtnVerContraseñaActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-			if (mostrar) {
-				txtContraseaVisible.setVisible(true);
-				passwordFieldOculto.setVisible(false);
-				txtContraseaVisible.setText(String.valueOf(passwordFieldOculto.getPassword()));
-				mostrar = false;
-			} else {
-				txtContraseaVisible.setVisible(false);
-				passwordFieldOculto.setVisible(true);
-				passwordFieldOculto.setText(txtContraseaVisible.getText());
-				mostrar = true;
-			}
-		}
-	}
-
-	private class BtnAñadirUserMouseListener extends MouseAdapter {
+	private class BtnAÅ„adirUserMouseListener extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			// ERROR CONTRASEÑA
+			char[] contrChar = pwdContrasena.getPassword();
+			String contr = "";
+			for (int i=0;i<contrChar.length;i++) {
+				contr += contrChar[i];
+			}
+			// ERROR CONTRASEÅƒA
 			Pattern pPasswd = Pattern.compile("^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{8,16}$");
-			Matcher mPasswd = pPasswd.matcher(txtContraseaVisible.getText());
+			Matcher mPasswd = pPasswd.matcher(contr);
 
 			if (!mPasswd.matches()) {
-				JOptionPane.showMessageDialog(null, "La contraseña no cumple los requisitos");
+				JOptionPane.showMessageDialog(null, "La contraseÅ„a no cumple los requisitos");
 				return;
 			}
-			// FIN CORRECCIÓN ERROR CONTRASEÑA
+			// FIN CORRECCIÃ“N ERROR CONTRASEÅƒA
 			for (Usuario usuario : vUsuarios) {
 				if (usuario.getNombreUsuario().equals(textFieldUser.getText())) {
 					JOptionPane.showMessageDialog(null, "El usuario indicado ya fue introducido anteriormente");
-					textFieldUser.setText("USUARIO");
-					txtContraseaVisible.setText("CONTRASEÑA");
+					textFieldUser.setText("Usuario");
+					pwdContrasena.setText("");
 					chckbxAdmin.setSelected(false);
 					return;
 				}
@@ -371,21 +330,75 @@ public class Registro extends JFrame {
 
 			JOptionPane.showMessageDialog(null, "El nuevo usuario fue introducido");
 
-			Usuario usu = new Usuario(textFieldUser.getText(), txtContraseaVisible.getText(), chckbxAdmin.isSelected());
+			Usuario usu = new Usuario(textFieldUser.getText(), contr, chckbxAdmin.isSelected());
 			vUsuarios.add(usu);
 
 			IoDatos.guardarUsusarios(vUsuarios);
-			textFieldUser.setText("USUARIO");
-			txtContraseaVisible.setText("CONTRASEÑA");
+			textFieldUser.setText("Usuario");
+			pwdContrasena.setText("");
 			chckbxAdmin.setSelected(false);
 		}
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			btnAñadirUser.setIcon(new ImageIcon(".\\recursos\\addUser.png"));
+			btnAÅ„adirUser.setIcon(new ImageIcon(".\\recursos\\addUser.png"));
 		}
 		@Override
 		public void mouseExited(MouseEvent e) {
-			btnAñadirUser.setIcon(new ImageIcon(".\\recursos\\addUserBW.png"));
+			btnAÅ„adirUser.setIcon(new ImageIcon(".\\recursos\\addUserBW.png"));
+		}
+	}
+	private void esconderContrasena() {
+		char[] contrChar = pwdContrasena.getPassword();
+		String contr = "";
+		for (int i=0;i<contrChar.length;i++) {
+			contr += contrChar[i];
+		}
+		if (!contr.equals("ContraseÃ±a")) {
+			pwdContrasena.setEchoChar('*');
+		}
+	}
+	private void ensenarContrasena() {
+		pwdContrasena.setEchoChar((char)0);
+	}
+	private class PwdContrasenaFocusListener extends FocusAdapter {
+		@Override
+		public void focusGained(FocusEvent e) {
+			char[] contrChar = pwdContrasena.getPassword();
+			String contr = "";
+			for (int i=0;i<contrChar.length;i++) {
+				contr += contrChar[i];
+			}
+			if (contr.equals("ContraseÃ±a")) {
+				pwdContrasena.setText("");
+				if (!escondida) {
+					esconderContrasena();
+					escondida = true;
+				}
+			}
+			
+		}
+		@Override
+		public void focusLost(FocusEvent e) {
+			char[] contrChar = pwdContrasena.getPassword();
+			String contr = "";
+			for (int i=0;i<contrChar.length;i++) {
+				contr += contrChar[i];
+			}
+			if (contr.equals("")) {
+				pwdContrasena.setText("ContraseÃ±a");
+			}
+		}
+	}
+	private class BtnVerContraseÅ„aMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			if (escondida) {
+				ensenarContrasena();
+				escondida = false;
+			} else {
+				esconderContrasena();
+				escondida = true;
+			}
 		}
 	}
 }
