@@ -82,7 +82,7 @@ public class OperacionHabitacion {
 	}
 
 	/** Nos da el número de habitación dando la posición */
-	public int sacarNumeroHabitación(int pos) {
+	public int sacarNumeroHabitacion(int pos) {
 		return vHabitaciones[pos].getNumHabitacion();
 	}
 
