@@ -23,6 +23,7 @@ import javax.swing.border.SoftBevelBorder;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
+import java.awt.TextField;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -34,6 +35,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class Hotel extends JFrame {
 
@@ -90,17 +93,18 @@ public class Hotel extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		btnAsignar = new JButton("ASIGNAR HABITACI\u00D3N");
+		btnAsignar = new JButton("Asignar habitacion");
+		btnAsignar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnAsignar.setFocusable(false);
 		btnAsignar.addMouseListener(new BtnAsignarMouseListener());
 
 		btnSalir = new JButton("Salir");
 		btnSalir.setFocusable(false);
 		btnSalir.addMouseListener(new BtnSalirMouseListener());
-		btnSalir.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		btnSalir.setBounds(1020, 671, 250, 50);
+		btnSalir.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnSalir.setBounds(722, 690, 225, 23);
 		contentPane.add(btnSalir);
-		btnAsignar.setBounds(597, 690, 152, 23);
+		btnAsignar.setBounds(407, 690, 257, 23);
 		contentPane.add(btnAsignar);
 
 		lblFinal = new JLabel("Fecha de salida:");
@@ -108,7 +112,7 @@ public class Hotel extends JFrame {
 		lblFinal.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		lblFinal.setFocusable(false);
 		lblFinal.setForeground(Color.WHITE);
-		lblFinal.setBounds(744, 217, 160, 18);
+		lblFinal.setBounds(744, 228, 160, 18);
 		contentPane.add(lblFinal);
 
 		list = new JList();
@@ -121,14 +125,14 @@ public class Hotel extends JFrame {
 		lblInicio.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		lblInicio.setFocusable(false);
 		lblInicio.setForeground(Color.WHITE);
-		lblInicio.setBounds(744, 165, 170, 18);
+		lblInicio.setBounds(744, 149, 170, 18);
 		contentPane.add(lblInicio);
 
 		lblReserva = new JLabel("Reserva:");
 		lblReserva.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		lblReserva.setFocusable(false);
 		lblReserva.setForeground(Color.WHITE);
-		lblReserva.setBounds(326, 163, 81, 22);
+		lblReserva.setBounds(326, 120, 81, 22);
 		contentPane.add(lblReserva);
 
 		lblNombre = new JLabel("Nombre: ");
@@ -136,39 +140,53 @@ public class Hotel extends JFrame {
 		lblNombre.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		lblNombre.setFocusable(false);
 		lblNombre.setForeground(Color.WHITE);
-		lblNombre.setBounds(326, 215, 81, 23);
+		lblNombre.setBounds(326, 183, 81, 23);
 		contentPane.add(lblNombre);
 
-		btnBorrarBusqueda = new JButton("BORRAR BUSQUEDA");
+		btnBorrarBusqueda = new JButton("Borrar busqueda");
+		btnBorrarBusqueda.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnBorrarBusqueda.setFocusable(false);
 		btnBorrarBusqueda.addMouseListener(new BtnBorrarBusquedaMouseListener());
 		btnBorrarBusqueda.setBounds(696, 356, 205, 23);
 		contentPane.add(btnBorrarBusqueda);
 
 		txtNombre = new JTextField();
+		txtNombre.addFocusListener(new TxtNombreFocusListener());
+		txtNombre.setForeground(Color.GRAY);
+		txtNombre.setText("NOMBRE");
 		txtNombre.setColumns(10);
-		txtNombre.setBounds(430, 216, 86, 20);
+		txtNombre.setBounds(430, 186, 86, 20);
 		contentPane.add(txtNombre);
 
 		txtApellidos = new JTextField();
+		txtApellidos.addFocusListener(new TxtApellidosFocusListener());
+		txtApellidos.setForeground(Color.GRAY);
+		txtApellidos.setText("APELLIDOS");
 		txtApellidos.setColumns(10);
-		txtApellidos.setBounds(430, 279, 86, 20);
+		txtApellidos.setBounds(430, 255, 86, 20);
 		contentPane.add(txtApellidos);
 
 		txtCodigo = new JTextField();
-		txtCodigo.setBounds(430, 164, 86, 20);
+		txtCodigo.addFocusListener(new TxtCodigoFocusListener());
+		txtCodigo.setForeground(Color.GRAY);
+		txtCodigo.setText("CODIGO");
+		txtCodigo.setBounds(430, 123, 86, 20);
 		contentPane.add(txtCodigo);
 		txtCodigo.setColumns(10);
 
-		btnBuscar = new JButton("BUSCAR");
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnBuscar.setFocusable(false);
 		btnBuscar.addMouseListener(new BtnBuscarMouseListener());
 		btnBuscar.setBounds(513, 356, 89, 23);
 		contentPane.add(btnBuscar);
 
 		txtInicio = new JTextField();
+		txtInicio.addFocusListener(new TxtInicioFocusListener());
+		txtInicio.setForeground(Color.GRAY);
+		txtInicio.setText("INICIO");
 		txtInicio.setColumns(10);
-		txtInicio.setBounds(918, 164, 86, 20);
+		txtInicio.setBounds(924, 150, 86, 20);
 		contentPane.add(txtInicio);
 
 		lblApellidos = new JLabel("Apellidos:");
@@ -176,15 +194,18 @@ public class Hotel extends JFrame {
 		lblApellidos.setFont(new Font("Monospaced", Font.PLAIN, 16));
 		lblApellidos.setFocusable(false);
 		lblApellidos.setForeground(Color.WHITE);
-		lblApellidos.setBounds(316, 276, 117, 23);
+		lblApellidos.setBounds(315, 252, 117, 23);
 		contentPane.add(lblApellidos);
 
 		txtFinal = new JTextField();
+		txtFinal.addFocusListener(new TxtFinalFocusListener());
+		txtFinal.setForeground(Color.GRAY);
+		txtFinal.setText("FINAL");
 		txtFinal.setColumns(10);
-		txtFinal.setBounds(918, 216, 86, 20);
+		txtFinal.setBounds(918, 229, 86, 20);
 		contentPane.add(txtFinal);
 
-		lblNewLabel = new JLabel("New label");
+		lblNewLabel = new JLabel("");
 		lblNewLabel.setFocusable(false);
 		lblNewLabel.setIcon(new ImageIcon(".\\recursos\\fondo.jpg"));
 		lblNewLabel.setBounds(0, 30, 1280, 720);
@@ -359,6 +380,96 @@ public class Hotel extends JFrame {
 			LogIn log = new LogIn();
 			log.setVisible(true);
 			dispose();
+		}
+	}
+	private class TxtCodigoFocusListener extends FocusAdapter {
+		@Override
+		public void focusGained(FocusEvent e) {
+			String texto = txtCodigo.getText();
+			if(texto.equals("CODIGO")) {
+				txtCodigo.setText("");
+				txtCodigo.setForeground(Color.black);
+			} 
+		}
+		@Override
+		public void focusLost(FocusEvent e) {
+			String texto = txtCodigo.getText();
+			if(texto.equals("")) {
+				txtCodigo.setForeground(Color.gray);
+				txtCodigo.setText("CODIGO");
+			}
+		}
+	}
+	private class TxtNombreFocusListener extends FocusAdapter {
+		@Override
+		public void focusGained(FocusEvent e) {
+			String texto = txtNombre.getText();
+			if(texto.equals("NOMBRE")) {
+				txtNombre.setText("");
+				txtNombre.setForeground(Color.black);
+			} 
+		}
+		@Override
+		public void focusLost(FocusEvent e) {
+			String texto = txtNombre.getText();
+			if(texto.equals("")) {
+				txtNombre.setForeground(Color.gray);
+				txtNombre.setText("NOMBRE");
+			}
+		}
+	}
+	private class TxtApellidosFocusListener extends FocusAdapter {
+		@Override
+		public void focusGained(FocusEvent e) {
+			String texto = txtApellidos.getText();
+			if(texto.equals("APELLIDOS")) {
+				txtApellidos.setText("");
+				txtApellidos.setForeground(Color.black);
+			} 
+		}
+		@Override
+		public void focusLost(FocusEvent e) {
+			String texto = txtApellidos.getText();
+			if(texto.equals("")) {
+				txtApellidos.setForeground(Color.gray);	
+				txtApellidos.setText("APELLIDOS");
+			}
+		}
+	}
+	private class TxtInicioFocusListener extends FocusAdapter {
+		@Override
+		public void focusGained(FocusEvent e) {
+			String texto = txtInicio.getText();
+			if(texto.equals("INICIO")) {
+				txtInicio.setText("");
+				txtInicio.setForeground(Color.black);
+			} 
+		}
+		@Override
+		public void focusLost(FocusEvent e) {
+			String texto = txtInicio.getText();
+			if(texto.equals("")) {
+				txtInicio.setForeground(Color.gray);	
+				txtInicio.setText("INICIO");
+			}
+		}
+	}
+	private class TxtFinalFocusListener extends FocusAdapter {
+		@Override
+		public void focusGained(FocusEvent e) {
+			String texto = txtFinal.getText();
+			if(texto.equals("FINAL")) {
+				txtFinal.setText("");
+				txtFinal.setForeground(Color.black);
+			} 
+		}
+		@Override
+		public void focusLost(FocusEvent e) {
+			String texto = txtFinal.getText();
+			if(texto.equals("")) {
+				txtFinal.setForeground(Color.gray);	
+				txtFinal.setText("FINAL");
+			}
 		}
 	}
 }
