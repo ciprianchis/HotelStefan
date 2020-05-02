@@ -72,22 +72,23 @@ public class ReservasCliente extends JFrame {
 	public ReservasCliente(String usuario) {
 		initApp();
 		usuarioReservas = usuario;
-		operacion.cargarReservas(usuarioReservas);
+		operacion.cargarReservas();
 		cargarReservas();
 	}
 
 	public ReservasCliente(String usuario, Reserva reserva) {
 		initApp();
 		usuarioReservas = usuario;
-		operacion.cargarReservas(usuarioReservas);
+		operacion.cargarReservas();
 		reservaRealizada = reserva;
 		operacion.anadirReserva(reservaRealizada);
+		operacion.guardarReservas();
 		cargarReservas();
 	}
 
 	public void cargarReservas() {
 		String textoReservas = "";
-		textoReservas = operacion.cargarArray();
+		textoReservas = operacion.cargarArray(usuarioReservas);
 		txtrReservasLista.setText(textoReservas);
 	}
 
@@ -105,7 +106,6 @@ public class ReservasCliente extends JFrame {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			operacion.guardarReservas(usuarioReservas);
 			System.exit(0);
 		}
 	}

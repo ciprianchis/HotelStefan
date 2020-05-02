@@ -40,7 +40,9 @@ public class Habitacion implements Serializable  {
     public boolean getDisponible() {
     	return disponible;
     }
-    
+    public void setHabitacionTrue() {
+    	disponible=true;
+    }
     public void reservarHabitacion() {
     	disponible = false;
     }
