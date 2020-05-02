@@ -34,6 +34,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -208,7 +209,7 @@ public class Hotel extends JFrame {
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setFocusable(false);
 		lblNewLabel.setIcon(new ImageIcon(".\\recursos\\fondo.jpg"));
-		lblNewLabel.setBounds(0, 30, 1280, 720);
+		lblNewLabel.setBounds(10, 30, 1280, 720);
 		contentPane.add(lblNewLabel);
 
 		panel = new JPanel();
@@ -332,6 +333,35 @@ public class Hotel extends JFrame {
 		public void mouseClicked(MouseEvent e) {
 			JOptionPane.showMessageDialog(null, "Habitacion asignada");
 		}
+	}
+	
+	private String[] lista() {
+		
+		ArrayList<String> listText = new ArrayList<String>();
+		
+		try {
+			FileInputStream fis = new FileInputStream("recursos/reservas.dat");
+			InputStreamReader isr = new InputStreamReader(fis, "UTF8");
+			BufferedReader br = new BufferedReader(isr);
+			
+			String linea = br.readLine();
+			
+			while(linea!=null) {
+				listText.add(linea);
+				linea = br.readLine();
+			}
+			
+			br.close();
+		} 
+		
+		catch(IOException ioe) {
+			
+		}
+		
+		String[] array= new String[listText.size()];
+		array = listText.toArray(array);
+		
+		return array;
 	}
 
 	private class BtnBuscarMouseListener extends MouseAdapter {
