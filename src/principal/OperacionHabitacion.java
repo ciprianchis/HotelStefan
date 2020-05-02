@@ -54,6 +54,11 @@ public class OperacionHabitacion {
 	 */
 
 	/** Método para cargas todas las habitaciones con su estado de local */
+	public void resetHabitaciones() {
+		for (int i=0;i<vHabitaciones.length;i++) {
+			vHabitaciones[i].setHabitacionTrue();
+		}
+	}
 	public void cargarHabitaciones() {
 		File fichero = new File(".\\recursos\\habitaciones.dat");
 		try {

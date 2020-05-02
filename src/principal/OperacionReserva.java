@@ -17,8 +17,8 @@ public class OperacionReserva {
 	
 	@SuppressWarnings("unchecked")
 	/** Carga todas las reservas de un archivo en local */
-	public void cargarReservas(String usuario) {
-        File fichero = new File(".\\recursos\\reservas" + usuario + ".dat");
+	public void cargarReservas() {
+        File fichero = new File(".\\recursos\\reservas.dat");
             try {
                 if (!fichero.exists()) {
                     fichero.createNewFile();
@@ -39,10 +39,7 @@ public class OperacionReserva {
             catch (ClassNotFoundException ex) {
             Logger.getLogger(OperacionHabitacion.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Iterator it = listaReservas.iterator();
-        while (it.hasNext()) {
-        	System.out.println(it.next());
-        }
+        
     };
     /** Método para añadir reserva realiza en el array (no guarda en local) */
     public void anadirReserva(Reserva reserva) {
@@ -51,18 +48,34 @@ public class OperacionReserva {
     
     /** Carga el toString del array de reservas entero del cliente */
     
-    public String cargarArray() {
+    public String cargarArray(String usuario) {
     	String contenido = "";
+    	Reserva usu;
     	Iterator it = listaReservas.iterator();
         while (it.hasNext()) {
-        	contenido += it.next() + "\n";
-        	
+        	usu = (Reserva) it.next();
+        	if (usu.getUsuario().equals(usuario))
+        		contenido += usu + "\n";
         }
+        System.out.println(contenido);
         return contenido;
     }
+    
+    public String cargarArrayHotel() {
+    	String contenido ="";
+    	Iterator it = listaReservas.iterator();
+    	while (it.hasNext()) {
+    		contenido += it.next() + "\n";
+    	}
+    	return contenido;
+    }
+    
+    public ArrayList<Reserva> devolverArray() {
+    	return listaReservas;
+    }
     /** Método para guardar las reservas realizadas en un archivo con el nombre de usuario */
-    public void guardarReservas(String usuario) {
-        File fichero = new File(".\\recursos\\reservas" + usuario + ".dat");
+    public void guardarReservas() {
+        File fichero = new File(".\\recursos\\reservas.dat");
             try {
                 if (!fichero.exists()) {
                     fichero.createNewFile();

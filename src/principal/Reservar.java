@@ -116,6 +116,9 @@ public class Reservar extends JFrame {
 	}
 
 	public Reservar(String usuario) {
+		operaciones.cargarHabitaciones();
+		operaciones.resetHabitaciones();
+		operaciones.guardarHabitaciones();
 		usuarioReservas = usuario;
 		initApp();
 	}
