@@ -19,6 +19,7 @@ import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.InitializationError;
 
+import principal.Hotel;
 import principal.IoDatos;
 import principal.OperacionHabitacion;
 import principal.Pago;
@@ -31,12 +32,14 @@ class JUnitTest {
 	OperacionHabitacion opHab;
 	Reservar reserva;
 	Pago pago;
+	Hotel hotel;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		opHab = new OperacionHabitacion();
 		reserva = new Reservar();
 		pago = new Pago();
+		hotel = new Hotel();
 	}
 
 	@Test
@@ -99,5 +102,65 @@ class JUnitTest {
 	@Test
 	void testComprobacionPago_4() {
 		assertEquals(false, pago.testComprobacionNumeroTarjetaYcvc("1234 1234 1234 1234", "1j3"));
+	}
+	
+	@Test
+	void testComprobacionFechasEntradaYsalidaHotel() {
+		assertEquals(false, hotel.testFechaEntradaSalida(-1, 0, -1, 0, -1, 0));
+	}
+	
+	@Test
+	void testComprobacionFechasEntradaYsalidaHotel_2() {
+		assertEquals(false, hotel.testFechaEntradaSalida(0, 1, 0, 1, 0, 1));
+	}
+	
+	@Test
+	void testComprobacionFechasEntradaYsalidaHotel_3() {
+		assertEquals(false, hotel.testFechaEntradaSalida(0, 0, 0, 0, 0, 0));
+	}
+	
+	@Test
+	void testComprobacionFechasEntradaYsalidaHotel_4() {
+		assertEquals(true, hotel.testFechaEntradaSalida(1, 1, 1, 1, 1, 1));
+	}
+	
+	@Test
+	void testComprobacionFechasEntradaYsalidaHotel_5() {
+		assertEquals(true, hotel.testFechaEntradaSalida(2020, 6, 28, 2020, 6, 30));
+	}
+	
+	@Test
+	void testComprobacionFechasEntradaYsalidaHotel_6() {
+		assertEquals(true, hotel.testFechaEntradaSalida(2020, 6, 28, 0, 0, 0));
+	}
+	
+	@Test
+	void testComprobacionFechasEntradaYsalidaHotel_7() {
+		assertEquals(true, hotel.testFechaEntradaSalida(0, 0, 0, 2020, 6, 28));
+	}
+	
+	@Test
+	void testComprobacionSecundariaFechasHotel() {
+		assertEquals(false, hotel.testFechasHotel(-1, 0, 0, 0, 0, 0));
+	}
+	
+	@Test
+	void testComprobacionSecundariaFechasHotel_2() {
+		assertEquals(false, hotel.testFechasHotel(1, 1, 1, 1, 1, 0));
+	}
+	
+	@Test
+	void testComprobacionSecundariaFechasHotel_3() {
+		assertEquals(false, hotel.testFechasHotel(0, 0, 0, 0, 0, 0));
+	}
+	
+	@Test
+	void testComprobacionSecundariaFechasHotel_4() {
+		assertEquals(true, hotel.testFechasHotel(2020, 6, 28, 2020, 6, 30));
+	}
+	
+	@Test
+	void testComprobacionSecundariaFechasHotel_5() {
+		assertEquals(true, hotel.testFechasHotel(2020, 6, 28, 2021, 8, 30));
 	}
 }

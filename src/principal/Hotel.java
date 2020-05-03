@@ -951,4 +951,25 @@ public class Hotel extends JFrame {
 		lblMaximizar.setBounds(70, 9, 14, 14);
 		panel.add(lblMaximizar);
 	}
+
+	public boolean testFechaEntradaSalida(int aSalida, int mSalida, int dSalida, int aEntrada, int mEntrada,
+			int dEntrada) {
+		if (aSalida != 0 && mSalida != 0 && dSalida != 0) {
+			return true;
+		} else {
+			if (aEntrada != 0 && mEntrada != 0 && dEntrada != 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	public boolean testFechasHotel(int aSalida, int mSalida, int dSalida, int aEntrada, int mEntrada, int dEntrada) {
+		if ((aSalida != 0 && mSalida != 0 && dSalida != 0) && (aEntrada != 0 && mEntrada != 0 && dEntrada != 0)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
