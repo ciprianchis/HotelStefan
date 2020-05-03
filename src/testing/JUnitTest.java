@@ -24,6 +24,8 @@ import principal.OperacionHabitacion;
 import principal.Pago;
 import principal.Reservar;
 
+/*Borja*/
+
 class JUnitTest {
 
 	OperacionHabitacion opHab;
