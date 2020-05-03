@@ -56,10 +56,10 @@ public class Registro extends JFrame {
 	private JCheckBox chckbxAdmin;
 	private ArrayList<Usuario> vUsuarios;
 	private boolean maximizado = false;
-	private JButton btnVerContrasena;
-	private boolean mostrar = false;
+	private JLabel btnVerContrasena;
+	private boolean mostrar;
 	private JPasswordField pwdContrasena;
-	private boolean escondida = false;
+	private boolean escondida;
 
 	/**
 	 * Launch the application.
@@ -182,9 +182,14 @@ public class Registro extends JFrame {
 		chckbxAdmin.setBounds(457, 400, 368, 40);
 		contentPane.add(chckbxAdmin);
 
-		btnVerContrasena = new JButton("--");
+		btnVerContrasena = new JLabel("");
+		btnVerContrasena.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnVerContrasena.setIcon(new ImageIcon(".\\recursos\\viewPassBW.png"));
+		btnVerContrasena.setToolTipText("Mostrar password");
+		btnVerContrasena.setHorizontalAlignment(SwingConstants.CENTER);
+		btnVerContrasena.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnVerContrasena.setBounds(845, 264, 64, 64);
 		btnVerContrasena.addMouseListener(new BtnVerContrasenaMouseListener());
-		btnVerContrasena.setBounds(835, 287, 89, 23);
 		contentPane.add(btnVerContrasena);
 
 		pwdContrasena = new JPasswordField();
@@ -204,6 +209,8 @@ public class Registro extends JFrame {
 		lblFondo.requestFocus();
 		vUsuarios = IoDatos.leerDatos();
 		pwdContrasena.setVisible(true);
+		escondida = false;
+		mostrar = false;
 
 	}
 
@@ -398,9 +405,13 @@ public class Registro extends JFrame {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			if (escondida) {
+				btnVerContrasena.setIcon(new ImageIcon(".//recursos//viewPass.png"));
+				btnVerContrasena.setToolTipText("Ocultar password");
 				ensenarContrasena();
 				escondida = false;
 			} else {
+				btnVerContrasena.setIcon(new ImageIcon(".//recursos//viewPassBW.png"));
+				btnVerContrasena.setToolTipText("Mostrar password");
 				esconderContrasena();
 				escondida = true;
 			}
