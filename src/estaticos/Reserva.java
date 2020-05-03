@@ -1,4 +1,4 @@
-package principal;
+package estaticos;
 
 import java.io.Serializable;
 
