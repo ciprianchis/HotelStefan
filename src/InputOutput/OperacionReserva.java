@@ -1,4 +1,4 @@
-package principal;
+package InputOutput;
 
 import java.io.EOFException;
 import java.io.File;
@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import estaticos.Reserva;
 
 public class OperacionReserva {
 	ArrayList<Reserva> listaReservas;

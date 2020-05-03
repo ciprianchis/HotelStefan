@@ -18,6 +18,9 @@ import javax.swing.JMenuItem;
 import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
 
+import InputOutput.OperacionReserva;
+import estaticos.Reserva;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;

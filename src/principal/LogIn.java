@@ -22,6 +22,10 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
 
+import InputOutput.IoDatos;
+import InputOutput.OperacionHabitacion;
+import estaticos.Usuario;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
@@ -51,7 +55,7 @@ public class LogIn extends JFrame {
 	private JLabel btnEntrar;
 	private JLabel btnSignup;
 	private boolean maximizado = false;
-
+	private ArrayList<Usuario> usus = new ArrayList<Usuario>();
 	// private ArrayList<Usuario> vUsuarios;
 	/**
 	 * Launch the application.
@@ -73,6 +77,7 @@ public class LogIn extends JFrame {
 	 * Create the frame.
 	 */
 	public LogIn() {
+		
 		setResizable(false);
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -126,7 +131,7 @@ public class LogIn extends JFrame {
 
 		textFieldUser = new JTextField();
 		textFieldUser.addFocusListener(new TextFieldUserFocusListener());
-		textFieldUser.setText("USUARIO");
+		textFieldUser.setText("Usuario");
 		textFieldUser.setHorizontalAlignment(SwingConstants.CENTER);
 		textFieldUser.setFont(new Font("Monospaced", Font.PLAIN, 20));
 		textFieldUser.setBounds(432, 250, 400, 40);
@@ -136,13 +141,13 @@ public class LogIn extends JFrame {
 		passwordFieldPass = new JPasswordField();
 		passwordFieldPass.addFocusListener(new PasswordFieldFocusListener());
 		passwordFieldPass.setHorizontalAlignment(SwingConstants.CENTER);
-		passwordFieldPass.setEchoChar('ï');
+		passwordFieldPass.setEchoChar('‚Ä¢');
 		passwordFieldPass.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		passwordFieldPass.setBounds(432, 350, 400, 40);
 		contentPane.add(passwordFieldPass);
-		passwordFieldPass.setText("CONTRASE—A");
+		passwordFieldPass.setText("Contrase√±a");
 
-		lblLogin = new JLabel("ACCESO");
+		lblLogin = new JLabel("Acceso");
 		lblLogin.setFocusable(false);
 		lblLogin.setForeground(new Color(184, 134, 11));
 		lblLogin.setFont(new Font("Monospaced", Font.PLAIN, 50));
@@ -249,7 +254,7 @@ public class LogIn extends JFrame {
 		@Override
 		public void focusLost(FocusEvent arg0) {
 			if (textFieldUser.getText().equals("")) {
-				textFieldUser.setText("USUARIO");
+				textFieldUser.setText("Usuario");
 			}
 		}
 	}
@@ -281,11 +286,11 @@ public class LogIn extends JFrame {
 		public void focusLost(FocusEvent arg0) {
 
 			if (String.copyValueOf(passwordFieldPass.getPassword()).equals("")) {
-				passwordFieldPass.setText("contraseÒa");
+				passwordFieldPass.setText("Contrase√±a");
 			}
 
 			if ((passwordFieldPass.getPassword().toString().equals(""))
-					&& (passwordFieldPass.getPassword().toString().equals("contraseÒa"))) {
+					&& (passwordFieldPass.getPassword().toString().equals("Contrase√±a"))) {
 				passwordFieldPass.setText(passwordFieldPass.getPassword().toString());
 			}
 
@@ -295,9 +300,9 @@ public class LogIn extends JFrame {
 	private class BtnEntrarMouseListener extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			if ((textFieldUser.getText().equals("") || passwordFieldPass.getPassword().equals(""))
-					|| (textFieldUser.getText().equals("USUARIO")
-							|| passwordFieldPass.getPassword().equals("CONTRASE—A"))) {
+			if ((textFieldUser.getText().equals("") || String.copyValueOf(passwordFieldPass.getPassword()).equals(""))
+					|| (textFieldUser.getText().equals("Usuario")
+							|| String.copyValueOf(passwordFieldPass.getPassword()).equals("Contrase√±a"))) {
 				JOptionPane.showMessageDialog(null, "Valores no introducidos");
 			}
 			ArrayList<Usuario> vUsuarios = IoDatos.leerDatos();
@@ -323,7 +328,7 @@ public class LogIn extends JFrame {
 				}
 			} else {
 				JOptionPane.showMessageDialog(null,
-						"Los datos del usuario introducidos no coinciden o este no est· registrado");
+						"Los datos del usuario introducidos no coinciden o este no est√° registrado");
 			}
 		}
 		@Override

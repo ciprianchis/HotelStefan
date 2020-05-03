@@ -1,4 +1,4 @@
-package principal;
+package InputOutput;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,6 +11,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import estaticos.Usuario;
+
 public class IoDatos {
 
 	
@@ -18,7 +20,7 @@ public class IoDatos {
 	public static void guardarUsusarios(ArrayList<Usuario> vUsuarios) {
 		
 		
-		File usuarios = new File("usuarios.dat");
+		File usuarios = new File(".\\recursos\\usuarios.dat");
 		FileOutputStream fo = null;
 		ObjectOutputStream escribir = null;
 		
@@ -57,12 +59,13 @@ public class IoDatos {
 	}
 	
 	//Leer los datos de los usuarios introducidos en el fichero
+	@SuppressWarnings("unchecked")
 	public static ArrayList<Usuario> leerDatos() {
 		
-		File usuarios = new File("usuarios.dat");
+		File usuarios = new File(".\\recursos\\usuarios.dat");
 		FileInputStream fi = null;
 		ObjectInputStream leer = null;
-		ArrayList<Usuario> vUsuarios = new ArrayList(); 
+		ArrayList<Usuario> vUsuarios = new ArrayList<Usuario>(); 
 		
 		if (!usuarios.exists()) {
 			try {

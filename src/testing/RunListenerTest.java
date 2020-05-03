@@ -6,9 +6,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 
+import InputOutput.IoDatos;
+import InputOutput.OperacionHabitacion;
 import principal.Hotel;
-import principal.IoDatos;
-import principal.OperacionHabitacion;
 import principal.Pago;
 import principal.Reservar;
 

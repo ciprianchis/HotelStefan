@@ -19,9 +19,9 @@ import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.InitializationError;
 
+import InputOutput.IoDatos;
+import InputOutput.OperacionHabitacion;
 import principal.Hotel;
-import principal.IoDatos;
-import principal.OperacionHabitacion;
 import principal.Pago;
 import principal.Reservar;
 
