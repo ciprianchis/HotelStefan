@@ -1,4 +1,4 @@
-package principal;
+package graficos;
 
 import java.io.Serializable;
 

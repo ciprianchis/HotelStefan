@@ -1,4 +1,4 @@
-package principal;
+package graficos;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -19,6 +19,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
+
+import clases.Usuario;
+import ioDatos.IoDatos;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;

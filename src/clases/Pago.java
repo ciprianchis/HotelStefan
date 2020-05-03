@@ -1,4 +1,4 @@
-package principal;
+package clases;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -18,6 +18,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
+
+import accionesAplicacion.ReservasCliente;
+import graficos.Reserva;
+import ioDatos.OperacionHabitacion;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;

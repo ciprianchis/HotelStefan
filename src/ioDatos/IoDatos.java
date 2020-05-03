@@ -1,4 +1,4 @@
-package principal;
+package ioDatos;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,6 +10,8 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import clases.Usuario;
 
 public class IoDatos {
 

@@ -6,11 +6,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 
-import principal.Hotel;
-import principal.IoDatos;
-import principal.OperacionHabitacion;
-import principal.Pago;
-import principal.Reservar;
+import accionesAplicacion.Reservar;
+import clases.Hotel;
+import clases.Pago;
+import ioDatos.IoDatos;
+import ioDatos.OperacionHabitacion;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
