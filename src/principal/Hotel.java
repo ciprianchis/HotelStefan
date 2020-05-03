@@ -15,6 +15,9 @@ import javax.swing.border.BevelBorder;
 import javax.swing.JOptionPane;
 import javax.swing.border.SoftBevelBorder;
 
+import InputOutput.OperacionReserva;
+import estaticos.Reserva;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.Cursor;

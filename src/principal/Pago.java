@@ -19,6 +19,9 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
 
+import InputOutput.OperacionHabitacion;
+import estaticos.Reserva;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;

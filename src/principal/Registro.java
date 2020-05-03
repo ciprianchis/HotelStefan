@@ -20,6 +20,9 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
 
+import InputOutput.IoDatos;
+import estaticos.Usuario;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.SystemColor;
@@ -48,12 +51,12 @@ public class Registro extends JFrame {
 	private JLabel lblMaximizar;
 	private JTextField textFieldUser;
 	private JLabel lblRegistro;
-	private JLabel btnAńadirUser;
+	private JLabel btnAnadirUser;
 	private JLabel btnSignIn;
 	private JCheckBox chckbxAdmin;
 	private ArrayList<Usuario> vUsuarios;
 	private boolean maximizado = false;
-	private JButton btnVerContraseńa;
+	private JButton btnVerContrasena;
 	private boolean mostrar = false;
 	private JPasswordField pwdContrasena;
 	private boolean escondida = false;
@@ -139,7 +142,7 @@ public class Registro extends JFrame {
 		contentPane.add(textFieldUser);
 		textFieldUser.setColumns(10);
 
-		lblRegistro = new JLabel("REGISTRO");
+		lblRegistro = new JLabel("Registro");
 		lblRegistro.setFocusable(false);
 		lblRegistro.setForeground(new Color(184, 134, 11));
 		lblRegistro.setFont(new Font("Monospaced", Font.PLAIN, 50));
@@ -147,16 +150,16 @@ public class Registro extends JFrame {
 		lblRegistro.setBounds(457, 62, 368, 70);
 		contentPane.add(lblRegistro);
 
-		btnAńadirUser = new JLabel("");
-		btnAńadirUser.setToolTipText("A\u00F1adir usuario");
-		btnAńadirUser.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnAńadirUser.setIcon(new ImageIcon(".\\recursos\\addUserBW.png"));
-		btnAńadirUser.addMouseListener(new BtnAńadirUserMouseListener());
-		btnAńadirUser.setHorizontalAlignment(SwingConstants.CENTER);
-		btnAńadirUser.setFocusable(false);
-		btnAńadirUser.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnAńadirUser.setBounds(406, 550, 128, 128);
-		contentPane.add(btnAńadirUser);
+		btnAnadirUser = new JLabel("");
+		btnAnadirUser.addMouseListener(new BtnAnadirUserMouseListener());
+		btnAnadirUser.setToolTipText("Añadir usuario");
+		btnAnadirUser.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnAnadirUser.setIcon(new ImageIcon(".\\recursos\\addUserBW.png"));
+		btnAnadirUser.setHorizontalAlignment(SwingConstants.CENTER);
+		btnAnadirUser.setFocusable(false);
+		btnAnadirUser.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnAnadirUser.setBounds(406, 550, 128, 128);
+		contentPane.add(btnAnadirUser);
 
 		btnSignIn = new JLabel("");
 		btnSignIn.setToolTipText("Volver a Login");
@@ -171,7 +174,7 @@ public class Registro extends JFrame {
 
 		contentPane.add(btnSignIn);
 
-		chckbxAdmin = new JCheckBox(" ADMINISTRADOR");
+		chckbxAdmin = new JCheckBox(" Administrador");
 		chckbxAdmin.setForeground(SystemColor.window);
 		chckbxAdmin.setHorizontalAlignment(SwingConstants.CENTER);
 		chckbxAdmin.setOpaque(false);
@@ -179,10 +182,10 @@ public class Registro extends JFrame {
 		chckbxAdmin.setBounds(457, 400, 368, 40);
 		contentPane.add(chckbxAdmin);
 
-		btnVerContraseńa = new JButton("--");
-		btnVerContraseńa.addMouseListener(new BtnVerContraseńaMouseListener());
-		btnVerContraseńa.setBounds(835, 287, 89, 23);
-		contentPane.add(btnVerContraseńa);
+		btnVerContrasena = new JButton("--");
+		btnVerContrasena.addMouseListener(new BtnVerContrasenaMouseListener());
+		btnVerContrasena.setBounds(835, 287, 89, 23);
+		contentPane.add(btnVerContrasena);
 
 		pwdContrasena = new JPasswordField();
 		pwdContrasena.setFont(new Font("Monospaced", Font.PLAIN, 20));
@@ -301,52 +304,7 @@ public class Registro extends JFrame {
 
 	
 
-	private class BtnAńadirUserMouseListener extends MouseAdapter {
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			char[] contrChar = pwdContrasena.getPassword();
-			String contr = "";
-			for (int i=0;i<contrChar.length;i++) {
-				contr += contrChar[i];
-			}
-			// ERROR CONTRASEŃA
-			Pattern pPasswd = Pattern.compile("^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{8,16}$");
-			Matcher mPasswd = pPasswd.matcher(contr);
 
-			if (!mPasswd.matches()) {
-				JOptionPane.showMessageDialog(null, "La contraseńa no cumple los requisitos");
-				return;
-			}
-			// FIN CORRECCIÓN ERROR CONTRASEŃA
-			for (Usuario usuario : vUsuarios) {
-				if (usuario.getNombreUsuario().equals(textFieldUser.getText())) {
-					JOptionPane.showMessageDialog(null, "El usuario indicado ya fue introducido anteriormente");
-					textFieldUser.setText("Usuario");
-					pwdContrasena.setText("");
-					chckbxAdmin.setSelected(false);
-					return;
-				}
-			}
-
-			JOptionPane.showMessageDialog(null, "El nuevo usuario fue introducido");
-
-			Usuario usu = new Usuario(textFieldUser.getText(), contr, chckbxAdmin.isSelected());
-			vUsuarios.add(usu);
-
-			IoDatos.guardarUsusarios(vUsuarios);
-			textFieldUser.setText("Usuario");
-			pwdContrasena.setText("");
-			chckbxAdmin.setSelected(false);
-		}
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			btnAńadirUser.setIcon(new ImageIcon(".\\recursos\\addUser.png"));
-		}
-		@Override
-		public void mouseExited(MouseEvent e) {
-			btnAńadirUser.setIcon(new ImageIcon(".\\recursos\\addUserBW.png"));
-		}
-	}
 	private void esconderContrasena() {
 		char[] contrChar = pwdContrasena.getPassword();
 		String contr = "";
@@ -389,7 +347,54 @@ public class Registro extends JFrame {
 			}
 		}
 	}
-	private class BtnVerContraseńaMouseListener extends MouseAdapter {
+
+	private class BtnAnadirUserMouseListener extends MouseAdapter {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			char[] contrChar = pwdContrasena.getPassword();
+			String contr = "";
+			for (int i=0;i<contrChar.length;i++) {
+				contr += contrChar[i];
+			}
+			// ERROR CONTRASEĹ�A
+			Pattern pPasswd = Pattern.compile("^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{8,16}$");
+			Matcher mPasswd = pPasswd.matcher(contr);
+
+			if (!mPasswd.matches()) {
+				JOptionPane.showMessageDialog(null, "La contraseña no cumple los requisitos");
+				return;
+			}
+			// FIN CORRECCIĂ“N ERROR CONTRASEĹ�A
+			for (Usuario usuario : vUsuarios) {
+				if (usuario.getNombreUsuario().equals(textFieldUser.getText())) {
+					JOptionPane.showMessageDialog(null, "El usuario indicado ya fue introducido anteriormente");
+					textFieldUser.setText("Usuario");
+					pwdContrasena.setText("");
+					chckbxAdmin.setSelected(false);
+					return;
+				}
+			}
+
+			JOptionPane.showMessageDialog(null, "El nuevo usuario fue introducido");
+
+			Usuario usu = new Usuario(textFieldUser.getText(), contr, chckbxAdmin.isSelected());
+			vUsuarios.add(usu);
+
+			IoDatos.guardarUsusarios(vUsuarios);
+			textFieldUser.setText("Usuario");
+			pwdContrasena.setText("");
+			chckbxAdmin.setSelected(false);
+		}
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			btnAnadirUser.setIcon(new ImageIcon(".\\recursos\\addUser.png"));
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+			btnAnadirUser.setIcon(new ImageIcon(".\\recursos\\addUserBW.png"));
+		}
+	}
+	private class BtnVerContrasenaMouseListener extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			if (escondida) {

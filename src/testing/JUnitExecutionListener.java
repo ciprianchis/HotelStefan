@@ -16,11 +16,11 @@ public class JUnitExecutionListener extends RunListener {
 	}
 
 	public void testStarted(Description description) throws Exception {
-		System.out.println("Comenzando ejecuciÃ³n: " + description.getMethodName());
+		System.out.println("Comenzando ejecución: " + description.getMethodName());
 	}
 
 	public void testFinished(Description description) throws Exception {
-		System.out.println("Finalizada ejecuciÃ³n: " + description.getMethodName());
+		System.out.println("Finalizada ejecución: " + description.getMethodName());
 	}
 
 	public void testFailure(Failure failure) throws Exception {
