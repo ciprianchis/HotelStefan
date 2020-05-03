@@ -1033,6 +1033,7 @@ public class Reservar extends JFrame {
 		contentPane.add(lblComprobacionHabitacion);
 
 		btnSalir = new JLabel("");
+		btnSalir.setFocusable(false);
 		btnSalir.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnSalir.setHorizontalAlignment(SwingConstants.CENTER);
 		btnSalir.setToolTipText("Volver");
@@ -1043,7 +1044,6 @@ public class Reservar extends JFrame {
 		contentPane.add(btnSalir);
 
 		btnPagar = new JLabel("");
-		btnPagar.setEnabled(false);
 		btnPagar.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnPagar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnPagar.setIcon(new ImageIcon(".\\recursos\\goToPayBW.png"));
