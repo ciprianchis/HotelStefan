@@ -1,4 +1,4 @@
-package graficos;
+package principal;
 
 //Version 3
 
@@ -21,11 +21,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.border.SoftBevelBorder;
-
-import accionesAplicacion.ReservasCliente;
-import clases.Hotel;
-import clases.Usuario;
-import ioDatos.IoDatos;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;

@@ -1,9 +1,7 @@
-package clases;
+package principal;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
-import graficos.Reserva;
 
 public class Usuario implements Serializable{
 	private String nombreUsuario;

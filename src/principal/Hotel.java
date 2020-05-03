@@ -1,4 +1,4 @@
-package clases;
+package principal;
 
 import java.awt.EventQueue;
 
@@ -14,10 +14,6 @@ import java.awt.Color;
 import javax.swing.border.BevelBorder;
 import javax.swing.JOptionPane;
 import javax.swing.border.SoftBevelBorder;
-
-import graficos.LogIn;
-import graficos.Reserva;
-import ioDatos.OperacionReserva;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;

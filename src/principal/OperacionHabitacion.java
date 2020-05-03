@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ioDatos;
+package principal;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,8 +14,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import clases.Habitacion;
 
 /**
  *

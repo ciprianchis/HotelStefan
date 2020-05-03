@@ -19,11 +19,11 @@ import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.InitializationError;
 
-import accionesAplicacion.Reservar;
-import clases.Hotel;
-import clases.Pago;
-import ioDatos.IoDatos;
-import ioDatos.OperacionHabitacion;
+import principal.Hotel;
+import principal.IoDatos;
+import principal.OperacionHabitacion;
+import principal.Pago;
+import principal.Reservar;
 
 /*Borja*/
 
