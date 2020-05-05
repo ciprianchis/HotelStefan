@@ -141,11 +141,11 @@ public class LogIn extends JFrame {
 		passwordFieldPass = new JPasswordField();
 		passwordFieldPass.addFocusListener(new PasswordFieldFocusListener());
 		passwordFieldPass.setHorizontalAlignment(SwingConstants.CENTER);
-		passwordFieldPass.setEchoChar('•');
+		passwordFieldPass.setEchoChar('○');
 		passwordFieldPass.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		passwordFieldPass.setBounds(432, 350, 400, 40);
 		contentPane.add(passwordFieldPass);
-		passwordFieldPass.setText("Contraseña");
+		passwordFieldPass.setText("ContraseÃ±a");
 
 		lblLogin = new JLabel("Acceso");
 		lblLogin.setFocusable(false);
@@ -286,11 +286,11 @@ public class LogIn extends JFrame {
 		public void focusLost(FocusEvent arg0) {
 
 			if (String.copyValueOf(passwordFieldPass.getPassword()).equals("")) {
-				passwordFieldPass.setText("Contraseña");
+				passwordFieldPass.setText("ContraseÃ±a");
 			}
 
 			if ((passwordFieldPass.getPassword().toString().equals(""))
-					&& (passwordFieldPass.getPassword().toString().equals("Contraseña"))) {
+					&& (passwordFieldPass.getPassword().toString().equals("ContraseÃ±a"))) {
 				passwordFieldPass.setText(passwordFieldPass.getPassword().toString());
 			}
 
@@ -302,7 +302,7 @@ public class LogIn extends JFrame {
 		public void mouseClicked(MouseEvent e) {
 			if ((textFieldUser.getText().equals("") || String.copyValueOf(passwordFieldPass.getPassword()).equals(""))
 					|| (textFieldUser.getText().equals("Usuario")
-							|| String.copyValueOf(passwordFieldPass.getPassword()).equals("Contraseña"))) {
+							|| String.copyValueOf(passwordFieldPass.getPassword()).equals("ContraseÃ±a"))) {
 				JOptionPane.showMessageDialog(null, "Valores no introducidos");
 			}
 			ArrayList<Usuario> vUsuarios = IoDatos.leerDatos();
@@ -328,7 +328,7 @@ public class LogIn extends JFrame {
 				}
 			} else {
 				JOptionPane.showMessageDialog(null,
-						"Los datos del usuario introducidos no coinciden o este no está registrado");
+						"Los datos del usuario introducidos no coinciden o este no estÃ¡ registrado");
 			}
 		}
 		@Override
